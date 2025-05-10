@@ -63,7 +63,7 @@ public class FileOpenerPanel {
                 tabManager.openNewTab("ent/" + fileToCall, button);
             });
 
-            panel.add(fileButton); // Add button to the panel
+            panel.add(fileButton);
         }
     }
 
