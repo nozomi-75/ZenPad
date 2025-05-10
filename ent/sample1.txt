@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class TempProgram {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Please type your name here:\t");
+        
+        String userName = input.nextLine();
+        String allCapUserName = userName.toUpperCase();
+        
+        System.out.print("First letter of your name:\t" + allCapUserName.charAt(0));
+        System.out.println();
+        input.close();
+    }
+}
