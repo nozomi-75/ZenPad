@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
@@ -18,7 +17,6 @@ public class AppFrame extends JFrame {
     // Other UI components
     private JTabbedPane tabbedPane;
     private JToolBar toolBar;
-    private JPanel sidePanel;
 
     public AppFrame(String title) {
         super(title);
@@ -47,8 +45,8 @@ public class AppFrame extends JFrame {
 
         // Adding components to the frame
         add(toolBar, BorderLayout.NORTH);
-        add(fileOpenerPanel.getPanel(), BorderLayout.CENTER);
-        add(sidePanel, BorderLayout.WEST);
+        add(tabbedPane, BorderLayout.CENTER);
+        add(fileOpenerPanel.getPanel(), BorderLayout.WEST);
     }
 
     public void showWindow() {
