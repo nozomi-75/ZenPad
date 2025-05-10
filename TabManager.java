@@ -1,7 +1,12 @@
 import javax.swing.JTabbedPane;
 
 public class TabManager {
-    // Instance of tabbed pane inherited from AppFrame
+    /* Instance of tabbed pane inherited from AppFrame
+     * TabManager manages the logic for tab management only
+     * It does not host its own tabbed pane
+     * The tabbed pane is passed to the TabManager constructor
+    */
+
     private JTabbedPane tabbedPane;
 
     public TabManager(JTabbedPane tabbedPane) {
