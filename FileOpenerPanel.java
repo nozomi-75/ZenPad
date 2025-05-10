@@ -1,0 +1,66 @@
+/* FileOpenerPanel takes a TabManager object parameter.
+ * It creates a JPanel (sidebar) that contains a button to open a file.
+ * When the button is clicked, it sends a message to the TabManager to open the file.
+*/
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.GridLayout;
+
+public class FileOpenerPanel {
+    private JPanel panel;
+    
+    public FileOpenerPanel(TabManager tabManager) {
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 1, 10, 10)); // Arrange buttons in a single row
+        panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        /* The buttons take their names from the buttonName array, which is iterated by a loop.
+         * The filenames are listed in the fileName array, which is also iterated by a loop.
+         * It is possible to merge two arrays into one (i.e., button name is similar to the file name).
+         * Their length should be the same. Otherwise, the program will throw an ArrayIndexOutOfBoundsException.
+        */
+
+        String[] buttonName = {
+            "Sample 1", "Sample 2", "Sample 3", "Sample 4", "Sample 5",
+            "Sample 6", "Sample 7", "Sample 8", "Sample 9", "Sample 10"
+        };
+
+        String[] fileName = {
+            "sample1.txt", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt",
+            "sample6.txt", "sample7.txt", "sample8.txt", "sample9.txt", "sample10.txt"
+        };
+
+        /* Check if the lengths of buttonName and fileName arrays are equal
+         * Should abruptly terminate the program if otherwise
+        */
+
+        if (buttonName.length != fileName.length) {
+            System.err.println("Error: buttonName and fileName arrays must have the same length.");
+            System.exit(1);
+        }
+
+        for (int i = 0; i < fileName.length; i++) {
+            String fileToCall = fileName[i]; // File name, will be resolved later
+            String button = buttonName[i]; // Button name
+
+            // Create buttons with the name from the array
+            JButton fileButton = new JButton(button);
+            fileButton.setFocusPainted(false); // Remove focus border
+
+            // Add action listener to the button
+            fileButton.addActionListener(e -> {
+                // Call the method in TabManager to open the file
+                tabManager.openNewTab("ent/" + fileToCall, button);
+            });
+
+            panel.add(fileButton); // Add button to the panel
+        }
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+}
