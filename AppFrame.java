@@ -8,7 +8,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 public class AppFrame extends JFrame {
-    // Instance variables
+    // Instance of TabManager object for external tab management logic
+    private TabManager tabManager;
+    // UI components
     private JTabbedPane tabbedPane;
     private JToolBar toolBar;
     private JPanel sidePanel;
@@ -26,6 +28,9 @@ public class AppFrame extends JFrame {
         toolBar = new JToolBar();
         toolBar.setFloatable(false);
         sidePanel = new JPanel();
+
+        // Pass tabbedPane to TabManager
+        tabManager = new TabManager(tabbedPane);
 
         // Adding components to the frame
         add(toolBar, BorderLayout.NORTH);
