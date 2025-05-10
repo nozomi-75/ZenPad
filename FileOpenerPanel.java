@@ -42,17 +42,24 @@ public class FileOpenerPanel {
             System.exit(1);
         }
 
+        /* Loop through above arrays while creating buttons
+         * The button name is taken from the buttonName array
+         * The file name is taken from the fileName array
+         * The file name is passed to the TabManager to open the file
+         * The button name is passed to the TabManager to set the tab title
+         * The file name is prefixed with "ent/" to resolve full directory path
+        */
+
         for (int i = 0; i < fileName.length; i++) {
-            String fileToCall = fileName[i]; // File name, will be resolved later
-            String button = buttonName[i]; // Button name
+            String fileToCall = fileName[i];
+            String button = buttonName[i];
 
             // Create buttons with the name from the array
             JButton fileButton = new JButton(button);
-            fileButton.setFocusPainted(false); // Remove focus border
+            fileButton.setFocusPainted(false);
 
             // Add action listener to the button
             fileButton.addActionListener(e -> {
-                // Call the method in TabManager to open the file
                 tabManager.openNewTab("ent/" + fileToCall, button);
             });
 
