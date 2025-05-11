@@ -19,13 +19,17 @@ public class TabManager {
         this.tabbedPane = tabbedPane;
     }
 
-    /* The FOP object calls this method to handle file opening logic
-     * This will take a full file path and a button name
-     * The file path is passed to the EditorTab object
-     * The button name is passed to the EditorTab object to serve as the tab title
-     * The tab is added to the tabbed pane
-     * The tab is set to be selected
-    */
+    /**
+     * Opens a new tab with the specified file path and button name.
+     * The FOP object calls this method to handle file opening logic.
+     * The file path is passed to the EditorTab object.
+     * The button name is passed to the EditorTab object to serve as the tab title.
+     * The tab is added to the tabbed pane and set to be selected.
+     * 
+     * @see EditorTab
+     * @param filePath The full file path to be opened in the new tab.
+     * @param button The name of the button that will serve as the tab title.
+     */
 
     public void openNewTab(String filePath, String button) {
         EditorTab newTab = new EditorTab(filePath, button);

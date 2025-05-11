@@ -47,7 +47,7 @@ public class AppFrame extends JFrame {
         /* Create a side panel for the file opener
          * Pass tabManager to FOP
          * The FOP object will call the TabManager to open a new tab
-        */
+         */
         
         fileOpenerPanel = new FileOpenerPanel(tabManager);
 
