@@ -6,6 +6,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+/**
+ * AppFrame is the main application window that contains the tabbed pane and the file opener panel.
+ * It initializes the GUI components and sets up the layout for the application.
+ * The frame is created with a title and has a default close operation to exit the application.
+ * 
+ * @see TabManager
+ * @see FileOpenerPanel
+ * @param title The title of the application window.
+ */
+
 public class AppFrame extends JFrame {
 
     // Instance of TabManager object for external tab management logic
@@ -21,15 +31,13 @@ public class AppFrame extends JFrame {
     public AppFrame(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(800, 600)); // Set the size of the window
-        setLocationRelativeTo(null); // Center the window
+        setSize(new Dimension(800, 600));
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         
-        // Create a tabbed pane for easy access to contents
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(5, 0, 5, 5));
 
-        // Create a tool bar for easy access to functions
         toolBar = new JToolBar();
         toolBar.setFloatable(false);
 
