@@ -1,16 +1,21 @@
 import javax.swing.JTabbedPane;
 
-public class TabManager {
-    /* Instance of tabbed pane inherited from AppFrame
-     * TabManager manages the logic for tab management only
-     * It does not host its own tabbed pane
-     * The tabbed pane is passed to the TabManager constructor
-    */
+/**
+ * TabManager is responsible for managing the tabs in the application.
+ * It handles the logic for opening new tabs and managing their content.
+ * The tabbed pane is passed to the TabManager constructor for management.
+ * 
+ * @see AppFrame
+ * @see EditorTab
+ * @see FileOpenerPanel
+ * @param tabbedPane The JTabbedPane instance to be managed.
+ */
 
+public class TabManager {
     private JTabbedPane tabbedPane;
 
     public TabManager(JTabbedPane tabbedPane) {
-        // Initialize the tabbed pane
+        // Refer to the tabbed pane passed from the AppFrame
         this.tabbedPane = tabbedPane;
     }
 
