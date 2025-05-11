@@ -8,8 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 
 /**
  * EditorTab is responsible for creating a tab view that displays the content of a file.
@@ -45,18 +44,37 @@ public class EditorTab {
     }
 
     /**
-     * Loads the content of the specified file into the text area.
-     * If an error occurs while loading the file, an error message is displayed in the text area.
-     * 
-     * @param filePath The full file path to be opened in the new tab.
+     * Loads the content of the specified resource file into the code area.
+     * <p>
+     * This method attempts to read the file from the application's classpath using the provided
+     * {@code filePath}. If the file is found, its contents are displayed in the {@link JTextArea}.
+     * If the file cannot be found or an error occurs during reading, an error message is shown instead.
+     * </p>
+     *
+     * @param filePath the relative path to the resource file within the classpath (e.g., "ent/sample1.txt")
+     * @see FileOpenerPanel
      */
 
     private void loadFileContent(String filePath) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
-            codeArea.setText(content);
+            // Read the file content and set it to the text area
+            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+                if (inputStream == null) {
+                    codeArea.setText("Error: Resource not found: " + filePath);
+                    return;
+                }
+                
+                // Read the content while the stream is open
+                String content = new String(inputStream.readAllBytes());
+                codeArea.setText(content);
+            }
+            
         } catch (IOException e) {
-            codeArea.setText("Error loading " + filePath + " " + e.getMessage());
+            codeArea.setText("Error loading " + filePath + ": " + e.getMessage());
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            codeArea.setText("An unexpected error occurred while loading " + filePath);
+            e.printStackTrace();
         }
     }
 

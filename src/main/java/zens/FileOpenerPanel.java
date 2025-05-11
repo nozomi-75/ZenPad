@@ -59,6 +59,7 @@ public class FileOpenerPanel {
         for (int i = 0; i < fileName.length; i++) {
             String fileToCall = fileName[i];
             String button = buttonName[i];
+            String filePath = "ent/" + fileToCall; // Relative path to the resource file within the classpath
 
             // Create buttons with the name from the array
             JButton fileButton = new JButton(button);
@@ -66,7 +67,7 @@ public class FileOpenerPanel {
 
             // Add action listener to the button
             fileButton.addActionListener(e -> {
-                tabManager.openNewTab("ent/" + fileToCall, button);
+                tabManager.openNewTab(filePath, button);
             });
 
             panel.add(fileButton);
