@@ -1,3 +1,5 @@
+package zens;
+
 import javax.swing.JTabbedPane;
 
 /**

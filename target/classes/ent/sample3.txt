@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class TempProgram {
+	public static void main(String[] args) {
+		Student student1 = new Student();
+		Scanner input = new Scanner(System.in);
+		String divider = "--------------------------------------";
+
+		System.out.print("Please type the student name\t: ");
+		student1.name = input.nextLine();
+		student1.grade = getValidInput(input);
+
+		System.out.println(divider);
+		System.out.println("PRINTED STUDENT DETAILS");
+		attrPrint(student1.name, student1.grade);
+		input.close();
+	}
+
+	public static double getValidInput(Scanner input) {
+		// getValidInput, variant two, revision two
+
+		double value = 0;
+		String message = "Please type the student grade";
+		String fdbkOne = "Invalid input. Please enter a number.";
+		String fdbkTwo = "Please enter a mark within 70 - 100.";
+
+		while (true) {
+			try {
+				System.out.print(message + "\t: ");
+				value = input.nextDouble();
+
+				if (value >= 70 && value <= 100) {
+					break;
+				} else {
+					System.out.println(fdbkTwo);
+				}
+
+			} catch (java.util.InputMismatchException e) {
+				System.out.println(fdbkOne);
+				input.nextLine();
+			}
+		}
+
+		return value;
+	}
+
+	public static void attrPrint(String name, double grade) {
+		System.out.println("Name\t: " + name);
+		System.out.println("Grade\t: " + grade);
+		System.out.println();
+	}
+}
+
+class Student {
+	String name;
+	double grade;
+}

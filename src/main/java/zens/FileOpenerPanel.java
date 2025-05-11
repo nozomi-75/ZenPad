@@ -1,3 +1,5 @@
+package zens;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;

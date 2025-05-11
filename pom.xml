@@ -4,12 +4,12 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zens</groupId>         <!-- Your group or organization name -->
-    <artifactId>zens</artifactId>          <!-- Your project name -->
-    <version>1.0-SNAPSHOT</version>        <!-- Project version -->
+    <groupId>com.zens</groupId>
+    <artifactId>zens</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>   <!-- Java version -->
+        <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
