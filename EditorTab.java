@@ -1,4 +1,4 @@
-/* EditorTab takes the 
+/* EditorTab takes the filePath and button name as parameters
  * It creates a JPanel (tab view) that contains a JTextArea
  * The JTextArea is used to display the content of the file
  * The JTextArea is wrapped in a JScrollPane to allow scrolling
