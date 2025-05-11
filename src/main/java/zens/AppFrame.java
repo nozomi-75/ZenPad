@@ -2,7 +2,6 @@ package zens;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
@@ -28,7 +27,6 @@ public class AppFrame extends JFrame {
 
     // Other UI components
     private JTabbedPane tabbedPane;
-    private JToolBar toolBar;
 
     public AppFrame(String title) {
         super(title);
@@ -40,8 +38,7 @@ public class AppFrame extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(5, 0, 5, 5));
 
-        toolBar = new JToolBar();
-        toolBar.setFloatable(false);
+        Toolbar toolbar = new Toolbar(tabManager);
 
         // Pass tabbedPane to TabManager
         tabManager = new TabManager(tabbedPane);
@@ -54,7 +51,7 @@ public class AppFrame extends JFrame {
         fileOpenerPanel = new FileOpenerPanel(tabManager);
 
         // Adding components to the frame
-        add(toolBar, BorderLayout.NORTH);
+        add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
         add(fileOpenerPanel.getPanel(), BorderLayout.WEST);
     }
