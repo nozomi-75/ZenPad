@@ -1,9 +1,3 @@
-/* EditorTab takes the filePath and button name as parameters
- * It creates a JPanel (tab view) that contains a JTextArea
- * The JTextArea is used to display the content of the file
- * The JTextArea is wrapped in a JScrollPane to allow scrolling
-*/
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -14,6 +8,16 @@ import java.awt.Font;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+/**
+ * EditorTab is responsible for creating a tab view that displays the content of a file.
+ * It initializes a JTextArea to show the file content and wraps it in a JScrollPane for scrolling.
+ * The file content is loaded from the specified file path when the tab is created.
+ * 
+ * @see TabManager
+ * @param filePath The full file path to be opened in the new tab.
+ * @param button The name of the button that will serve as the tab title.
+ */
 
 public class EditorTab {
     private JPanel panel;
@@ -37,6 +41,13 @@ public class EditorTab {
         scrollPane = new JScrollPane(codeArea);
         panel.add(scrollPane, BorderLayout.CENTER);
     }
+
+    /**
+     * Loads the content of the specified file into the text area.
+     * If an error occurs while loading the file, an error message is displayed in the text area.
+     * 
+     * @param filePath The full file path to be opened in the new tab.
+     */
 
     private void loadFileContent(String filePath) {
         try {
