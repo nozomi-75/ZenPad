@@ -14,10 +14,12 @@ import javax.swing.UIManager;
  */
 
 public class LafManager {
+    private static boolean dark = false;
 
     public static void applyLightLaf() {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
+            dark = false;
         } catch (Exception ex) {
             fallback();
         }
@@ -26,9 +28,14 @@ public class LafManager {
     public static void applyDarkLaf() {
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
+            dark = true;
         } catch (Exception ex) {
             fallback();
         }
+    }
+
+    public static boolean isDark() {
+        return dark;
     }
 
     private static void fallback() {

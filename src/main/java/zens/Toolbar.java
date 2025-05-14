@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
+import java.awt.Window;
 
 /**
  * Toolbar is responsible for creating a toolbar with buttons for various actions.
@@ -89,6 +90,16 @@ public class Toolbar {
         } else {
             LafManager.applyLightLaf();
             toggleButton.setText("Dark Mode");
+        }
+
+        // Update all windows (for dialogs, etc.)
+        for (Window window : Window.getWindows()) {
+            SwingUtilities.updateComponentTreeUI(window);
+        }
+
+        // Update RSyntaxTextArea theme for all open tabs
+        for (EditorTab tab : tabManager.getOpenTabs()) {
+            tab.applyRSyntaxTheme();
         }
 
         SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());

@@ -3,10 +3,10 @@ package zens;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import java.awt.BorderLayout;
@@ -42,8 +42,9 @@ public class EditorTab {
         codeArea.setEditable(false);
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
-        codeArea.setBorder(new EmptyBorder(10, 10, 10, 10));
         codeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+
+        applyRSyntaxTheme(); // Apply the RSyntax theme
 
         // Load the file content into the text area
         loadFileContent(filePath);
@@ -85,6 +86,19 @@ public class EditorTab {
             e.printStackTrace();
         } catch (NullPointerException e) {
             codeArea.setText("An unexpected error occurred while loading " + filePath);
+            e.printStackTrace();
+        }
+    }
+
+    public void applyRSyntaxTheme() {
+        boolean isDark = LafManager.isDark(); // You need to implement this method
+        String themePath = isDark
+            ? "/org/fife/ui/rsyntaxtextarea/themes/dark.xml"
+            : "/org/fife/ui/rsyntaxtextarea/themes/default.xml";
+        try (InputStream in = getClass().getResourceAsStream(themePath)) {
+            Theme theme = Theme.load(in);
+            theme.apply(codeArea);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

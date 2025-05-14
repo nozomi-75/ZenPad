@@ -6,6 +6,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TabManager is responsible for managing the tabs in the application.
@@ -20,6 +22,7 @@ import java.awt.Component;
 
 public class TabManager {
     private JTabbedPane tabbedPane;
+    private List<EditorTab> openTabs = new ArrayList<>();
 
     public TabManager(JTabbedPane tabbedPane) {
         // Refer to the tabbed pane passed from the AppFrame
@@ -40,6 +43,7 @@ public class TabManager {
 
     public void openNewTab(String filePath, String button) {
         EditorTab newTab = new EditorTab(filePath, button, tabbedPane);
+        openTabs.add(newTab);
         tabbedPane.addTab(button, newTab.getPanel());
 
         // Set the tab's header
@@ -47,6 +51,10 @@ public class TabManager {
 
         // Set the tab to be selected
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
+    }
+
+    public List<EditorTab> getOpenTabs() {
+        return openTabs;
     }
 
     /**
