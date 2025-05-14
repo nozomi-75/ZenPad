@@ -1,6 +1,7 @@
 package zens;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.UIManager;
 
@@ -13,16 +14,28 @@ import javax.swing.UIManager;
  */
 
 public class LafManager {
-    public static void applyLaf() {
+
+    public static void applyLightLaf() {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
-            System.out.println("Failed to initialize FlatLaf. Falling back to system look and feel.");
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception fallbackException) {
-                System.out.println("Fatal error: Could not initialize any Look and Feel.");
-            }
+            fallback();
+        }
+    }
+
+    public static void applyDarkLaf() {
+        try {
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (Exception ex) {
+            fallback();
+        }
+    }
+
+    private static void fallback() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception fallbackException) {
+            System.out.println("Fatal error: Could not initialize any Look and Feel.");
         }
     }
 }
