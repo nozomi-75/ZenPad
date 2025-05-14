@@ -2,7 +2,9 @@ package zens;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.datatransfer.Clipboard;
@@ -41,23 +43,16 @@ public class Toolbar {
         runButton.setFocusPainted(false);
         aboutButton.setFocusPainted(false);
 
-        copyButton.addActionListener(e -> {
-            // Implement copy functionality
-            copyCode();
-        });
+        copyButton.addActionListener(e -> copyCode());
+        runButton.addActionListener(e -> runCode());
+        aboutButton.addActionListener(e -> showAboutDialog());
 
-        runButton.addActionListener(e -> {
-            // Implement run functionality
-            runCode();
-        });
-
-        aboutButton.addActionListener(e -> {
-            // Implement about functionality
-            showAboutDialog();
-        });
+        JToggleButton toggleButton = new JToggleButton("Dark Mode");
+        toggleButton.addActionListener(e -> themeToggle(toggleButton));
 
         toolbar.add(copyButton);
         toolbar.add(runButton);
+        toolbar.add(toggleButton);
         toolbar.add(aboutButton);
     }
     
@@ -78,13 +73,25 @@ public class Toolbar {
         clipboard.setContents(selection, null);
     }
     
-    public void runCode() {
+    private void runCode() {
         String code = tabManager.getSelectedCode();
         if (!code.trim().isEmpty()) {
             codeRunner.runCode(code);
         } else {
             JOptionPane.showMessageDialog(null, "No code to run.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void themeToggle(JToggleButton toggleButton) {
+        if (toggleButton.isSelected()) {
+            LafManager.applyDarkLaf();
+            toggleButton.setText("Light Mode");
+        } else {
+            LafManager.applyLightLaf();
+            toggleButton.setText("Dark Mode");
+        }
+
+        SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
     }
 
     /**

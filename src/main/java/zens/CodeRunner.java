@@ -56,7 +56,7 @@ public class CodeRunner {
             } else {
                 // Linux: Try various terminals or fallback to common defaults
                 String terminal = detectLinuxTerminal();
-                runProcess = new ProcessBuilder(terminal, "-e", "java TempProgram");
+                runProcess = new ProcessBuilder(terminal, "-e", "bash -c 'java TempProgram; exec bash'");
             }
 
             runProcess.start();
