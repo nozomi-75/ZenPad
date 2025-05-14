@@ -1,6 +1,10 @@
 # Octocat's Gitignore #
 #######################
 
+# Custom Ignore List #
+######################
+TempProgram.java
+
 # Compiled source #
 ###################
 *.com
