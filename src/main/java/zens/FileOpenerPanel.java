@@ -14,7 +14,7 @@ import java.awt.GridLayout;
 /**
  * FileOpenerPanel is responsible for creating a panel with buttons to open files.
  * It takes a TabManager object as a parameter to handle the logic for opening files in new tabs.
- * The panel contains buttons that, when clicked, will open the corresponding file in a new tab.
+ * The panel contains a JTree that displays sample files.
  * 
  * @see TabManager
  * @param tabManager The TabManager instance to handle file opening logic.
@@ -28,10 +28,33 @@ public class FileOpenerPanel {
         panel.setLayout(new GridLayout(0, 1, 10, 10)); // Arrange buttons in a single row
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+        JScrollPane scrollPane = new JScrollPane(createSampleTree(tabManager));
+        scrollPane.setPreferredSize(new java.awt.Dimension(150, 400)); // Adjust width as needed
+        panel.add(scrollPane);
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    /**
+     * Creates a JTree with sample files.
+     * The tree is populated with nodes representing sample files.
+     * When a node is selected, it opens the corresponding file in a new tab using the TabManager.
+     * 
+     * @param tabManager The TabManager instance to handle file opening logic.
+     * @return A JTree populated with sample files.
+     */
+
+    private JTree createSampleTree(TabManager tabManager) {
+
         /* The nodes take their names from the brnOneNames array, which is iterated by a loop.
          * The filenames are listed in the brnOneFiles array, which is also iterated by a loop.
          * It is possible to merge two arrays into one (i.e., node name is similar to the file name).
          * Their length should be the same. Otherwise, the program will throw an ArrayIndexOutOfBoundsException.
+         * You may add more branches to the tree by adding more array pairs.
+         * Adding more branches would require current branch be dissociated from the root node.
+         * You would have to add parent nodes to the root node and the branches to the parent nodes.
          */
 
         String[] brnOneNames = {
@@ -42,18 +65,14 @@ public class FileOpenerPanel {
             "sample1.txt", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt"
         };
 
-        /* Check if the lengths of the arrays are equal
-         * Should abruptly terminate the program if otherwise
-         */
-
         if (brnOneNames.length != brnOneFiles.length) {
             System.err.println("Error: The arrays must have the same length.");
             System.exit(1);
         }
 
+        // Base nodes section, add parent nodes here if necessary
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
 
-        // Create nodes for each file
         for (int i = 0; i < brnOneFiles.length; i++) {
             root.add(new DefaultMutableTreeNode(
                 new SampleFile(brnOneNames[i], "ent/" + brnOneFiles[i])
@@ -84,13 +103,7 @@ public class FileOpenerPanel {
             }
         });
 
-        JScrollPane scrollPane = new JScrollPane(tree);
-        scrollPane.setPreferredSize(new java.awt.Dimension(150, 400)); // Adjust width as needed
-        panel.add(scrollPane);
-    }
-
-    public JPanel getPanel() {
-        return panel;
+        return tree;
     }
 
     /**
@@ -98,7 +111,7 @@ public class FileOpenerPanel {
      * It is used to represent the files in the JTree.
      * The display name is what will be shown in the tree, while the file path is used to open the file.
      * 
-     * 
+     * @see createSampleTree
      */
     private static class SampleFile {
         String displayName;
