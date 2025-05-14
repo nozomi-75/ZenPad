@@ -15,15 +15,19 @@ import java.awt.Toolkit;
  * The toolbar is designed to be non-floatable and has a specific border layout.
  * 
  * @see TabManager
+ * @see CodeRunner
  * @param tabManager The TabManager instance used to manage tabs in the application.
+ * @param codeRunner The CodeRunner instance used to execute code.
  */
 
 public class Toolbar {
     private JToolBar toolbar;
     private TabManager tabManager;
+    private CodeRunner codeRunner;
     
-    public Toolbar(TabManager tabManager) {
+    public Toolbar(TabManager tabManager, CodeRunner codeRunner) {
         this.tabManager = tabManager;
+        this.codeRunner = codeRunner;
 
         toolbar = new JToolBar();
         toolbar.setFloatable(false);
@@ -44,7 +48,7 @@ public class Toolbar {
 
         runButton.addActionListener(e -> {
             // Implement run functionality
-            // runCode();
+            runCode();
         });
 
         aboutButton.addActionListener(e -> {
@@ -74,6 +78,14 @@ public class Toolbar {
         clipboard.setContents(selection, null);
     }
     
+    public void runCode() {
+        String code = tabManager.getSelectedCode();
+        if (!code.trim().isEmpty()) {
+            codeRunner.runCode(code);
+        } else {
+            JOptionPane.showMessageDialog(null, "No code to run.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * Displays an "About" dialog with information about the application.

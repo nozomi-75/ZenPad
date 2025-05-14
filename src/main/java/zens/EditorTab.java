@@ -36,7 +36,7 @@ public class EditorTab {
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
         codeArea.setBorder(new EmptyBorder(10, 10, 10, 10));
-        codeArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        codeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
 
         // Load the file content into the text area
         loadFileContent(filePath);

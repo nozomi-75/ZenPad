@@ -25,6 +25,9 @@ public class AppFrame extends JFrame {
     // Instance of FileOpenerPanel object for sidebar management
     private FileOpenerPanel fileOpenerPanel;
 
+    // Instance of CodeRunner object for code execution
+    private CodeRunner codeRunner;
+
     // Other UI components
     private JTabbedPane tabbedPane;
 
@@ -40,7 +43,8 @@ public class AppFrame extends JFrame {
 
         // Pass tabbedPane to TabManager
         tabManager = new TabManager(tabbedPane);
-        Toolbar toolbar = new Toolbar(tabManager);
+        codeRunner = new CodeRunner();
+        Toolbar toolbar = new Toolbar(tabManager, codeRunner);
 
         /* Create a side panel for the file opener
          * Pass tabManager to FOP
