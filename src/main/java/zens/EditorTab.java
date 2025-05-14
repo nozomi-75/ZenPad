@@ -11,7 +11,6 @@ import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -43,7 +42,6 @@ public class EditorTab {
         codeArea.setEditable(true);
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
-        codeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
 
         applyRSyntaxTheme(); // Apply the RSyntax theme
 
@@ -107,6 +105,7 @@ public class EditorTab {
         try (InputStream in = getClass().getResourceAsStream(themePath)) {
             Theme theme = Theme.load(in);
             theme.apply(codeArea);
+            codeArea.setFont(codeArea.getFont().deriveFont(14f));
         } catch (IOException e) {
             e.printStackTrace();
         }
