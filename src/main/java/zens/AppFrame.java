@@ -38,10 +38,9 @@ public class AppFrame extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(5, 0, 5, 5));
 
-        Toolbar toolbar = new Toolbar(tabManager);
-
         // Pass tabbedPane to TabManager
         tabManager = new TabManager(tabbedPane);
+        Toolbar toolbar = new Toolbar(tabManager);
 
         /* Create a side panel for the file opener
          * Pass tabManager to FOP

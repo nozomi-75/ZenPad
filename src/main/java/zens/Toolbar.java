@@ -39,7 +39,7 @@ public class Toolbar {
 
         copyButton.addActionListener(e -> {
             // Implement copy functionality
-            // copyCode();
+            copyCode();
         });
 
         runButton.addActionListener(e -> {
@@ -57,14 +57,23 @@ public class Toolbar {
         toolbar.add(aboutButton);
     }
     
-    /*
+    /**
+     * Copies the code from the currently selected tab to the system clipboard.
+     * <p>
+     * This method retrieves the code from the selected tab using the TabManager
+     * and copies it to the system clipboard for easy access.
+     * </p>
+     * 
+     * @see TabManager
+     * @see EditorTab
+     */
     private void copyCode() {
         String code = tabManager.getSelectedCode();
         StringSelection selection = new StringSelection(code);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, null);
     }
-    */
+    
 
     /**
      * Displays an "About" dialog with information about the application.
