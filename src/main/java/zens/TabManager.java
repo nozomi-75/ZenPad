@@ -39,8 +39,11 @@ public class TabManager {
      */
 
     public void openNewTab(String filePath, String button) {
-        EditorTab newTab = new EditorTab(filePath, button);
+        EditorTab newTab = new EditorTab(filePath, button, tabbedPane);
         tabbedPane.addTab(button, newTab.getPanel());
+
+        // Set the tab's header
+        tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());
 
         // Set the tab to be selected
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);

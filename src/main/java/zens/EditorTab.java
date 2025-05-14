@@ -2,6 +2,7 @@ package zens;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -24,8 +25,9 @@ public class EditorTab {
     private JPanel panel;
     private JTextArea codeArea;
     private JScrollPane scrollPane;
+    private TabHeader tabHeader;
     
-    public EditorTab(String filePath, String button) {
+    public EditorTab(String filePath, String button, JTabbedPane tabbedPane) {
         panel = new JPanel(new BorderLayout());
 
         // Set the configurations for the text area
@@ -41,6 +43,8 @@ public class EditorTab {
 
         scrollPane = new JScrollPane(codeArea);
         panel.add(scrollPane, BorderLayout.CENTER);
+
+        tabHeader = new TabHeader(button, tabbedPane, panel);
     }
 
     /**
@@ -81,5 +85,16 @@ public class EditorTab {
     // Getters for the entire tab view
     public JPanel getPanel() {
         return panel;
+    }
+
+    /**
+     * Returns the tab header component.
+     * @return
+     * 
+     * @see TabHeader
+     * @see TabManager
+     */
+    public JPanel getTabHeader() {
+        return tabHeader.getHeaderPanel();
     }
 }
