@@ -1,8 +1,13 @@
 package zens;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 
 import java.awt.GridLayout;
 
@@ -23,58 +28,88 @@ public class FileOpenerPanel {
         panel.setLayout(new GridLayout(0, 1, 10, 10)); // Arrange buttons in a single row
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        /* The buttons take their names from the buttonName array, which is iterated by a loop.
-         * The filenames are listed in the fileName array, which is also iterated by a loop.
-         * It is possible to merge two arrays into one (i.e., button name is similar to the file name).
+        /* The nodes take their names from the brnOneNames array, which is iterated by a loop.
+         * The filenames are listed in the brnOneFiles array, which is also iterated by a loop.
+         * It is possible to merge two arrays into one (i.e., node name is similar to the file name).
          * Their length should be the same. Otherwise, the program will throw an ArrayIndexOutOfBoundsException.
          */
 
-        String[] buttonName = {
-            "Sample 1", "Sample 2", "Sample 3", "Sample 4", "Sample 5",
-            "Sample 6", "Sample 7", "Sample 8", "Sample 9", "Sample 10"
+        String[] brnOneNames = {
+            "Sample 1", "Sample 2", "Sample 3", "Sample 4", "Sample 5"
         };
 
-        String[] fileName = {
-            "sample1.txt", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt",
-            "sample6.txt", "sample7.txt", "sample8.txt", "sample9.txt", "sample10.txt"
+        String[] brnOneFiles = {
+            "sample1.txt", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt"
         };
 
-        /* Check if the lengths of buttonName and fileName arrays are equal
+        /* Check if the lengths of the arrays are equal
          * Should abruptly terminate the program if otherwise
          */
 
-        if (buttonName.length != fileName.length) {
-            System.err.println("Error: buttonName and fileName arrays must have the same length.");
+        if (brnOneNames.length != brnOneFiles.length) {
+            System.err.println("Error: The arrays must have the same length.");
             System.exit(1);
         }
 
-        /* Loop through above arrays while creating buttons
-         * The button name is taken from the buttonName array
-         * The file name is taken from the fileName array
-         * The file name is passed to the TabManager to open the file
-         * The button name is passed to the TabManager to set the tab title
-         * The file name is prefixed with "ent/" to resolve full directory path
-         */
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
 
-        for (int i = 0; i < fileName.length; i++) {
-            String fileToCall = fileName[i];
-            String button = buttonName[i];
-            String filePath = "ent/" + fileToCall; // Relative path to the resource file within the classpath
-
-            // Create buttons with the name from the array
-            JButton fileButton = new JButton(button);
-            fileButton.setFocusPainted(false);
-
-            // Add action listener to the button
-            fileButton.addActionListener(e -> {
-                tabManager.openNewTab(filePath, button);
-            });
-
-            panel.add(fileButton);
+        // Create nodes for each file
+        for (int i = 0; i < brnOneFiles.length; i++) {
+            root.add(new DefaultMutableTreeNode(
+                new SampleFile(brnOneNames[i], "ent/" + brnOneFiles[i])
+            ));
         }
+
+        JTree tree = new JTree(root);
+        tree.setRootVisible(true);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.setShowsRootHandles(true);
+
+        /*
+         * Adds a TreeSelectionListener to the JTree.
+         * When the user selects a node, this listener is triggered.
+         * It checks if a valid node is selected and whether its user object is a SampleFile.
+         * If so, it retrieves the SampleFile and opens a new tab with the associated file path and display name.
+         */
+        tree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                if (selectedNode == null) return;
+                Object userObj = selectedNode.getUserObject();
+                if (userObj instanceof SampleFile) {
+                    SampleFile sample = (SampleFile) userObj;
+                    tabManager.openNewTab(sample.filePath, sample.displayName);
+                }
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(tree);
+        scrollPane.setPreferredSize(new java.awt.Dimension(150, 400)); // Adjust width as needed
+        panel.add(scrollPane);
     }
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    /**
+     * SampleFile is a simple class that holds the display name and file path of a sample file.
+     * It is used to represent the files in the JTree.
+     * The display name is what will be shown in the tree, while the file path is used to open the file.
+     * 
+     * 
+     */
+    private static class SampleFile {
+        String displayName;
+        String filePath;
+        SampleFile(String displayName, String filePath) {
+            this.displayName = displayName;
+            this.filePath = filePath;
+        }
+        @Override
+        public String toString() {
+            return displayName;
+        }
     }
 }
