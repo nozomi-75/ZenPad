@@ -89,7 +89,7 @@ public class EditorTab {
 
     /**
      * Returns the tab header component.
-     * @return
+     * @return headerPanel
      * 
      * @see TabHeader
      * @see TabManager
