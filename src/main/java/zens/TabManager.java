@@ -1,11 +1,7 @@
 package zens;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,15 +62,12 @@ public class TabManager {
      * 
      * @see EditorTab
      */
+
     public String getSelectedCode() {
-        Component comp = tabbedPane.getSelectedComponent();
-
-        if (comp instanceof JPanel panel) {
-            JScrollPane scrollPane = (JScrollPane) panel.getComponent(0);
-            JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
-            return textArea.getText();
+        int selectedIndex = tabbedPane.getSelectedIndex();
+        if (selectedIndex >=0 && selectedIndex < openTabs.size()) {
+            return openTabs.get(selectedIndex).getCode();
         }
-
         return "";
     }
 }

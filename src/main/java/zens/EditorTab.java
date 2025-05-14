@@ -3,6 +3,7 @@ package zens;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
@@ -39,7 +40,7 @@ public class EditorTab {
         codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         codeArea.setCodeFoldingEnabled(true);
         codeArea.setAntiAliasingEnabled(true);
-        codeArea.setEditable(false);
+        codeArea.setEditable(true);
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
         codeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -68,28 +69,36 @@ public class EditorTab {
      */
 
     private void loadFileContent(String filePath) {
-        try {
-            // Read the file content and set it to the text area
-            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-                if (inputStream == null) {
-                    codeArea.setText("Error: Resource not found: " + filePath);
-                    return;
+        new SwingWorker<String, Void>() {
+            @Override
+            protected String doInBackground() throws Exception {
+                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+                    if (inputStream == null) {
+                        return "Error: Resource not found: " + filePath;
+                    }
+                    return new String(inputStream.readAllBytes());
                 }
-                
-                // Read the content while the stream is open
-                String content = new String(inputStream.readAllBytes());
-                codeArea.setText(content);
             }
-            
-        } catch (IOException e) {
-            codeArea.setText("Error loading " + filePath + ": " + e.getMessage());
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            codeArea.setText("An unexpected error occurred while loading " + filePath);
-            e.printStackTrace();
-        }
+            @Override
+            protected void done() {
+                try {
+                    codeArea.setText(get());
+                } catch (Exception e) {
+                    codeArea.setText("Error loading " + filePath + ": " + e.getMessage());
+                }
+            }
+        }.execute();
     }
 
+    /**
+     * Applies the RSyntaxTextArea theme based on the current look and feel.
+     * <p>
+     * This method checks if the current look and feel is dark or light and applies the corresponding
+     * RSyntaxTextArea theme. The themes are loaded from XML files located in the classpath.
+     * </p>
+     * 
+     * @see LafManager
+     */
     public void applyRSyntaxTheme() {
         boolean isDark = LafManager.isDark(); // You need to implement this method
         String themePath = isDark
@@ -106,6 +115,10 @@ public class EditorTab {
     // Getters for the entire tab view
     public JPanel getPanel() {
         return panel;
+    }
+
+    public String getCode() {
+        return codeArea.getText();
     }
 
     /**
