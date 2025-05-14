@@ -1,10 +1,13 @@
 package zens;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -23,8 +26,8 @@ import java.io.InputStream;
 
 public class EditorTab {
     private JPanel panel;
-    private JTextArea codeArea;
-    private JScrollPane scrollPane;
+    private RSyntaxTextArea codeArea;
+    private RTextScrollPane scrollPane;
     private TabHeader tabHeader;
     
     public EditorTab(String filePath, String button, JTabbedPane tabbedPane) {
@@ -32,7 +35,11 @@ public class EditorTab {
 
         // Set the configurations for the text area
         // This will be used to display the sample code
-        codeArea = new JTextArea();
+        codeArea = new RSyntaxTextArea();
+        codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        codeArea.setCodeFoldingEnabled(true);
+        codeArea.setAntiAliasingEnabled(true);
+        codeArea.setEditable(false);
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
         codeArea.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -41,7 +48,7 @@ public class EditorTab {
         // Load the file content into the text area
         loadFileContent(filePath);
 
-        scrollPane = new JScrollPane(codeArea);
+        scrollPane = new RTextScrollPane(codeArea);
         panel.add(scrollPane, BorderLayout.CENTER);
 
         tabHeader = new TabHeader(button, tabbedPane, panel);
