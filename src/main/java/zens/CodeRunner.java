@@ -53,6 +53,12 @@ public class CodeRunner {
             if (os.contains("win")) {
                 // Windows: Open in Command Prompt
                 runProcess = new ProcessBuilder("cmd", "/c", "start", "cmd", "/k", "java TempProgram");
+            } else if (os.contains("mac")) {
+                String command = "java TempProgram; exec bash";
+                runProcess = new ProcessBuilder(
+                    "osascript", "-e",
+                    "tell application \"Terminal\" to do script \"" + command.replace("\"", "\\\"") + "\""
+                );
             } else {
                 // Linux: Try various terminals or fallback to common defaults
                 String terminal = detectLinuxTerminal();
