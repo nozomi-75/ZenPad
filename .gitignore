@@ -5,6 +5,7 @@
 ######################
 TempProgram.java
 /src/main/resources/ent/
+/target/classes/ent/
 
 # Compiled source #
 ###################
