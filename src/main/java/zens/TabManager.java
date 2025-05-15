@@ -39,18 +39,18 @@ public class TabManager {
     /**
      * Opens a new editor tab in the managed JTabbedPane.
      * <p>
-     * This method creates a new {@link EditorTab} using the provided file path and button name.
+     * This method creates a new {@link EditorTab} using the provided file path and node name.
      * The tab is added to the JTabbedPane, its custom header is set, and it becomes the selected tab.
      * </p>
      *
      * @param filePath the full file path to be loaded in the new editor tab
-     * @param button the display name for the tab (typically the file name or a label)
+     * @param node the display name for the tab (typically the file name or a label)
      * @see FileOpenerPanel
      */
-    public void openNewTab(String filePath, String button) {
-        EditorTab newTab = new EditorTab(filePath, button, tabbedPane);
+    public void openNewTab(String filePath, String node) {
+        EditorTab newTab = new EditorTab(filePath, node, tabbedPane);
         openTabs.add(newTab);
-        tabbedPane.addTab(button, newTab.getPanel());
+        tabbedPane.addTab(node, newTab.getPanel());
 
         // Set the tab's header
         tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());

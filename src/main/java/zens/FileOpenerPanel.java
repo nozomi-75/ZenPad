@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * FileOpenerPanel is responsible for creating a panel with buttons to open files.
+ * FileOpenerPanel is responsible for creating a panel with nodes to open files.
  * It takes a TabManager object as a parameter to handle the logic for opening files in new tabs.
  * The panel contains a JTree that displays sample files.
  * 
@@ -27,7 +27,7 @@ public class FileOpenerPanel {
     
     public FileOpenerPanel(TabManager tabManager) {
         panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 1, 10, 10)); // Arrange buttons in a single row
+        panel.setLayout(new GridLayout(0, 1, 10, 10));
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         JScrollPane scrollPane = new JScrollPane(createSampleTree(tabManager));
@@ -45,7 +45,7 @@ public class FileOpenerPanel {
      */
 
     private JTree createSampleTree(TabManager tabManager) {
-        
+
         List<Branch> branches = getBranches();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
 
@@ -60,7 +60,10 @@ public class FileOpenerPanel {
             DefaultMutableTreeNode parentNode = new DefaultMutableTreeNode(branch.parentName);
             for (int i = 0; i < branch.displayNames.length; i++) {
                 parentNode.add(new DefaultMutableTreeNode(
-                    new SampleFile(branch.displayNames[i], "samples/" + branch.fileNames[i])
+                    new SampleFile(
+                        branch.displayNames[i],
+                        "samples/" + branch.fileNames[i]
+                    )
                 ));
             }
 
@@ -108,6 +111,12 @@ public class FileOpenerPanel {
                 "Java Basics",
                 new String[] { "Hello world", "Operators 1", "Operators 2", "Printing strings", "Test increments" },
                 new String[] { "HelloWorld.java", "OprtOne.java", "OprtTwo.java", "PrintData.java", "Increment.java" }
+            ),
+
+            new Branch(
+                "Conditions",
+                new String[] { "If, else, else-if", "Ternary operator", "Switch statement" },
+                new String[] { "CtrlOne.java", "CtrlTwo.java", "CtrlThree.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
@@ -120,11 +129,13 @@ public class FileOpenerPanel {
      * The display name is what will be shown in the tree, while the file path is used to open the file.
      * 
      * @see createSampleTree
+     * @see Branch
      */
 
     private static class SampleFile {
         String displayName;
         String filePath;
+
         SampleFile(String displayName, String filePath) {
             this.displayName = displayName;
             this.filePath = filePath;
