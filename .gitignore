@@ -4,7 +4,7 @@
 # Custom Ignore List #
 ######################
 TempProgram.java
-/target/classes/samples/
+/target/
 
 # Compiled source #
 ###################
