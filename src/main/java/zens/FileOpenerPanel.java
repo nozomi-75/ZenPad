@@ -58,11 +58,11 @@ public class FileOpenerPanel {
          */
 
         String[] brnOneNames = {
-            "Sample 1", "Sample 2", "Sample 3", "Sample 4", "Sample 5"
+            "Hello World", "Sample 2", "Sample 3", "Sample 4", "Sample 5"
         };
 
         String[] brnOneFiles = {
-            "sample1.txt", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt"
+            "HelloWorld.java", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt"
         };
 
         if (brnOneNames.length != brnOneFiles.length) {
@@ -79,11 +79,13 @@ public class FileOpenerPanel {
             parentNodeOne.add(new DefaultMutableTreeNode(
                 new SampleFile(brnOneNames[i], "ent/" + brnOneFiles[i])
             ));
+
         }
 
         // Add branches to the root node
         root.add(parentNodeOne);
         
+
         // Set root node configuration
         JTree tree = new JTree(root);
         tree.setRootVisible(false);

@@ -2,7 +2,6 @@ package zens;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -21,7 +20,7 @@ import java.io.InputStream;
  * 
  * @see TabManager
  * @param filePath The full file path to be opened in the new tab.
- * @param button The name of the button that will serve as the tab title.
+ * @param node The name of the node that will serve as the tab title.
  */
 
 public class EditorTab {
@@ -29,47 +28,53 @@ public class EditorTab {
     private RSyntaxTextArea codeArea;
     private RTextScrollPane scrollPane;
     private TabHeader tabHeader;
+    private String fileName;
     
-    public EditorTab(String filePath, String button, JTabbedPane tabbedPane) {
+    /**
+     * Constructs an EditorTab for displaying and editing the content of a file.
+     *
+     * @param filePath The full file path to be opened in the new tab.
+     * @param node The name of the node that will serve as the tab title.
+     * @param tabbedPane The parent JTabbedPane to which this tab belongs.
+     */
+    public EditorTab(String filePath, String node, JTabbedPane tabbedPane) {
+        // Extract the file name from the file path (everything after the last '/')
+        this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         panel = new JPanel(new BorderLayout());
 
-        // Set the configurations for the text area
-        // This will be used to display the sample code
+        // Set up the code editor area with syntax highlighting and other features
         codeArea = new RSyntaxTextArea();
         codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         codeArea.setCodeFoldingEnabled(true);
-        codeArea.setAntiAliasingEnabled(true);
+        codeArea.setAntiAliasingEnabled(true); // Smoother text rendering
         codeArea.setEditable(true);
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
 
-        applyRSyntaxTheme(); // Apply the RSyntax theme
+        applyRSyntaxTheme();
 
-        // Load the file content into the text area
+        // Load the file content into the text area asynchronously
         loadFileContent(filePath);
 
+        // Wrap the code area in a scroll pane for scrolling support
         scrollPane = new RTextScrollPane(codeArea);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        tabHeader = new TabHeader(button, tabbedPane, panel);
+        // Create a custom tab header (with close button, etc.)
+        tabHeader = new TabHeader(node, tabbedPane, panel);
     }
 
     /**
-     * Loads the content of the specified resource file into the code area.
-     * <p>
-     * This method attempts to read the file from the application's classpath using the provided
-     * {@code filePath}. If the file is found, its contents are displayed in the {@link JTextArea}.
-     * If the file cannot be found or an error occurs during reading, an error message is shown instead.
-     * </p>
+     * Loads the content of the specified resource file into the code area asynchronously.
+     * Uses a SwingWorker to avoid freezing the UI while reading the file.
      *
      * @param filePath the relative path to the resource file within the classpath (e.g., "ent/sample1.txt")
-     * @see FileOpenerPanel
      */
-
     private void loadFileContent(String filePath) {
         new SwingWorker<String, Void>() {
             @Override
             protected String doInBackground() throws Exception {
+                // Try to load the file as a resource from the classpath
                 try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
                     if (inputStream == null) {
                         return "Error: Resource not found: " + filePath;
@@ -90,19 +95,18 @@ public class EditorTab {
 
     /**
      * Applies the RSyntaxTextArea theme based on the current look and feel.
-     * <p>
-     * This method checks if the current look and feel is dark or light and applies the corresponding
-     * RSyntaxTextArea theme. The themes are loaded from XML files located in the classpath.
-     * </p>
+     * Loads the theme XML from the classpath and applies it to the code area.
      * 
      * @see LafManager
+     * @see Toolbar
      */
     public void applyRSyntaxTheme() {
-        boolean isDark = LafManager.isDark(); // You need to implement this method
+        boolean isDark = LafManager.isDark(); // Determine if the current theme is dark
         String themePath = isDark
             ? "/org/fife/ui/rsyntaxtextarea/themes/dark.xml"
             : "/org/fife/ui/rsyntaxtextarea/themes/default.xml";
         try (InputStream in = getClass().getResourceAsStream(themePath)) {
+            // Load the theme from the XML file
             Theme theme = Theme.load(in);
             theme.apply(codeArea);
             codeArea.setFont(codeArea.getFont().deriveFont(14f));
@@ -111,23 +115,41 @@ public class EditorTab {
         }
     }
 
-    // Getters for the entire tab view
+    /**
+     * Returns the main panel containing the editor and scroll pane.
+     * @return the JPanel representing this tab's content
+     * @see TabManager
+     */
     public JPanel getPanel() {
         return panel;
     }
 
+    /**
+     * Returns the current text/code in the editor area.
+     * @return the code as a String
+     * @see TabManager
+     */
     public String getCode() {
         return codeArea.getText();
     }
 
     /**
-     * Returns the tab header component.
-     * @return headerPanel
+     * Returns the tab header component (with close button, etc.).
+     * @return headerPanel the custom tab header panel
      * 
      * @see TabHeader
      * @see TabManager
      */
     public JPanel getTabHeader() {
         return tabHeader.getHeaderPanel();
+    }
+
+    /**
+     * Returns the file name of the current tab (not the full path).
+     * @return fileName the name of the file being edited
+     * @see TabManager
+     */
+    public String getFileName() {
+        return fileName;
     }
 }

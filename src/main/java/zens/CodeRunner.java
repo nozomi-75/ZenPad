@@ -3,6 +3,7 @@ package zens;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 import javax.swing.JOptionPane;
 
@@ -20,24 +21,29 @@ public class CodeRunner {
     /**
      * Compiles and runs the provided Java code.
      * <p>
-     * This method creates a temporary Java file, writes the provided code to it,
-     * compiles the file, and then executes it in the appropriate terminal based on the operating system.
-     * If the compilation fails, an error message is displayed.
+     * This method creates a temporary Java file, compiles it, and executes it in the appropriate terminal.
+     * It detects the operating system to determine the correct terminal to use.
      * </p>
      *
      * @param code The Java code to be compiled and run.
-     * @see EditorTab
+     * @param fileName The name of the file to be created (without extension).
      */
 
-
-    public void runCode(String code) {
+    public void runCode(String code, String fileName) {
         try {
+            // Extract the class name from the file name
+            String className = fileName.substring(0, fileName.lastIndexOf('.'));
+
             // Create a temporary Java file
             // Write the code to the file
-            File tempFile = new File("TempProgram.java");
-            Files.write(tempFile.toPath(), code.getBytes());
+            File tempDir = Files.createTempDirectory("java_samples").toFile();
+            File javaFile = new File(tempDir, className + ".java");
 
-            Process compileProcess = new ProcessBuilder("javac", "TempProgram.java").start();
+            Files.writeString(javaFile.toPath(), code, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+            Process compileProcess = new ProcessBuilder("javac", javaFile.getName())
+                .directory(tempDir)
+                .start();
             compileProcess.waitFor();
 
             // Check if the compilation was successful
@@ -52,19 +58,22 @@ public class CodeRunner {
 
             if (os.contains("win")) {
                 // Windows: Open in Command Prompt
-                runProcess = new ProcessBuilder("cmd", "/c", "start", "cmd", "/k", "java TempProgram");
+                runProcess = new ProcessBuilder("cmd", "/c", "start", "cmd", "/k",
+                    "java", "-cp", tempDir.getAbsolutePath(), className);
             } else if (os.contains("mac")) {
-                String command = "java TempProgram; exec bash";
-                runProcess = new ProcessBuilder(
-                    "osascript", "-e",
-                    "tell application \"Terminal\" to do script \"" + command.replace("\"", "\\\"") + "\""
-                );
+                String command = "java -cp " + tempDir.getAbsolutePath() + " " + className + "; exec bash";
+                runProcess = new ProcessBuilder("osascript", "-e",
+                    "tell application \"Terminal\" to do script \"" + command.replace("\"", "\\\"") + "\"");
             } else {
                 // Linux: Try various terminals or fallback to common defaults
                 String terminal = detectLinuxTerminal();
-                runProcess = new ProcessBuilder(terminal, "-e", "bash -c 'java TempProgram; exec bash'");
+                String bashCommand = "bash -c 'java -cp " + tempDir.getAbsolutePath() + " " + className + "; exec bash'";
+                runProcess = new ProcessBuilder(terminal, "-e", bashCommand);
             }
 
+            runProcess.directory(tempDir);
+            // Debug print: show the command being run
+            System.out.println("Running: " + String.join(" ", runProcess.command()));
             runProcess.start();
         } catch (IOException | InterruptedException e) {
             JOptionPane.showMessageDialog(null, "An error occurred while running the code: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -76,7 +85,6 @@ public class CodeRunner {
      * <p>
      * This method checks for various common terminal applications and returns the first one found.
      * If none are found, it falls back to a default terminal.
-     * </p>
      *
      * @return The name of the detected terminal.
      */

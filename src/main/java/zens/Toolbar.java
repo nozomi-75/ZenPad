@@ -64,6 +64,7 @@ public class Toolbar {
      * and copies it to the system clipboard for easy access.
      * </p>
      * 
+     * @see TabManager#getSelectedCode()
      * @see TabManager
      * @see EditorTab
      */
@@ -74,14 +75,39 @@ public class Toolbar {
         clipboard.setContents(selection, null);
     }
     
+    /**
+     * Runs the code from the currently selected tab.
+     * <p>
+     * This method retrieves the code and file name from the selected tab using the TabManager
+     * and executes it using the CodeRunner.
+     * </p>
+     * 
+     * @see CodeRunner
+     * @see TabManager#getSelectedCode()
+     * @see TabManager#getSelectedFileName()
+     */
     private void runCode() {
         String code = tabManager.getSelectedCode();
+        String fileName = tabManager.getSelectedFileName();
         if (!code.trim().isEmpty()) {
-            codeRunner.runCode(code);
+            codeRunner.runCode(code, fileName);
         } else {
             JOptionPane.showMessageDialog(null, "No code to run.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    /**
+     * Toggles the theme of the application between light and dark modes.
+     * <p>
+     * This method applies the selected theme using the LafManager and updates
+     * all open tabs to reflect the new theme.
+     * </p>
+     * 
+     * @param toggleButton The JToggleButton that triggers the theme change.
+     * @see LafManager
+     * @see EditorTab#applyRSyntaxTheme()
+     * @see TabManager#getOpenTabs()
+     */
 
     private void themeToggle(JToggleButton toggleButton) {
         if (toggleButton.isSelected()) {
@@ -116,6 +142,16 @@ public class Toolbar {
     private void showAboutDialog() {
         JOptionPane.showMessageDialog(null, "Java Programming Demo. CC-BY-NC-SA 4.0. Made by Zens.", "About", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    /**
+     * Returns the toolbar instance.
+     * <p>
+     * This method provides access to the JToolBar instance created in this class.
+     * </p>
+     * 
+     * @return the JToolBar instance
+     * @see AppFrame
+     */
 
     public JToolBar getToolbar() {
         return toolbar;
