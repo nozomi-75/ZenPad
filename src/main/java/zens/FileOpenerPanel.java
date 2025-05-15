@@ -77,7 +77,7 @@ public class FileOpenerPanel {
         // Handle iteration for the first branch
         for (int i = 0; i < brnOneFiles.length; i++) {
             parentNodeOne.add(new DefaultMutableTreeNode(
-                new SampleFile(brnOneNames[i], "ent/" + brnOneFiles[i])
+                new SampleFile(brnOneNames[i], "samples/" + brnOneFiles[i])
             ));
 
         }
