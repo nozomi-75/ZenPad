@@ -10,6 +10,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 import java.awt.GridLayout;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * FileOpenerPanel is responsible for creating a panel with buttons to open files.
@@ -33,10 +35,6 @@ public class FileOpenerPanel {
         panel.add(scrollPane);
     }
 
-    public JPanel getPanel() {
-        return panel;
-    }
-
     /**
      * Creates a JTree with sample files.
      * The tree is populated with nodes representing sample files.
@@ -47,44 +45,27 @@ public class FileOpenerPanel {
      */
 
     private JTree createSampleTree(TabManager tabManager) {
-
-        /* The nodes take their names from the brnOneNames array, which is iterated by a loop.
-         * The filenames are listed in the brnOneFiles array, which is also iterated by a loop.
-         * It is possible to merge two arrays into one (i.e., node name is similar to the file name).
-         * Their length should be the same. Otherwise, the program will throw an ArrayIndexOutOfBoundsException.
-         * You may add more branches to the tree by adding more array pairs.
-         * Adding more branches would require current branch be dissociated from the root node.
-         * You would have to add parent nodes to the root node and the branches to the parent nodes.
-         */
-
-        String[] brnOneNames = {
-            "Hello world", "Operators 1", "Operators 2", "Printing strings", "Test increments"
-        };
-
-        String[] brnOneFiles = {
-            "HelloWorld.java", "OprtOne.java", "OprtTwo.java", "PrintData.java", "Increment.java"
-        };
-
-        if (brnOneNames.length != brnOneFiles.length) {
-            System.err.println("Error: The arrays must have the same length.");
-            System.exit(1);
-        }
-
-        // Base nodes section, add parent nodes here if necessary
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
-        DefaultMutableTreeNode parentNodeOne = new DefaultMutableTreeNode("Java Basics");
-
-        // Handle iteration for the first branch
-        for (int i = 0; i < brnOneFiles.length; i++) {
-            parentNodeOne.add(new DefaultMutableTreeNode(
-                new SampleFile(brnOneNames[i], "samples/" + brnOneFiles[i])
-            ));
-
-        }
-
-        // Add branches to the root node
-        root.add(parentNodeOne);
         
+        List<Branch> branches = getBranches();
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+
+        for (Branch branch : branches) {
+
+            // Abruptly exit if branch array pairs are not the same length
+            if (branch.displayNames.length != branch.fileNames.length) {
+                System.err.println("Error: The arrays for branch '" + branch.parentName + "' do not match in length.");
+                System.exit(1);
+            }
+
+            DefaultMutableTreeNode parentNode = new DefaultMutableTreeNode(branch.parentName);
+            for (int i = 0; i < branch.displayNames.length; i++) {
+                parentNode.add(new DefaultMutableTreeNode(
+                    new SampleFile(branch.displayNames[i], "samples/" + branch.fileNames[i])
+                ));
+            }
+
+            root.add(parentNode);
+        }
 
         // Set root node configuration
         JTree tree = new JTree(root);
@@ -114,6 +95,25 @@ public class FileOpenerPanel {
         return tree;
     }
 
+
+    /**
+     * Returns a list of branches, each containing display names and file names.
+     * This method is used to populate the JTree with sample files.
+     * 
+     * @return List of Branch objects representing the sample files.
+     */
+    private List<Branch> getBranches() {
+        return Arrays.asList(
+            new Branch(
+                "Java Basics",
+                new String[] { "Hello world", "Operators 1", "Operators 2", "Printing strings", "Test increments" },
+                new String[] { "HelloWorld.java", "OprtOne.java", "OprtTwo.java", "PrintData.java", "Increment.java" }
+            )
+            // Add more branches here as needed
+            // new Branch("Another Branch", new String[] {...}, new String[] {...})
+        );
+    }
+
     /**
      * SampleFile is a simple class that holds the display name and file path of a sample file.
      * It is used to represent the files in the JTree.
@@ -121,6 +121,7 @@ public class FileOpenerPanel {
      * 
      * @see createSampleTree
      */
+
     private static class SampleFile {
         String displayName;
         String filePath;
@@ -132,5 +133,16 @@ public class FileOpenerPanel {
         public String toString() {
             return displayName;
         }
+    }
+
+    /**
+     * Returns the panel containing the file opener UI.
+     * 
+     * @return panel: The JPanel containing the file opener UI.
+     * @see AppFrame
+     */
+
+    public JPanel getPanel() {
+        return panel;
     }
 }
