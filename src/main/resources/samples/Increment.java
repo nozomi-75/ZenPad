@@ -1,5 +1,3 @@
-package samples;
-
 public class Increment {
     public static void main(String[] args) {
         // Pre-increment

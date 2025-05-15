@@ -1,5 +1,3 @@
-package samples;
-
 public class PrintData {
 	    public static void main(String[] args) {
         // INITIALIZE AND DECLARE VARIABLES

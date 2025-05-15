@@ -1,5 +1,3 @@
-package samples;
-
 public class OprtOne {
     public static void main(String[] args) {
         
