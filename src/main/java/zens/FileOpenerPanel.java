@@ -29,7 +29,7 @@ public class FileOpenerPanel {
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         JScrollPane scrollPane = new JScrollPane(createSampleTree(tabManager));
-        scrollPane.setPreferredSize(new java.awt.Dimension(150, 400)); // Adjust width as needed
+        scrollPane.setPreferredSize(new java.awt.Dimension(200, 400)); // Adjust width as needed
         panel.add(scrollPane);
     }
 
@@ -58,11 +58,11 @@ public class FileOpenerPanel {
          */
 
         String[] brnOneNames = {
-            "Hello World", "Sample 2", "Sample 3", "Sample 4", "Sample 5"
+            "Hello world", "Operators 1", "Operators 2", "Printing strings", "Test increments"
         };
 
         String[] brnOneFiles = {
-            "HelloWorld.java", "sample2.txt", "sample3.txt", "sample4.txt", "sample5.txt"
+            "HelloWorld.java", "OprtOne.java", "OprtTwo.java", "PrintData.java", "Increment.java"
         };
 
         if (brnOneNames.length != brnOneFiles.length) {
