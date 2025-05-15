@@ -72,17 +72,23 @@ public class FileOpenerPanel {
 
         // Base nodes section, add parent nodes here if necessary
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+        DefaultMutableTreeNode parentNodeOne = new DefaultMutableTreeNode("Java Basics");
 
+        // Handle iteration for the first branch
         for (int i = 0; i < brnOneFiles.length; i++) {
-            root.add(new DefaultMutableTreeNode(
+            parentNodeOne.add(new DefaultMutableTreeNode(
                 new SampleFile(brnOneNames[i], "ent/" + brnOneFiles[i])
             ));
         }
 
+        // Add branches to the root node
+        root.add(parentNodeOne);
+        
+        // Set root node configuration
         JTree tree = new JTree(root);
-        tree.setRootVisible(true);
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.setRootVisible(false);
         tree.setShowsRootHandles(true);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         /*
          * Adds a TreeSelectionListener to the JTree.
