@@ -10,13 +10,38 @@ package zens;
  * @param fileNames An array of file names for the files in the branch.
  */
 public class Branch {
-        String parentName;
-        String[] displayNames;
-        String[] fileNames;
+    String parentName;
+    String[] displayNames;
+    String[] fileNames;
 
-        Branch(String parentName, String[] displayNames, String[] fileNames) {
-            this.parentName = parentName;
-            this.displayNames = displayNames;
-            this.fileNames = fileNames;
+    Branch(String parentName, String[] displayNames, String[] fileNames) {
+
+        if (displayNames.length != fileNames.length) {
+            throw new InvalidBranchException(
+                "Branch '" + parentName + "' must have displayNames and fileNames arrays of the same length."
+            );
+        }
+        
+        if (displayNames.length == 0 || fileNames.length == 0) {
+            throw new InvalidBranchException(
+                "Branch '" + parentName + "' must have at least one displayName and fileName."
+            );
+        }
+        
+        if (parentName == null || parentName.isEmpty()) {
+            throw new InvalidBranchException(
+                "Branch name cannot be null or empty."
+            );
+        }
+
+        this.parentName = parentName;
+        this.displayNames = displayNames;
+        this.fileNames = fileNames;
+    }
+    
+    private static class InvalidBranchException extends RuntimeException {
+        public InvalidBranchException(String message) {
+            super(message);
+        }
     }
 }
