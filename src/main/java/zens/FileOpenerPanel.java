@@ -109,8 +109,8 @@ public class FileOpenerPanel {
         return Arrays.asList(
             new Branch(
                 "Java Basics",
-                new String[] { "Hello world", "Data types" },
-                new String[] { "HelloWorld.java", "PrintData.java" }
+                new String[] { "Hello world", "Data types", "Type casting", "True or false" },
+                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" }
             ),
 
             new Branch(
