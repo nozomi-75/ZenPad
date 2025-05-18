@@ -109,14 +109,20 @@ public class FileOpenerPanel {
         return Arrays.asList(
             new Branch(
                 "Java Basics",
-                new String[] { "Hello world", "Operators 1", "Operators 2", "Printing strings", "Test increments" },
-                new String[] { "HelloWorld.java", "OprtOne.java", "OprtTwo.java", "PrintData.java", "Increment.java" }
+                new String[] { "Hello world", "Data types", "Operators 1", "Operators 2", "Test increments" },
+                new String[] { "HelloWorld.java", "PrintData.java", "OprtOne.java", "OprtTwo.java", "Increment.java" }
             ),
 
             new Branch(
-                "Conditions",
-                new String[] { "If, else, else-if", "Ternary operator", "Switch statement" },
-                new String[] { "CtrlOne.java", "CtrlTwo.java", "CtrlThree.java" }
+                "Java Conditions",
+                new String[] { "If, else, else-if", "Ternary operator", "Traditional switch", "Rule switch" },
+                new String[] { "CtrlOne.java", "CtrlTwo.java", "CtrlThree.java", "CtrlFour.java" }
+            ),
+
+            new Branch(
+                "Java Loops",
+                new String[] { "For loop", "While loop", "Do-while loop", "Nested loops" },
+                new String[] { "ForLoop.java", "While.java", "DoWhile.java", "NestedLoop.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
