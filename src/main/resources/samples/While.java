@@ -1,6 +1,6 @@
 public class While {
     public static void main(String[] args) {
-        int n = 10; // predefined, replaceable
+        final int n = 10; // predefined, replaceable
         int sum = 0, i = 1; // don't replace
 
         while (i <= n) {
