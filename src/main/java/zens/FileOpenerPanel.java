@@ -134,6 +134,12 @@ public class FileOpenerPanel {
                 "Java Arrays",
                 new String[] { "Creating an array", "Array length property", "Enhanced for-loop", "Multidimensional array" },
                 new String[] { "CreateArrays.java", "ThroughFor.java", "ForEach.java", "MtdArray.java" }
+            ),
+
+            new Branch(
+                "Java Methods",
+                new String[] { "Simple method", "Method with parameters", "Method with return value", "Method with return only", "Static vs instance" },
+                new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
