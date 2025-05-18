@@ -1,4 +1,4 @@
-public class RightTri {
+public class RightTriangle {
     public static void main(String[] args) {
         int rows = 10;
         for (int i = 1; i <= rows; i++) {

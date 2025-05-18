@@ -1,4 +1,4 @@
-public class CtrlFour {
+public class RuleSwitch {
     public static void main(String[] args) {
         int day = 1;
         System.out.print("Today is ");

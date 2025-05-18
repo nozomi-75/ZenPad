@@ -109,14 +109,20 @@ public class FileOpenerPanel {
         return Arrays.asList(
             new Branch(
                 "Java Basics",
-                new String[] { "Hello world", "Data types", "Operators 1", "Operators 2", "Test increments" },
-                new String[] { "HelloWorld.java", "PrintData.java", "OprtOne.java", "OprtTwo.java", "Increment.java" }
+                new String[] { "Hello world", "Data types" },
+                new String[] { "HelloWorld.java", "PrintData.java" }
+            ),
+
+            new Branch(
+                "Java Operators",
+                new String[] { "Arithmetic operators" },
+                new String[] { "ArithmeticOperators.java" }
             ),
 
             new Branch(
                 "Java Conditions",
-                new String[] { "If, else, else-if", "Ternary operator", "Traditional switch", "Rule switch" },
-                new String[] { "CtrlOne.java", "CtrlTwo.java", "CtrlThree.java", "CtrlFour.java" }
+                new String[] { "Ternary operator", "Traditional switch", "Rule switch" },
+                new String[] { "Ternary.java", "Switch.java", "RuleSwitch.java" }
             ),
 
             new Branch(
@@ -128,7 +134,7 @@ public class FileOpenerPanel {
             new Branch(
                 "Complex Loops",
                 new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
-                new String[] { "Floyd.java", "MltTable.java", "RightTri.java", "MatrixSum.java", "PlotCoordinates.java" }
+                new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
