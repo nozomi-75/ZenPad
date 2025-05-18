@@ -123,6 +123,12 @@ public class FileOpenerPanel {
                 "Java Loops",
                 new String[] { "For loop", "While loop", "Do-while loop", "Nested loops" },
                 new String[] { "ForLoop.java", "While.java", "DoWhile.java", "NestedLoop.java" }
+            ),
+
+            new Branch(
+                "Complex Loops",
+                new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
+                new String[] { "Floyd.java", "MltTable.java", "RightTri.java", "MatrixSum.java", "PlotCoordinates.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
