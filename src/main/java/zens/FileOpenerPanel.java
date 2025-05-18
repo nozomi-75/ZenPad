@@ -125,9 +125,15 @@ public class FileOpenerPanel {
             ),
 
             new Branch(
-                "Complex Loops",
+                "Java Loop Dilemma",
                 new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
                 new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" }
+            ),
+
+            new Branch(
+                "Java Arrays",
+                new String[] { "Creating an array", "Array length property", "Enhanced for-loop", "Multidimensional array" },
+                new String[] { "CreateArrays.java", "ThroughFor.java", "ForEach.java", "MtdArray.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
