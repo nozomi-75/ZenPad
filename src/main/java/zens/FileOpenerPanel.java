@@ -50,13 +50,6 @@ public class FileOpenerPanel {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
 
         for (Branch branch : branches) {
-
-            // Abruptly exit if branch array pairs are not the same length
-            if (branch.displayNames.length != branch.fileNames.length) {
-                System.err.println("Error: The arrays for branch '" + branch.parentName + "' do not match in length.");
-                System.exit(1);
-            }
-
             DefaultMutableTreeNode parentNode = new DefaultMutableTreeNode(branch.parentName);
             for (int i = 0; i < branch.displayNames.length; i++) {
                 parentNode.add(new DefaultMutableTreeNode(
@@ -115,8 +108,8 @@ public class FileOpenerPanel {
 
             new Branch(
                 "Java Operators",
-                new String[] { "Arithmetic operators" },
-                new String[] { "ArithmeticOperators.java" }
+                new String[] { "Arithmetic operators", "Assignment operators", "Relational operators", "Logical operators" },
+                new String[] { "ArithmeticOperators.java", "AssignOperators.java", "RelationalOperators.java", "LogicalOperators.java" }
             ),
 
             new Branch(
