@@ -35,8 +35,9 @@ public class EditorTab {
      * @param filePath The full file path to be opened in the new tab.
      * @param node The name of the node that will serve as the tab title.
      * @param tabbedPane The parent JTabbedPane to which this tab belongs.
+     * @param tabManager The TabManager instance managing the tabs.
      */
-    public EditorTab(String filePath, String node, JTabbedPane tabbedPane) {
+    public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager) {
         // Extract the file name from the file path (everything after the last '/')
         this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         panel = new JPanel(new BorderLayout());
@@ -60,7 +61,7 @@ public class EditorTab {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         // Create a custom tab header (with close button, etc.)
-        tabHeader = new TabHeader(node, tabbedPane, panel);
+        tabHeader = new TabHeader(node, tabbedPane, panel, tabManager);
     }
 
     /**

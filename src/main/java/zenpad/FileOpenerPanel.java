@@ -28,7 +28,7 @@ public class FileOpenerPanel {
     public FileOpenerPanel(TabManager tabManager) {
         panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1, 10, 10));
-        panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        panel.setBorder(new EmptyBorder(5, 5, 5, 2));
 
         JScrollPane scrollPane = new JScrollPane(createSampleTree(tabManager));
         panel.add(scrollPane);

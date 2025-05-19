@@ -14,8 +14,10 @@ public class TabHeader {
     private JPanel headerPanel;
     private JLabel titleLabel;
     private JButton closeButton;
+    private TabManager tabManager;
 
-    public TabHeader(String button, JTabbedPane tabbedPane, JPanel editorPanel) {
+    public TabHeader(String button, JTabbedPane tabbedPane, JPanel editorPanel, TabManager tabManager) {
+        this.tabManager = tabManager;
         headerPanel = new JPanel();
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.X_AXIS));
         headerPanel.setOpaque(false);
@@ -50,7 +52,7 @@ public class TabHeader {
         closeButton.addActionListener(e -> {
             int index = tabbedPane.indexOfComponent(editorPanel);
             if (index != -1) {
-                tabbedPane.remove(index);
+                tabManager.closeTab(index);
             }
         });
 

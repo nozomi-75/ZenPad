@@ -29,15 +29,25 @@ import java.util.List;
  */
 public class TabManager {
     private JTabbedPane tabbedPane;
+    private TextPanel textPanel;
     private List<EditorTab> openTabs = new ArrayList<>();
+    private Runnable onTabsChanged;
 
-    public TabManager(JTabbedPane tabbedPane) {
+    public TabManager(JTabbedPane tabbedPane, TextPanel textPanel, Runnable onTabsChanged) {
         // Refer to the tabbed pane passed from the AppFrame
         this.tabbedPane = tabbedPane;
+        this.textPanel = textPanel;
+        this.onTabsChanged = onTabsChanged;
+    }
+
+    public void openNewTab(String filePath, String node) {
+        setupEditor(filePath, node);
+        setupText(node);
+        if (onTabsChanged != null) onTabsChanged.run();
     }
 
     /**
-     * Opens a new editor tab in the managed JTabbedPane.
+     * Creates an EditorTab object and configures its settings.
      * <p>
      * This method creates a new {@link EditorTab} using the provided file path and node name.
      * The tab is added to the JTabbedPane, its custom header is set, and it becomes the selected tab.
@@ -47,16 +57,17 @@ public class TabManager {
      * @param node the display name for the tab (typically the file name or a label)
      * @see FileOpenerPanel
      */
-    public void openNewTab(String filePath, String node) {
-        EditorTab newTab = new EditorTab(filePath, node, tabbedPane);
+    public void setupEditor(String filePath, String node) {
+        EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this);
         openTabs.add(newTab);
         tabbedPane.addTab(node, newTab.getPanel());
-
-        // Set the tab's header
         tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());
-
-        // Set the tab to be selected
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
+    }
+
+    public void setupText(String node) {
+        textPanel = new TextPanel();
+        textPanel.setText("Description for " + node);
     }
 
     /**
@@ -102,5 +113,13 @@ public class TabManager {
             return openTabs.get(selectedIndex).getFileName();
         }
         return "";
+    }
+
+    public void closeTab(int index) {
+        if (index >= 0 && index < openTabs.size()) {
+            openTabs.remove(index);
+            tabbedPane.remove(index);
+            if (onTabsChanged != null) onTabsChanged.run();
+        }
     }
 }

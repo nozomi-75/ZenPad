@@ -30,14 +30,20 @@ public class AppFrame extends JFrame {
     // Instance of CodeRunner object for code execution
     private CodeRunner codeRunner;
 
-    // Other UI components
+    // Instance of TextPanel object for bottom bar purposes
+    private TextPanel textPanel;
+
+    // Other generic UI components
     private JTabbedPane tabbedPane;
+    private JSplitPane innerSplitPane;
     private JSplitPane outerSplitPane;
 
     public AppFrame(String title) {
         super(title);
         initializeFrame();
         initializeComponents();
+        setupInnerSplit();
+        updateTextPanelVisibility();
         setupOuterSplit();
         layoutComponents();
         setAppIcon();
@@ -52,12 +58,30 @@ public class AppFrame extends JFrame {
 
     private void initializeComponents() {
         tabbedPane = new JTabbedPane();
-        tabbedPane.setBorder(new EmptyBorder(5, 0, 5, 5));
+        tabbedPane.setBorder(new EmptyBorder(5, 2, 2, 5));
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        tabManager = new TabManager(tabbedPane);
+        // Pass a callback to TabManager to update text panel visibility
+        tabManager = new TabManager(tabbedPane, textPanel, this::updateTextPanelVisibility);
         codeRunner = new CodeRunner();
         fileOpenerPanel = new FileOpenerPanel(tabManager);
+
+        textPanel = new TextPanel();
+        textPanel.getTextPanel().setBorder(new EmptyBorder(2, 2, 5, 5));
+    }
+
+    private void setupInnerSplit() {
+        textPanel.getTextPanel().setMinimumSize(new Dimension(100, 100));
+
+        innerSplitPane = new JSplitPane(
+            JSplitPane.VERTICAL_SPLIT,
+            tabbedPane,
+            textPanel.getTextPanel()
+        );
+        // Set divider location to 85% of the height for the editor
+        innerSplitPane.setDividerLocation(0.85);
+        innerSplitPane.setResizeWeight(0.85);
+        innerSplitPane.setDividerSize(8);
     }
 
     private void setupOuterSplit() {
@@ -67,7 +91,7 @@ public class AppFrame extends JFrame {
         outerSplitPane = new JSplitPane(
             JSplitPane.HORIZONTAL_SPLIT,
             fileOpenerPanel.getPanel(),
-            tabbedPane
+            innerSplitPane
         );
         outerSplitPane.setDividerLocation(200);
         outerSplitPane.setDividerSize(8);
@@ -77,6 +101,14 @@ public class AppFrame extends JFrame {
         Toolbar toolbar = new Toolbar(tabManager, codeRunner);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(outerSplitPane, BorderLayout.CENTER);
+    }
+
+    public void updateTextPanelVisibility() {
+        if (tabManager.getOpenTabs().isEmpty()) {
+            innerSplitPane.setBottomComponent(null);
+        } else {
+            innerSplitPane.setBottomComponent(textPanel.getTextPanel());
+        }
     }
 
     private void setAppIcon() {
