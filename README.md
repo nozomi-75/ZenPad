@@ -34,7 +34,7 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
 
 3. **Run from source:**
     ```sh
-    mvn exec:java -Dexec.mainClass="zens.MainApp"
+    mvn exec:java -Dexec.mainClass="zenpad.MainApp"
     ```
 
 ## Project Structure
