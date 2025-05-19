@@ -23,9 +23,12 @@ import java.util.List;
  */
 
 public class FileOpenerPanel {
+    private TextPanel textPanel;
     private JPanel panel;
     
-    public FileOpenerPanel(TabManager tabManager) {
+    public FileOpenerPanel(TabManager tabManager, TextPanel textPanel) {
+        this.textPanel = textPanel;
+
         panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1, 10, 10));
         panel.setBorder(new EmptyBorder(5, 5, 5, 2));
@@ -83,6 +86,7 @@ public class FileOpenerPanel {
                 if (userObj instanceof SampleFile) {
                     SampleFile sample = (SampleFile) userObj;
                     tabManager.openNewTab(sample.filePath, sample.displayName);
+                    textPanel.loadTextFromResource(sample.filePath);
                 }
             }
         });

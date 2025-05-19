@@ -67,7 +67,7 @@ public class AppFrame extends JFrame {
         // Pass a callback to TabManager to update text panel visibility
         tabManager = new TabManager(tabbedPane, this::updateTextPanelVisibility);
         codeRunner = new CodeRunner();
-        fileOpenerPanel = new FileOpenerPanel(tabManager);
+        fileOpenerPanel = new FileOpenerPanel(tabManager, textPanel);
     }
 
     private void setupInnerSplit() {
