@@ -1,21 +1,21 @@
 public class AssignOperators {
     public static void main(String[] args) {
-        int number = 10; // Simple assignment
+        int number = 10;
         System.out.println("Initial value: " + number);
 
-        number += 5; // Add and assign
+        number += 5;
         System.out.println("After += 5: " + number);
 
-        number -= 3; // Subtract and assign
+        number -= 3;
         System.out.println("After -= 3: " + number);
 
-        number *= 2; // Multiply and assign
+        number *= 2;
         System.out.println("After *= 2: " + number);
 
-        number /= 4; // Divide and assign
+        number /= 4;
         System.out.println("After /= 4: " + number);
 
-        number %= 3; // Modulus and assign
+        number %= 3;
         System.out.println("After %= 3: " + number);
     }
 }

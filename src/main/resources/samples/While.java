@@ -1,10 +1,10 @@
 public class While {
     public static void main(String[] args) {
-        final int n = 10; // predefined, replaceable
-        int sum = 0, i = 1; // don't replace
+        final int n = 10;
+        int sum = 0, i = 1;
 
         while (i <= n) {
-            sum += i; // sum = sum + i
+            sum += i;
             i++;
         }
 
