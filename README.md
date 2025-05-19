@@ -23,7 +23,7 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/nozomi-75/zenpad.git
+    git clone https://github.com/nozomi-75/ZenPad.git
     cd zenpad
     ```
 
