@@ -35,39 +35,38 @@ public class Toolbar {
         toolbar.setFloatable(false);
         toolbar.setBorder(new EmptyBorder(3, 5, 0, 0));
 
-        JButton copyButton = new JButton("Copy");
-        JButton runButton = new JButton("Run");
-        JButton increaseFontSizeButton = new JButton("Zoom in");
-        JButton decreaseFontSizeButton = new JButton("Zoom out");
-        JButton resetFontSizeButton = new JButton("Reset zoom");
-        JButton aboutButton = new JButton("About");
-
-        copyButton.setFocusPainted(false);
-        runButton.setFocusPainted(false);
-        increaseFontSizeButton.setFocusPainted(false);
-        decreaseFontSizeButton.setFocusPainted(false);
-        resetFontSizeButton.setFocusPainted(false);
-        aboutButton.setFocusPainted(false);
-
-        copyButton.addActionListener(e -> copyCode());
-        runButton.addActionListener(e -> runCode());
-        increaseFontSizeButton.addActionListener(e -> changeFontSize(1));
-        decreaseFontSizeButton.addActionListener(e -> changeFontSize(-1));
-        resetFontSizeButton.addActionListener(e -> resetFontSize());
-        aboutButton.addActionListener(e -> showAboutDialog());
+        toolbar.add(createButton("Copy", this::copyCode));
+        toolbar.add(createButton("Run", this::runCode));
+        toolbar.add(createButton("Zoom in", () -> changeFontSize(1)));
+        toolbar.add(createButton("Zoom out", () -> changeFontSize(-1)));
+        toolbar.add(createButton("Reset zoom", this::resetFontSize));
 
         JToggleButton toggleButton = new JToggleButton("Dark Mode");
+        toggleButton.setFocusPainted(false);
         toggleButton.addActionListener(e -> themeToggle(toggleButton));
-
-        toolbar.add(copyButton);
-        toolbar.add(runButton);
-        toolbar.add(increaseFontSizeButton);
-        toolbar.add(decreaseFontSizeButton);
-        toolbar.add(resetFontSizeButton);
         toolbar.add(toggleButton);
-        toolbar.add(aboutButton);
+
+        toolbar.add(createButton("About", this::showAboutDialog));
     }
     
+    /**
+     * Creates a button with the specified text and action.
+     * <p>
+     * This method initializes a JButton with the given text and sets its action
+     * to the provided Runnable. The button is configured to not show focus paint.
+     * </p>
+     * 
+     * @param text The text to display on the button.
+     * @param action The action to perform when the button is clicked.
+     * @return A JButton configured with the specified text and action.
+     */
+    private JButton createButton(String text, Runnable action) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.addActionListener(e -> action.run());
+        return button;
+    }
+
     /**
      * Copies the code from the currently selected tab to the system clipboard.
      * <p>
