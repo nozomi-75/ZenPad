@@ -66,3 +66,8 @@ MIT License. See [LICENSE](LICENSE) for details.
 ---
 
 **Made with ❤️ by Zens**
+- Bryan Suela
+- Jan Conrad Maniquiz
+- Marco Jaezzy Bacolto
+- Sebastian Abad
+- Keiaa (nozomi-75)
