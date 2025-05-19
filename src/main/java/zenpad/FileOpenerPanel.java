@@ -54,10 +54,18 @@ public class FileOpenerPanel {
         for (Branch branch : branches) {
             DefaultMutableTreeNode parentNode = new DefaultMutableTreeNode(branch.parentName);
             for (int i = 0; i < branch.displayNames.length; i++) {
+                String descPath = (
+                    branch.descFile != null &&
+                    branch.descFile.length > i &&
+                    branch.descFile[i] != null &&
+                    !branch.descFile[i].isEmpty())
+                    ? "desc/" + branch.descFile[i]
+                    : null;
                 parentNode.add(new DefaultMutableTreeNode(
                     new SampleFile(
                         branch.displayNames[i],
-                        "samples/" + branch.fileNames[i]
+                        "samples/" + branch.fileNames[i],
+                        descPath
                     )
                 ));
             }
@@ -86,7 +94,11 @@ public class FileOpenerPanel {
                 if (userObj instanceof SampleFile) {
                     SampleFile sample = (SampleFile) userObj;
                     tabManager.openNewTab(sample.filePath, sample.displayName);
-                    textPanel.loadTextFromResource(sample.filePath);
+                    if (sample.descFile != null && !sample.descFile.isEmpty()) {
+                        textPanel.loadTextFromResource(sample.descFile);
+                    } else {
+                        textPanel.setText("No description available.");
+                    }
                 }
             }
         });
@@ -106,67 +118,78 @@ public class FileOpenerPanel {
             new Branch(
                 "Java Basics",
                 new String[] { "Hello world", "Data types", "Type casting", "True or false" },
-                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" }
+                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Operators",
                 new String[] { "Arithmetic operators", "Assignment operators", "Relational operators", "Logical operators" },
-                new String[] { "ArithmeticOperators.java", "AssignOperators.java", "RelationalOperators.java", "LogicalOperators.java" }
+                new String[] { "ArithmeticOperators.java", "AssignOperators.java", "RelationalOperators.java", "LogicalOperators.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Conditions",
                 new String[] { "Ternary operator", "Traditional switch", "Rule switch" },
-                new String[] { "Ternary.java", "Switch.java", "RuleSwitch.java" }
+                new String[] { "Ternary.java", "Switch.java", "RuleSwitch.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Loops",
                 new String[] { "For loop", "While loop", "Do-while loop", "Nested loops" },
-                new String[] { "ForLoop.java", "While.java", "DoWhile.java", "NestedLoop.java" }
+                new String[] { "ForLoop.java", "While.java", "DoWhile.java", "NestedLoop.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Loops Challenge",
                 new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
-                new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" }
+                new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Arrays",
                 new String[] { "Creating an array", "Array length property", "Enhanced for-loop", "Multidimensional array" },
-                new String[] { "CreateArrays.java", "ThroughFor.java", "ForEach.java", "MtdArray.java" }
+                new String[] { "CreateArrays.java", "ThroughFor.java", "ForEach.java", "MtdArray.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java String Methods",
                 new String[] { "String length()", "String isEmpty()", "String case()", "String indexOf()", "String contains()", "String substring()", "String equals()", "String replace()", "String trim()" },
-                new String[] { "StringLength.java", "StringIsEmpty.java", "StringCaseChange.java", "StringIndexOf.java", "StringContains.java", "StringSubstring.java", "StringEquals.java", "StringReplace.java", "StringTrim.java" }
+                new String[] { "StringLength.java", "StringIsEmpty.java", "StringCaseChange.java", "StringIndexOf.java", "StringContains.java", "StringSubstring.java", "StringEquals.java", "StringReplace.java", "StringTrim.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Methods",
                 new String[] { "Simple method", "Method with parameters", "Method with return value", "Method with return only", "Static vs instance" },
-                new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" }
+                new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Scanner",
                 new String[] { "Scanner next()", "Scanner nextLine()", "Scanner hasNext()", "Scanner numbers" },
-                new String[] { "ScannerNext.java", "ScannerNextLine.java", "ScannerHasNext.java", "ScannerNumbers.java" }
+                new String[] { "ScannerNext.java", "ScannerNextLine.java", "ScannerHasNext.java", "ScannerNumbers.java" },
+                new String[] { }
             ), 
 
             new Branch(
                 "Java Exception Handling",
                 new String[] { "Try-catch", "Try-catch-finally", "Multiple catch blocks", "Throwing exceptions" },
-                new String[] { "TryCatch.java", "TryCatchFinally.java", "MultipleCatchBlocks.java", "ThrowingExceptions.java" }
+                new String[] { "TryCatch.java", "TryCatchFinally.java", "MultipleCatchBlocks.java", "ThrowingExceptions.java" },
+                new String[] { }
             ),
 
             new Branch(
                 "Java Object-Oriented",
                 new String[] { "Encapsulation", "Getters and setters", "Inheritance", "Polymorphism", "Abstraction" },
-                new String[] { "Encapsulation.java", "GetterSetter.java", "Inheritance.java", "Polymorphism.java", "Abstraction.java" }
+                new String[] { "Encapsulation.java", "GetterSetter.java", "Inheritance.java", "Polymorphism.java", "Abstraction.java" },
+                new String[] { }
             )
 
             // Add more branches here as needed
@@ -186,10 +209,12 @@ public class FileOpenerPanel {
     private static class SampleFile {
         String displayName;
         String filePath;
+        String descFile;
 
-        SampleFile(String displayName, String filePath) {
+        SampleFile(String displayName, String filePath, String descFile) {
             this.displayName = displayName;
             this.filePath = filePath;
+            this.descFile = descFile;
         }
         @Override
         public String toString() {
