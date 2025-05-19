@@ -146,6 +146,12 @@ public class FileOpenerPanel {
                 "Java Methods",
                 new String[] { "Simple method", "Method with parameters", "Method with return value", "Method with return only", "Static vs instance" },
                 new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" }
+            ),
+
+            new Branch(
+                "Java Scanner",
+                new String[] { "Scanner next()", "Scanner nextLine()", "Scanner hasNext()", "Scanner numbers" },
+                new String[] { "ScannerNext.java", "ScannerNextLine.java", "ScannerHasNext.java", "ScannerNumbers.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
