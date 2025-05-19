@@ -41,11 +41,6 @@ public class Toolbar {
         toolbar.add(createButton("Zoom out", () -> changeFontSize(-1)));
         toolbar.add(createButton("Reset zoom", this::resetFontSize));
 
-        JToggleButton fontToggleButton = new JToggleButton("JetBrains");
-        fontToggleButton.setFocusPainted(false);
-        fontToggleButton.addActionListener(e -> fontToggle(fontToggleButton));
-        toolbar.add(fontToggleButton);
-
         JToggleButton themeToggleButton = new JToggleButton("Dark Mode");
         themeToggleButton.setFocusPainted(false);
         themeToggleButton.addActionListener(e -> themeToggle(themeToggleButton));
@@ -139,20 +134,6 @@ public class Toolbar {
     private void resetFontSize() {
         for (EditorTab tab : tabManager.getOpenTabs()) {
             tab.resetFontSize();
-        }
-    }
-
-    private void fontToggle(JToggleButton toggleButton) {
-        if (toggleButton.isSelected()) {
-            for (EditorTab tab : tabManager.getOpenTabs()) {
-                tab.setFontJetBrains();
-            }
-            toggleButton.setText("FiraCode");
-        } else {
-            for (EditorTab tab : tabManager.getOpenTabs()) {
-                tab.setFontFiraCode();
-            }
-            toggleButton.setText("JetBrains");
         }
     }
 

@@ -122,7 +122,7 @@ public class EditorTab {
             // Load the theme from the XML file
             Theme theme = Theme.load(in);
             theme.apply(codeArea);
-            codeArea.setFont(FontUtils.loadFont("/fonts/FiraCode-Retina.ttf", 14f));
+            setFontJetBrains();
         } catch (IOException e) {
             e.printStackTrace();
         }
