@@ -31,7 +31,6 @@ public class FileOpenerPanel {
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         JScrollPane scrollPane = new JScrollPane(createSampleTree(tabManager));
-        scrollPane.setPreferredSize(new java.awt.Dimension(200, 400)); // Adjust width as needed
         panel.add(scrollPane);
     }
 

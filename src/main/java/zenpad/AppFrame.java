@@ -1,6 +1,7 @@
 package zenpad;
 
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
@@ -31,11 +32,13 @@ public class AppFrame extends JFrame {
 
     // Other UI components
     private JTabbedPane tabbedPane;
+    private JSplitPane outerSplitPane;
 
     public AppFrame(String title) {
         super(title);
         initializeFrame();
         initializeComponents();
+        setupOuterSplit();
         layoutComponents();
         setAppIcon();
     }
@@ -57,11 +60,23 @@ public class AppFrame extends JFrame {
         fileOpenerPanel = new FileOpenerPanel(tabManager);
     }
 
+    private void setupOuterSplit() {
+        fileOpenerPanel.getPanel().setMinimumSize(new Dimension(100, 100));
+        tabbedPane.setMinimumSize(new Dimension(300, 100));
+
+        outerSplitPane = new JSplitPane(
+            JSplitPane.HORIZONTAL_SPLIT,
+            fileOpenerPanel.getPanel(),
+            tabbedPane
+        );
+        outerSplitPane.setDividerLocation(200);
+        outerSplitPane.setDividerSize(8);
+    }
+
     private void layoutComponents() {
         Toolbar toolbar = new Toolbar(tabManager, codeRunner);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
-        add(tabbedPane, BorderLayout.CENTER);
-        add(fileOpenerPanel.getPanel(), BorderLayout.WEST);
+        add(outerSplitPane, BorderLayout.CENTER);
     }
 
     private void setAppIcon() {
