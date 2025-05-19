@@ -182,7 +182,7 @@ public class Toolbar {
     private void showAboutDialog() {
         String message = "<html>"
             + "<strong>ZenPad</strong>"
-            + "<p>Version 1.1-SNAPSHOT<br>"
+            + "<p>Version 1.2-SNAPSHOT<br>"
             + "<p>&copy; 2025 Zens. Licensed under MIT.</p>"
             + "</html>";
 

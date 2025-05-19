@@ -6,7 +6,7 @@
 
     <groupId>com.zens</groupId>
     <artifactId>ZenPad</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <name>ZenPad</name>
 
     <properties>
