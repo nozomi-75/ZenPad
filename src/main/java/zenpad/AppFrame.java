@@ -61,13 +61,13 @@ public class AppFrame extends JFrame {
         tabbedPane.setBorder(new EmptyBorder(5, 2, 2, 5));
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        // Pass a callback to TabManager to update text panel visibility
-        tabManager = new TabManager(tabbedPane, textPanel, this::updateTextPanelVisibility);
-        codeRunner = new CodeRunner();
-        fileOpenerPanel = new FileOpenerPanel(tabManager);
-
         textPanel = new TextPanel();
         textPanel.getTextPanel().setBorder(new EmptyBorder(2, 2, 5, 5));
+
+        // Pass a callback to TabManager to update text panel visibility
+        tabManager = new TabManager(tabbedPane, this::updateTextPanelVisibility);
+        codeRunner = new CodeRunner();
+        fileOpenerPanel = new FileOpenerPanel(tabManager);
     }
 
     private void setupInnerSplit() {

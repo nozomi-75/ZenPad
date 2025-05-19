@@ -29,20 +29,16 @@ import java.util.List;
  */
 public class TabManager {
     private JTabbedPane tabbedPane;
-    private TextPanel textPanel;
     private List<EditorTab> openTabs = new ArrayList<>();
     private Runnable onTabsChanged;
 
-    public TabManager(JTabbedPane tabbedPane, TextPanel textPanel, Runnable onTabsChanged) {
-        // Refer to the tabbed pane passed from the AppFrame
+    public TabManager(JTabbedPane tabbedPane, Runnable onTabsChanged) {
         this.tabbedPane = tabbedPane;
-        this.textPanel = textPanel;
         this.onTabsChanged = onTabsChanged;
     }
 
     public void openNewTab(String filePath, String node) {
         setupEditor(filePath, node);
-        setupText(node);
         if (onTabsChanged != null) onTabsChanged.run();
     }
 
@@ -63,11 +59,6 @@ public class TabManager {
         tabbedPane.addTab(node, newTab.getPanel());
         tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
-    }
-
-    public void setupText(String node) {
-        textPanel = new TextPanel();
-        textPanel.setText("Description for " + node);
     }
 
     /**
