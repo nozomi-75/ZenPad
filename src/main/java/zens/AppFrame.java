@@ -40,6 +40,7 @@ public class AppFrame extends JFrame {
         
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(5, 0, 5, 5));
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         // Pass tabbedPane to TabManager
         tabManager = new TabManager(tabbedPane);
