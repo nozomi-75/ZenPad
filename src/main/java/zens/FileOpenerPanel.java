@@ -158,7 +158,14 @@ public class FileOpenerPanel {
                 "Java Exception Handling",
                 new String[] { "Try-catch", "Try-catch-finally", "Multiple catch blocks", "Throwing exceptions" },
                 new String[] { "TryCatch.java", "TryCatchFinally.java", "MultipleCatchBlocks.java", "ThrowingExceptions.java" }
+            ),
+
+            new Branch(
+                "Java Object-Oriented",
+                new String[] { "Encapsulation", "Getters and setters", "Inheritance", "Polymorphism", "Abstraction" },
+                new String[] { "Encapsulation.java", "GetterSetter.java", "Inheritance.java", "Polymorphism.java", "Abstraction.java" }
             )
+
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
         );
