@@ -152,6 +152,12 @@ public class FileOpenerPanel {
                 "Java Scanner",
                 new String[] { "Scanner next()", "Scanner nextLine()", "Scanner hasNext()", "Scanner numbers" },
                 new String[] { "ScannerNext.java", "ScannerNextLine.java", "ScannerHasNext.java", "ScannerNumbers.java" }
+            ), 
+
+            new Branch(
+                "Java Exception Handling",
+                new String[] { "Try-catch", "Try-catch-finally", "Multiple catch blocks", "Throwing exceptions" },
+                new String[] { "TryCatch.java", "TryCatchFinally.java", "MultipleCatchBlocks.java", "ThrowingExceptions.java" }
             )
             // Add more branches here as needed
             // new Branch("Another Branch", new String[] {...}, new String[] {...})
