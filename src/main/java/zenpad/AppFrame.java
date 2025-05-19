@@ -34,32 +34,37 @@ public class AppFrame extends JFrame {
 
     public AppFrame(String title) {
         super(title);
+        initializeFrame();
+        initializeComponents();
+        layoutComponents();
+        setAppIcon();
+    }
+
+    private void initializeFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(800, 600));
+        setSize(new Dimension(800,600));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-        
+    }
+
+    private void initializeComponents() {
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(5, 0, 5, 5));
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        // Pass tabbedPane to TabManager
         tabManager = new TabManager(tabbedPane);
         codeRunner = new CodeRunner();
-        Toolbar toolbar = new Toolbar(tabManager, codeRunner);
-
-        /* Create a side panel for the file opener
-         * Pass tabManager to FOP
-         * The FOP object will call the TabManager to open a new tab
-         */
-        
         fileOpenerPanel = new FileOpenerPanel(tabManager);
+    }
 
-        // Adding components to the frame
+    private void layoutComponents() {
+        Toolbar toolbar = new Toolbar(tabManager, codeRunner);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
         add(fileOpenerPanel.getPanel(), BorderLayout.WEST);
+    }
 
+    private void setAppIcon() {
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/48x48.png"));
         setIconImage(icon.getImage());
     }
