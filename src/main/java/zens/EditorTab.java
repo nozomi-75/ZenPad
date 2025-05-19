@@ -22,7 +22,6 @@ import java.io.InputStream;
  * @param filePath The full file path to be opened in the new tab.
  * @param node The name of the node that will serve as the tab title.
  */
-
 public class EditorTab {
     private JPanel panel;
     private RSyntaxTextArea codeArea;
@@ -127,6 +126,27 @@ public class EditorTab {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Changes the font size of the code area by a specified delta.
+     * Ensures that the font size does not go below a minimum value.
+     *
+     * @param delta The amount to change the font size by (positive or negative).
+     */
+    public void changeFontSize(int delta) {
+        java.awt.Font currentFont = codeArea.getFont();
+        float newSize = Math.max(11f, currentFont.getSize2D() + delta);
+        codeArea.setFont(currentFont.deriveFont(newSize));
+    }
+
+    /**
+     * Returns the code area (RSyntaxTextArea) for this tab.
+     * @return the RSyntaxTextArea representing this tab's code editor
+     * @see Toolbar
+     */
+    public void resetFontSize() {
+        codeArea.setFont(codeArea.getFont().deriveFont(14f));
     }
 
     /**

@@ -22,7 +22,6 @@ import java.awt.Window;
  * @param tabManager The TabManager instance used to manage tabs in the application.
  * @param codeRunner The CodeRunner instance used to execute code.
  */
-
 public class Toolbar {
     private JToolBar toolbar;
     private TabManager tabManager;
@@ -38,14 +37,23 @@ public class Toolbar {
 
         JButton copyButton = new JButton("Copy");
         JButton runButton = new JButton("Run");
+        JButton increaseFontSizeButton = new JButton("Zoom in");
+        JButton decreaseFontSizeButton = new JButton("Zoom out");
+        JButton resetFontSizeButton = new JButton("Reset zoom");
         JButton aboutButton = new JButton("About");
 
         copyButton.setFocusPainted(false);
         runButton.setFocusPainted(false);
+        increaseFontSizeButton.setFocusPainted(false);
+        decreaseFontSizeButton.setFocusPainted(false);
+        resetFontSizeButton.setFocusPainted(false);
         aboutButton.setFocusPainted(false);
 
         copyButton.addActionListener(e -> copyCode());
         runButton.addActionListener(e -> runCode());
+        increaseFontSizeButton.addActionListener(e -> changeFontSize(1));
+        decreaseFontSizeButton.addActionListener(e -> changeFontSize(-1));
+        resetFontSizeButton.addActionListener(e -> resetFontSize());
         aboutButton.addActionListener(e -> showAboutDialog());
 
         JToggleButton toggleButton = new JToggleButton("Dark Mode");
@@ -53,6 +61,9 @@ public class Toolbar {
 
         toolbar.add(copyButton);
         toolbar.add(runButton);
+        toolbar.add(increaseFontSizeButton);
+        toolbar.add(decreaseFontSizeButton);
+        toolbar.add(resetFontSizeButton);
         toolbar.add(toggleButton);
         toolbar.add(aboutButton);
     }
@@ -97,6 +108,37 @@ public class Toolbar {
     }
 
     /**
+     * Changes the font size of the code editor in all open tabs.
+     * <p>
+     * This method iterates through all open tabs and adjusts the font size
+     * based on the provided delta value.
+     * </p>
+     * 
+     * @param delta The amount to change the font size by (positive or negative).
+     * @see EditorTab#changeFontSize(int)
+     */
+    private void changeFontSize(int delta) {
+        for (EditorTab tab : tabManager.getOpenTabs()) {
+            tab.changeFontSize(delta);
+        }
+    }
+
+    /**
+     * Resets the font size of the code editor in all open tabs to the default size.
+     * <p>
+     * This method iterates through all open tabs and resets the font size
+     * to a predefined default value.
+     * </p>
+     * 
+     * @see EditorTab#resetFontSize()
+     */
+    private void resetFontSize() {
+        for (EditorTab tab : tabManager.getOpenTabs()) {
+            tab.resetFontSize();
+        }
+    }
+
+    /**
      * Toggles the theme of the application between light and dark modes.
      * <p>
      * This method applies the selected theme using the LafManager and updates
@@ -108,7 +150,6 @@ public class Toolbar {
      * @see EditorTab#applyRSyntaxTheme()
      * @see TabManager#getOpenTabs()
      */
-
     private void themeToggle(JToggleButton toggleButton) {
         if (toggleButton.isSelected()) {
             LafManager.applyDarkLaf();
@@ -138,7 +179,6 @@ public class Toolbar {
      * and author information. The dialog is displayed when the "About" button is clicked.
      * </p>
      */
-
     private void showAboutDialog() {
         JOptionPane.showMessageDialog(null, "Java Programming Demo. CC-BY-NC-SA 4.0. Made by Zens.", "About", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -152,7 +192,6 @@ public class Toolbar {
      * @return the JToolBar instance
      * @see AppFrame
      */
-
     public JToolBar getToolbar() {
         return toolbar;
     }
