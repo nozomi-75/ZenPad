@@ -1,4 +1,4 @@
-package zens;
+package zenpad;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.FlatDarkLaf;

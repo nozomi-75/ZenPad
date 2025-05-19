@@ -1,4 +1,4 @@
-package zens;
+package zenpad;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;

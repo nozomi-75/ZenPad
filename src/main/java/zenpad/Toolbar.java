@@ -1,4 +1,4 @@
-package zens;
+package zenpad;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
