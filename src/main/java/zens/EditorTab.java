@@ -101,15 +101,29 @@ public class EditorTab {
      * @see Toolbar
      */
     public void applyRSyntaxTheme() {
-        boolean isDark = LafManager.isDark(); // Determine if the current theme is dark
+
+        // Determine if the current theme is dark
+        boolean isDark = LafManager.isDark();
+
+        /**
+         * Available themes:
+         * dark: Sane dark mode color theme
+         * default: Vibrant highlighting on white backdrop.
+         * druid: Insane dark with terminal console feels.
+         * eclipse: Eclipse palette on white backdrop.
+         * idea: IntelliJ palette on white backdrop.
+         * monokai: Aesthetic, subtle, and readable dark theme.
+         * vs: Visual Studio light palette.
+         */
         String themePath = isDark
             ? "/org/fife/ui/rsyntaxtextarea/themes/dark.xml"
-            : "/org/fife/ui/rsyntaxtextarea/themes/default.xml";
+            : "/org/fife/ui/rsyntaxtextarea/themes/vs.xml";
+
         try (InputStream in = getClass().getResourceAsStream(themePath)) {
             // Load the theme from the XML file
             Theme theme = Theme.load(in);
             theme.apply(codeArea);
-            codeArea.setFont(codeArea.getFont().deriveFont(14f));
+            codeArea.setFont(FontUtils.loadFont("/fonts/FiraCode-Retina.ttf", 14f));
         } catch (IOException e) {
             e.printStackTrace();
         }
