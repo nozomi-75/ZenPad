@@ -14,7 +14,7 @@ public class MainApp {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LafManager.applyLightLaf();
-            new AppFrame("Demonstration").showWindow();
+            new AppFrame("ZenPad").showWindow();
         });
     }
 }

@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.datatransfer.Clipboard;
@@ -179,7 +180,21 @@ public class Toolbar {
      * </p>
      */
     private void showAboutDialog() {
-        JOptionPane.showMessageDialog(null, "Java Programming Demo. CC-BY-NC-SA 4.0. Made by Zens.", "About", JOptionPane.INFORMATION_MESSAGE);
+        String message = "<html>"
+            + "<strong>ZenPad</strong>"
+            + "<p>Version 1.0-SNAPSHOT<br>"
+            + "<p>&copy; 2025 Zens. Licensed under MIT.</p>"
+            + "</html>";
+
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/64x64.png"));
+            
+        JOptionPane.showMessageDialog(
+            null,
+            message,
+            "About",
+            JOptionPane.INFORMATION_MESSAGE,
+            icon
+        );
     }
 
     /**

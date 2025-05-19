@@ -3,6 +3,7 @@ package zens;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -58,6 +59,9 @@ public class AppFrame extends JFrame {
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
         add(fileOpenerPanel.getPanel(), BorderLayout.WEST);
+
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/48x48.png"));
+        setIconImage(icon.getImage());
     }
 
     public void showWindow() {
