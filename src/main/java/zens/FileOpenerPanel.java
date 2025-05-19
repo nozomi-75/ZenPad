@@ -137,6 +137,12 @@ public class FileOpenerPanel {
             ),
 
             new Branch(
+                "Java String Methods",
+                new String[] { "String length()", "String isEmpty()", "String case()", "String indexOf()", "String contains()", "String substring()", "String equals()", "String replace()", "String trim()" },
+                new String[] { "StringLength.java", "StringIsEmpty.java", "StringCaseChange.java", "StringIndexOf.java", "StringContains.java", "StringSubstring.java", "StringEquals.java", "StringReplace.java", "StringTrim.java" }
+            ),
+
+            new Branch(
                 "Java Methods",
                 new String[] { "Simple method", "Method with parameters", "Method with return value", "Method with return only", "Static vs instance" },
                 new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" }
