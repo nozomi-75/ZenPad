@@ -128,6 +128,14 @@ public class EditorTab {
         }
     }
 
+    public void setFontFiraCode() {
+        codeArea.setFont(FontUtils.loadFont("/fonts/FiraCode-Retina.ttf", 14f));
+    }
+    
+    public void setFontJetBrains() {
+        codeArea.setFont(FontUtils.loadFont("/fonts/JetBrainsMono-Regular.ttf", 14f));
+    }
+
     /**
      * Changes the font size of the code area by a specified delta.
      * Ensures that the font size does not go below a minimum value.

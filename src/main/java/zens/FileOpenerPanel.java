@@ -125,7 +125,7 @@ public class FileOpenerPanel {
             ),
 
             new Branch(
-                "Java Loop Dilemma",
+                "Java Loops Challenge",
                 new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
                 new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" }
             ),
