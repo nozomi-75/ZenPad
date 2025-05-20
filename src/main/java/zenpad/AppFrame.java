@@ -31,7 +31,7 @@ public class AppFrame extends JFrame {
     private CodeRunner codeRunner;
 
     // Instance of TextPanel object for bottom bar purposes
-    private NotePanel textPanel;
+    private NotePanel notePanel;
 
     // Other generic UI components
     private JTabbedPane tabbedPane;
@@ -73,13 +73,13 @@ public class AppFrame extends JFrame {
         tabbedPane.setBorder(new EmptyBorder(5, 2, 2, 5));
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        textPanel = new NotePanel();
-        textPanel.getNotePanel().setBorder(new EmptyBorder(2, 2, 5, 5));
+        notePanel = new NotePanel();
+        notePanel.getNotePanel().setBorder(new EmptyBorder(2, 2, 5, 5));
 
         // Pass a callback to TabManager to update text panel visibility
         tabManager = new TabManager(tabbedPane, this::updateNotePanelVis);
         codeRunner = new CodeRunner();
-        fileOpenerPanel = new FileOpenerPanel(tabManager, textPanel);
+        fileOpenerPanel = new FileOpenerPanel(tabManager, notePanel);
 
         addTabSwitchListener();
     }
@@ -104,9 +104,9 @@ public class AppFrame extends JFrame {
             EditorTab editorTab = tabManager.getEditorTabAt(idx);
             String descFile = (editorTab != null) ? editorTab.getDescFile() : null;
             if (descFile != null && !descFile.isEmpty()) {
-                textPanel.loadTextFromResource(descFile);
+                notePanel.loadTextFromResource(descFile);
             } else {
-                textPanel.setText("No description available.");
+                notePanel.setText("No description available.");
             }
         }
     }
@@ -118,12 +118,12 @@ public class AppFrame extends JFrame {
      * @see NotePanel
      */
     private void setupInnerSplit() {
-        textPanel.getNotePanel().setMinimumSize(new Dimension(100, 100));
+        notePanel.getNotePanel().setMinimumSize(new Dimension(100, 100));
 
         innerSplitPane = new JSplitPane(
             JSplitPane.VERTICAL_SPLIT,
             tabbedPane,
-            textPanel.getNotePanel()
+            notePanel.getNotePanel()
         );
         // Set divider location to 85% of the height for the editor
         innerSplitPane.setDividerLocation(0.85);
@@ -155,7 +155,7 @@ public class AppFrame extends JFrame {
      * @see #setupOuterSplit()
      */
     private void layoutComponents() {
-        Toolbar toolbar = new Toolbar(tabManager, codeRunner);
+        Toolbar toolbar = new Toolbar(tabManager, codeRunner, notePanel);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(outerSplitPane, BorderLayout.CENTER);
     }
@@ -172,7 +172,7 @@ public class AppFrame extends JFrame {
         if (tabManager.getOpenTabs().isEmpty()) {
             innerSplitPane.setBottomComponent(null);
         } else {
-            innerSplitPane.setBottomComponent(textPanel.getNotePanel());
+            innerSplitPane.setBottomComponent(notePanel.getNotePanel());
             // If previously collapsed, set default proportion
             if (wasCollapsed) {
                 innerSplitPane.setDividerLocation(0.80);

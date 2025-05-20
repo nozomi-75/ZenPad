@@ -19,7 +19,6 @@ public class NotePanel {
     public NotePanel() {
         notePanel = new JPanel(new BorderLayout());
 
-        // JTextArea for displaying plain text
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setLineWrap(true);
@@ -71,6 +70,14 @@ public class NotePanel {
      */
     public String getText() {
         return textArea.getText();
+    }
+    
+    /**
+     * Sets whether the text area is editable.
+     * @param editable Whether the text area should be editable.
+     */
+    public void setEditable(boolean editable) {
+        textArea.setEditable(editable);
     }
 
     /**

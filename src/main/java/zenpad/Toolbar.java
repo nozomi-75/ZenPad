@@ -30,12 +30,15 @@ public class Toolbar {
     private JToolBar toolbar;
     private TabManager tabManager;
     private CodeRunner codeRunner;
+    private NotePanel notePanel;
     private JComboBox<String> languageComboBox;
     private JToggleButton themeToggleButton;
+    private JToggleButton editNotesToggleButton;
     
-    public Toolbar(TabManager tabManager, CodeRunner codeRunner) {
+    public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel) {
         this.tabManager = tabManager;
         this.codeRunner = codeRunner;
+        this.notePanel = notePanel;
 
         toolbar = new JToolBar();
         toolbar.setFloatable(false);
@@ -60,18 +63,14 @@ public class Toolbar {
         toolbar.add(languageComboBox);
 
         toolbar.addSeparator();
-
         toolbar.add(createButton("Copy", this::copyCode));
         toolbar.add(createButton("Run", this::runCode));
-        toolbar.add(createButton("Zoom in", () -> changeFontSize(1)));
-        toolbar.add(createButton("Zoom out", () -> changeFontSize(-1)));
-        toolbar.add(createButton("Reset zoom", this::resetFontSize));
+        toolbar.add(createButton("Font+", () -> changeFontSize(1)));
+        toolbar.add(createButton("Font-", () -> changeFontSize(-1)));
+        toolbar.add(createButton("Reset", this::resetFontSize));
 
-        themeToggleButton = new JToggleButton("Dark Mode");
-        themeToggleButton.setFocusPainted(false);
-        themeToggleButton.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        themeToggleButton.addActionListener(e -> themeToggle(themeToggleButton));
-        toolbar.add(themeToggleButton);
+        createToggleButton("Dark mode", () -> themeToggle(themeToggleButton), btn -> themeToggleButton = btn);
+        createToggleButton("Edit notes", this::toggleEditNotes, btn -> editNotesToggleButton = btn);
 
         toolbar.add(createButton("About", this::showAboutDialog));
     }
@@ -91,8 +90,38 @@ public class Toolbar {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
         button.addActionListener(e -> action.run());
-        button.setMargin(new java.awt.Insets(2, 10, 2, 10)); // Add horizontal padding
+        button.setMargin(new java.awt.Insets(2, 5, 2, 5));
         return button;
+    }
+
+    /**
+     * Creates a toggle button with the specified text and action.
+     * <p>
+     * This method initializes a JToggleButton with the given text and sets its action
+     * to the provided Runnable. The toggle button is configured to not show focus paint.
+     * </p>
+     * 
+     * @param text The text to display on the button.
+     * @param action The action to perform when the button is clicked.
+     * @return A JButton configured with the specified text and action.
+     */
+    private void createToggleButton(String text, Runnable action, java.util.function.Consumer<JToggleButton> assignField) {
+        JToggleButton btn = new JToggleButton(text);
+        btn.setFocusPainted(false);
+        btn.addActionListener(e -> action.run());
+        btn.setMargin(new java.awt.Insets(2, 5, 2, 5));
+        toolbar.add(btn);
+        assignField.accept(btn);
+    }
+
+    /**
+     * Sets whether the text area is editable.
+     * @see NotePanel#setEditable
+     */
+    private void toggleEditNotes() {
+        boolean editable = editNotesToggleButton.isSelected();
+        notePanel.setEditable(editable);
+        editNotesToggleButton.setText(editable ? "Lock notes" : "Edit notes");
     }
 
     /**
