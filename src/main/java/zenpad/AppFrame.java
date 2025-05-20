@@ -49,6 +49,10 @@ public class AppFrame extends JFrame {
         setAppIcon();
     }
 
+    /**
+     * Set the JFrame configuration.
+     * @see AppFrame
+     */
     private void initializeFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(800,600));
@@ -56,6 +60,14 @@ public class AppFrame extends JFrame {
         setLayout(new BorderLayout());
     }
 
+    /**
+     * Initialize inner JFrame components.
+     * Set their respective configuration if necessary.
+     * @see TextPanel
+     * @see TabManager
+     * @see CodeRunner
+     * @see FileOpenerPanel
+     */
     private void initializeComponents() {
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(5, 2, 2, 5));
@@ -70,6 +82,12 @@ public class AppFrame extends JFrame {
         fileOpenerPanel = new FileOpenerPanel(tabManager, textPanel);
     }
 
+    /**
+     * Set up inner vertical JSplit.
+     * @see tabbedPane
+     * @see EditorTab
+     * @see TextPanel
+     */
     private void setupInnerSplit() {
         textPanel.getTextPanel().setMinimumSize(new Dimension(100, 100));
 
@@ -84,6 +102,11 @@ public class AppFrame extends JFrame {
         innerSplitPane.setDividerSize(8);
     }
 
+    /**
+     * Set up outer horizontal JSplit.
+     * @see FileOpenerPanel
+     * @see #setupInnerSplit()
+     */
     private void setupOuterSplit() {
         fileOpenerPanel.getPanel().setMinimumSize(new Dimension(100, 100));
         tabbedPane.setMinimumSize(new Dimension(300, 100));
@@ -97,18 +120,38 @@ public class AppFrame extends JFrame {
         outerSplitPane.setDividerSize(8);
     }
 
+    /**
+     * Configure layout components within the JFrame.
+     * @see Toolbar
+     * @see #setupOuterSplit()
+     */
     private void layoutComponents() {
         Toolbar toolbar = new Toolbar(tabManager, codeRunner);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(outerSplitPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Handle dynamic presence of text area.
+     * @see TextPanel
+     * @see #setupInnerSplit()
+     */
     public void updateTextPanelVisibility() {
+        boolean wasCollapsed = (innerSplitPane.getBottomComponent() == null);
+        int dividerLoc = innerSplitPane.getDividerLocation();
+
         if (tabManager.getOpenTabs().isEmpty()) {
             innerSplitPane.setBottomComponent(null);
         } else {
             innerSplitPane.setBottomComponent(textPanel.getTextPanel());
+            // If previously collapsed, set default proportion
+            if (wasCollapsed) {
+                innerSplitPane.setDividerLocation(0.80);
+                return;
+            }
         }
+
+        innerSplitPane.setDividerLocation(dividerLoc);
     }
 
     private void setAppIcon() {
