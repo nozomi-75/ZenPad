@@ -31,7 +31,7 @@ public class AppFrame extends JFrame {
     private CodeRunner codeRunner;
 
     // Instance of TextPanel object for bottom bar purposes
-    private TextPanel textPanel;
+    private NotePanel textPanel;
 
     // Other generic UI components
     private JTabbedPane tabbedPane;
@@ -63,7 +63,7 @@ public class AppFrame extends JFrame {
     /**
      * Initialize inner JFrame components.
      * Set their respective configuration if necessary.
-     * @see TextPanel
+     * @see NotePanel
      * @see TabManager
      * @see CodeRunner
      * @see FileOpenerPanel
@@ -73,8 +73,8 @@ public class AppFrame extends JFrame {
         tabbedPane.setBorder(new EmptyBorder(5, 2, 2, 5));
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        textPanel = new TextPanel();
-        textPanel.getTextPanel().setBorder(new EmptyBorder(2, 2, 5, 5));
+        textPanel = new NotePanel();
+        textPanel.getNotePanel().setBorder(new EmptyBorder(2, 2, 5, 5));
 
         // Pass a callback to TabManager to update text panel visibility
         tabManager = new TabManager(tabbedPane, this::updateTextPanelVisibility);
@@ -86,15 +86,15 @@ public class AppFrame extends JFrame {
      * Set up inner vertical JSplit.
      * @see tabbedPane
      * @see EditorTab
-     * @see TextPanel
+     * @see NotePanel
      */
     private void setupInnerSplit() {
-        textPanel.getTextPanel().setMinimumSize(new Dimension(100, 100));
+        textPanel.getNotePanel().setMinimumSize(new Dimension(100, 100));
 
         innerSplitPane = new JSplitPane(
             JSplitPane.VERTICAL_SPLIT,
             tabbedPane,
-            textPanel.getTextPanel()
+            textPanel.getNotePanel()
         );
         // Set divider location to 85% of the height for the editor
         innerSplitPane.setDividerLocation(0.85);
@@ -133,7 +133,7 @@ public class AppFrame extends JFrame {
 
     /**
      * Handle dynamic presence of text area.
-     * @see TextPanel
+     * @see NotePanel
      * @see #setupInnerSplit()
      */
     public void updateTextPanelVisibility() {
@@ -143,7 +143,7 @@ public class AppFrame extends JFrame {
         if (tabManager.getOpenTabs().isEmpty()) {
             innerSplitPane.setBottomComponent(null);
         } else {
-            innerSplitPane.setBottomComponent(textPanel.getTextPanel());
+            innerSplitPane.setBottomComponent(textPanel.getNotePanel());
             // If previously collapsed, set default proportion
             if (wasCollapsed) {
                 innerSplitPane.setDividerLocation(0.80);

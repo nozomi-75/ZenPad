@@ -23,10 +23,10 @@ import java.util.List;
  */
 
 public class FileOpenerPanel {
-    private TextPanel textPanel;
+    private NotePanel textPanel;
     private JPanel panel;
     
-    public FileOpenerPanel(TabManager tabManager, TextPanel textPanel) {
+    public FileOpenerPanel(TabManager tabManager, NotePanel textPanel) {
         this.textPanel = textPanel;
 
         panel = new JPanel();

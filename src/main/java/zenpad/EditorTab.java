@@ -45,11 +45,11 @@ public class EditorTab {
         // Set up the code editor area with syntax highlighting and other features
         codeArea = new RSyntaxTextArea();
         codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        codeArea.setAntiAliasingEnabled(true);
         codeArea.setCodeFoldingEnabled(true);
-        codeArea.setAntiAliasingEnabled(true); // Smoother text rendering
-        codeArea.setEditable(true);
         codeArea.setLineWrap(true);
         codeArea.setWrapStyleWord(true);
+        codeArea.setEditable(true);
 
         applyRSyntaxTheme();
 
@@ -86,6 +86,7 @@ public class EditorTab {
             protected void done() {
                 try {
                     codeArea.setText(get());
+                    codeArea.setCaretPosition(0);
                 } catch (Exception e) {
                     codeArea.setText("Error loading " + filePath + ": " + e.getMessage());
                 }

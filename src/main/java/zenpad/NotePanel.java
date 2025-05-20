@@ -18,16 +18,16 @@ import org.commonmark.renderer.html.HtmlRenderer;
  * TextPanel provides a panel that displays Markdown-rendered content only.
  * It supports asynchronous loading of text resources and renders Markdown as HTML.
  */
-public class TextPanel {
-    private JPanel textPanel;
+public class NotePanel {
+    private JPanel notePanel;
     private JEditorPane editorPane;
     private JScrollPane scrollPane;
 
     /**
      * Constructs a TextPanel with Markdown rendering support.
      */
-    public TextPanel() {
-        textPanel = new JPanel(new BorderLayout());
+    public NotePanel() {
+        notePanel = new JPanel(new BorderLayout());
 
         // JEditorPane for rendering HTML (used for Markdown)
         editorPane = new JEditorPane();
@@ -47,7 +47,7 @@ public class TextPanel {
         });
 
         scrollPane = new JScrollPane(editorPane);
-        textPanel.add(scrollPane, BorderLayout.CENTER);
+        notePanel.add(scrollPane, BorderLayout.CENTER);
     }
 
     /**
@@ -65,7 +65,7 @@ public class TextPanel {
             + "<style>"
             + "body { font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 10px; padding: 5px; }"
             + "pre { background: #7F8C8D; padding: 8px; border-radius: 4px; }"
-            + "code { font-family: 'Fira Code', 'monospace'; }"
+            + "code { font-family: 'monospace'; }"
             + "h1, h2, h3, h4 { margin-top: 1.2em; }"
             + "</style>"
             + "</head><body>" + htmlBody + "</body></html>";
@@ -113,7 +113,7 @@ public class TextPanel {
      * Returns the main panel containing the Markdown view.
      * @return The JPanel for this TextPanel.
      */
-    public JPanel getTextPanel() {
-        return textPanel;
+    public JPanel getNotePanel() {
+        return notePanel;
     }
 }
