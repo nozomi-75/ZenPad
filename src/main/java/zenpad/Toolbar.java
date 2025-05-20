@@ -6,12 +6,15 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.Dimension;
 
 /**
  * Toolbar is responsible for creating a toolbar with buttons for various actions.
@@ -27,6 +30,8 @@ public class Toolbar {
     private JToolBar toolbar;
     private TabManager tabManager;
     private CodeRunner codeRunner;
+    private JComboBox<String> languageComboBox;
+    private JToggleButton themeToggleButton;
     
     public Toolbar(TabManager tabManager, CodeRunner codeRunner) {
         this.tabManager = tabManager;
@@ -36,14 +41,33 @@ public class Toolbar {
         toolbar.setFloatable(false);
         toolbar.setBorder(new EmptyBorder(3, 5, 0, 0));
 
+        initToolbarComponents();
+    }
+
+    /**
+     * Initializes and adds the language combo box, theme toggle button,
+     * and other toolbar buttons to the toolbar.
+     * <p>
+     * This method sets up the language selection combo box, theme toggle button,
+     * and all action buttons, and adds them to the toolbar.
+     * </p>
+     */
+    private void initToolbarComponents() {
+        languageComboBox = new JComboBox<>(new String[] { "Java", "Python", "C" });
+        languageComboBox.setPreferredSize(new Dimension(155, 24));
+        languageComboBox.setMaximumSize(new Dimension(155, 24));
+        toolbar.add(new JLabel("Lang:  "));
+        toolbar.add(languageComboBox);
+
         toolbar.add(createButton("Copy", this::copyCode));
         toolbar.add(createButton("Run", this::runCode));
         toolbar.add(createButton("Zoom in", () -> changeFontSize(1)));
         toolbar.add(createButton("Zoom out", () -> changeFontSize(-1)));
         toolbar.add(createButton("Reset zoom", this::resetFontSize));
 
-        JToggleButton themeToggleButton = new JToggleButton("Dark Mode");
+        themeToggleButton = new JToggleButton("Dark Mode");
         themeToggleButton.setFocusPainted(false);
+        themeToggleButton.setMargin(new java.awt.Insets(2, 10, 2, 10));
         themeToggleButton.addActionListener(e -> themeToggle(themeToggleButton));
         toolbar.add(themeToggleButton);
 
@@ -65,6 +89,7 @@ public class Toolbar {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
         button.addActionListener(e -> action.run());
+        button.setMargin(new java.awt.Insets(2, 10, 2, 10)); // Add horizontal padding
         return button;
     }
 
@@ -87,21 +112,14 @@ public class Toolbar {
     }
     
     /**
-     * Runs the code from the currently selected tab.
-     * <p>
-     * This method retrieves the code and file name from the selected tab using the TabManager
-     * and executes it using the CodeRunner.
-     * </p>
-     * 
-     * @see CodeRunner
-     * @see TabManager#getSelectedCode()
-     * @see TabManager#getSelectedFileName()
+     * Runs the code from the currently selected tab using the selected language.
      */
     private void runCode() {
         String code = tabManager.getSelectedCode();
         String fileName = tabManager.getSelectedFileName();
+        String language = (String) languageComboBox.getSelectedItem();
         if (!code.trim().isEmpty()) {
-            codeRunner.runCode(code, fileName);
+            codeRunner.runCode(code, fileName, language);
         } else {
             JOptionPane.showMessageDialog(null, "No code to run.", "Error", JOptionPane.ERROR_MESSAGE);
         }

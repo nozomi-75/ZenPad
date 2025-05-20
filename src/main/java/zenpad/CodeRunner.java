@@ -19,62 +19,66 @@ import javax.swing.JOptionPane;
 public class CodeRunner {
 
     /**
-     * Compiles and runs the provided Java code.
-     * <p>
-     * This method creates a temporary Java file, compiles it, and executes it in the appropriate terminal.
-     * It detects the operating system to determine the correct terminal to use.
-     * </p>
+     * Compiles and runs the provided code in the selected language.
      *
-     * @param code The Java code to be compiled and run.
-     * @param fileName The name of the file to be created (without extension).
+     * @param code The code to be compiled and run.
+     * @param fileName The name of the file to be created (with extension).
+     * @param language The programming language selected.
      */
-
-    public void runCode(String code, String fileName) {
+    public void runCode(String code, String fileName, String language) {
         try {
-            // Extract the class name from the file name
-            String className = fileName.substring(0, fileName.lastIndexOf('.'));
-
-            // Create a temporary Java file
-            // Write the code to the file
-            File tempDir = Files.createTempDirectory("java_samples").toFile();
-            File javaFile = new File(tempDir, className + ".java");
-
-            Files.writeString(javaFile.toPath(), code, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-
-            Process compileProcess = new ProcessBuilder("javac", javaFile.getName())
-                .directory(tempDir)
-                .start();
-            compileProcess.waitFor();
-
-            // Check if the compilation was successful
-            if (compileProcess.exitValue() != 0) {
-                JOptionPane.showMessageDialog(null, "Compilation failed. Please check your code.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Detect the OS and run in appropriate terminal
+            File tempDir = Files.createTempDirectory("samples").toFile();
             String os = System.getProperty("os.name").toLowerCase();
-            ProcessBuilder runProcess;
+            ProcessBuilder runProcess = null;
 
-            if (os.contains("win")) {
-                // Windows: Open in Command Prompt
-                runProcess = new ProcessBuilder("cmd", "/c", "start", "cmd", "/k",
-                    "java", "-cp", tempDir.getAbsolutePath(), className);
-            } else if (os.contains("mac")) {
-                String command = "java -cp " + tempDir.getAbsolutePath() + " " + className + "; exec bash";
-                runProcess = new ProcessBuilder("osascript", "-e",
-                    "tell application \"Terminal\" to do script \"" + command.replace("\"", "\\\"") + "\"");
-            } else {
-                // Linux: Try various terminals or fallback to common defaults
-                String terminal = detectLinuxTerminal();
-                String bashCommand = "bash -c 'java -cp " + tempDir.getAbsolutePath() + " " + className + "; exec bash'";
-                runProcess = new ProcessBuilder(terminal, "-e", bashCommand);
+            switch (language) {
+                case "Java": {
+                    String className = fileName.substring(0, fileName.lastIndexOf('.'));
+                    File javaFile = new File(tempDir, className + ".java");
+                    Files.writeString(javaFile.toPath(), code, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+                    Process compileProcess = new ProcessBuilder("javac", javaFile.getName())
+                        .directory(tempDir)
+                        .start();
+                    compileProcess.waitFor();
+
+                    if (compileProcess.exitValue() != 0) {
+                        JOptionPane.showMessageDialog(null, "Compilation failed. Please check your code.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (os.contains("win")) {
+                        runProcess = new ProcessBuilder("cmd", "/c", "start", "cmd", "/k",
+                            "java", "-cp", tempDir.getAbsolutePath(), className);
+                    } else if (os.contains("mac")) {
+                        String command = "java -cp " + tempDir.getAbsolutePath() + " " + className + "; exec bash";
+                        runProcess = new ProcessBuilder("osascript", "-e",
+                            "tell application \"Terminal\" to do script \"" + command.replace("\"", "\\\"") + "\"");
+                    } else {
+                        String terminal = detectLinuxTerminal();
+                        String bashCommand = "bash -c 'java -cp " + tempDir.getAbsolutePath() + " " + className + "; exec bash'";
+                        runProcess = new ProcessBuilder(terminal, "-e", bashCommand);
+                    }
+                    break;
+                }
+                case "Python": {
+                    JOptionPane.showMessageDialog(null, "Logic not yet added: " + language, "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                case "C": {
+                    JOptionPane.showMessageDialog(null, "Logic not yet added: " + language, "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                default:
+                    JOptionPane.showMessageDialog(null, "Unsupported language: " + language, "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
             }
 
-            runProcess.directory(tempDir);
-            // Debug print: show the command being run
-            System.out.println("Running: " + String.join(" ", runProcess.command()));
-            runProcess.start();
+            if (runProcess != null) {
+                runProcess.directory(tempDir);
+                System.out.println("Running: " + String.join(" ", runProcess.command()));
+                runProcess.start();
+            }
         } catch (IOException | InterruptedException e) {
             JOptionPane.showMessageDialog(null, "An error occurred while running the code: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
