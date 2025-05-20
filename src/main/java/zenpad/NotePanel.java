@@ -5,78 +5,42 @@ import java.io.InputStream;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JEditorPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 
-import org.commonmark.node.Node;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
-
-/**
- * TextPanel provides a panel that displays Markdown-rendered content only.
- * It supports asynchronous loading of text resources and renders Markdown as HTML.
- */
 public class NotePanel {
     private JPanel notePanel;
-    private JEditorPane editorPane;
+    private JTextArea textArea;
     private JScrollPane scrollPane;
 
     /**
-     * Constructs a TextPanel with Markdown rendering support.
+     * Constructs a NotePanel for displaying plain text.
      */
     public NotePanel() {
         notePanel = new JPanel(new BorderLayout());
 
-        // JEditorPane for rendering HTML (used for Markdown)
-        editorPane = new JEditorPane();
-        editorPane.setEditable(false);
-        editorPane.setContentType("text/html");
-        editorPane.addHyperlinkListener(new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    try {
-                        java.awt.Desktop.getDesktop().browse(e.getURL().toURI());
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        });
+        // JTextArea for displaying plain text
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
 
-        scrollPane = new JScrollPane(editorPane);
+        scrollPane = new JScrollPane(textArea);
         notePanel.add(scrollPane, BorderLayout.CENTER);
     }
 
     /**
-     * Sets the Markdown content of the panel and renders it as HTML.
-     * @param markdown The Markdown content to render.
+     * Sets the plain text content of the panel.
+     * @param text The text content to display.
      */
-    public void setText(String markdown) {
-        Parser parser = Parser.builder().build();
-        Node document = parser.parse(markdown);
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
-        String htmlBody = renderer.render(document);
-
-        // Basic HTML template for better font and padding
-        String html = "<html><head>"
-            + "<style>"
-            + "body { font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 10px; padding: 5px; }"
-            + "pre { background: #7F8C8D; padding: 8px; border-radius: 4px; }"
-            + "code { font-family: 'monospace'; }"
-            + "h1, h2, h3, h4 { margin-top: 1.2em; }"
-            + "</style>"
-            + "</head><body>" + htmlBody + "</body></html>";
-
-        editorPane.setText(html);
-        editorPane.setCaretPosition(0);
+    public void setText(String text) {
+        textArea.setText(text);
+        textArea.setCaretPosition(0);
     }
 
     /**
-     * Loads text from a resource file asynchronously and sets it as Markdown.
-     * @param filePath the resource path (e.g., "desc/HelloWorld.md")
+     * Loads text from a resource file asynchronously and sets it as plain text.
+     * @param filePath the resource path (e.g., "desc/HelloWorld.txt")
      */
     public void loadTextFromResource(String filePath) {
         new SwingWorker<String, Void>() {
@@ -102,16 +66,16 @@ public class NotePanel {
     }
 
     /**
-     * Gets the current HTML content.
-     * @return The current HTML as a String.
+     * Gets the current text content.
+     * @return The current text as a String.
      */
     public String getText() {
-        return editorPane.getText();
+        return textArea.getText();
     }
 
     /**
-     * Returns the main panel containing the Markdown view.
-     * @return The JPanel for this TextPanel.
+     * Returns the main panel containing the text view.
+     * @return The JPanel for this NotePanel.
      */
     public JPanel getNotePanel() {
         return notePanel;

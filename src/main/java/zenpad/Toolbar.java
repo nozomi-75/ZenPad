@@ -59,6 +59,8 @@ public class Toolbar {
         toolbar.add(new JLabel("Lang:  "));
         toolbar.add(languageComboBox);
 
+        toolbar.addSeparator();
+
         toolbar.add(createButton("Copy", this::copyCode));
         toolbar.add(createButton("Run", this::runCode));
         toolbar.add(createButton("Zoom in", () -> changeFontSize(1)));
