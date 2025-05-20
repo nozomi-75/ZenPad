@@ -88,7 +88,7 @@ public class NotePanel {
             if (defaultFileName != null && !defaultFileName.isEmpty()) {
                 String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");                chooser.setSelectedFile(new java.io.File(baseName));
             }
-
+            
             int result = chooser.showSaveDialog(parent);
             if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
                 try {
