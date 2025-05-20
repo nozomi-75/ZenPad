@@ -43,7 +43,7 @@ public class AppFrame extends JFrame {
         initializeFrame();
         initializeComponents();
         setupInnerSplit();
-        updateTextPanelVisibility();
+        updateNotePanelVis();
         setupOuterSplit();
         layoutComponents();
         setAppIcon();
@@ -77,7 +77,7 @@ public class AppFrame extends JFrame {
         textPanel.getNotePanel().setBorder(new EmptyBorder(2, 2, 5, 5));
 
         // Pass a callback to TabManager to update text panel visibility
-        tabManager = new TabManager(tabbedPane, this::updateTextPanelVisibility);
+        tabManager = new TabManager(tabbedPane, this::updateNotePanelVis);
         codeRunner = new CodeRunner();
         fileOpenerPanel = new FileOpenerPanel(tabManager, textPanel);
 
@@ -161,11 +161,11 @@ public class AppFrame extends JFrame {
     }
 
     /**
-     * Handle dynamic presence of text area.
+     * Handle dynamic presence of note area.
      * @see NotePanel
      * @see #setupInnerSplit()
      */
-    public void updateTextPanelVisibility() {
+    public void updateNotePanelVis() {
         boolean wasCollapsed = (innerSplitPane.getBottomComponent() == null);
         int dividerLoc = innerSplitPane.getDividerLocation();
 
