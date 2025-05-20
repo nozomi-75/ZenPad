@@ -33,6 +33,7 @@ public class NotePanel {
 
         scrollPane = new RTextScrollPane(textArea);
         scrollPane.getGutter().setLineNumbersEnabled(false);
+        scrollPane.getGutter().setFoldIndicatorEnabled(false);
         notePanel.add(scrollPane, BorderLayout.CENTER);
     }
 
