@@ -218,6 +218,8 @@ public class Toolbar {
             tab.applyRSyntaxTheme();
         }
 
+        notePanel.updateTheme();
+
         SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
     }
 

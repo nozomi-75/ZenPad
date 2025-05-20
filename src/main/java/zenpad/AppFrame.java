@@ -173,7 +173,7 @@ public class AppFrame extends JFrame {
             innerSplitPane.setBottomComponent(null);
         } else {
             innerSplitPane.setBottomComponent(notePanel.getNotePanel());
-            // If previously collapsed, set default proportion
+            notePanel.updateTheme();
             if (wasCollapsed) {
                 innerSplitPane.setDividerLocation(0.80);
                 return;

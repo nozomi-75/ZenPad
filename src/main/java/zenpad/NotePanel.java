@@ -65,6 +65,27 @@ public class NotePanel {
     }
 
     /**
+     * Updates the colors of the text area and scroll pane to match the current Look and Feel.
+     */
+    public void updateTheme() {
+        javax.swing.SwingUtilities.updateComponentTreeUI(notePanel);
+        javax.swing.SwingUtilities.updateComponentTreeUI(scrollPane);
+        javax.swing.SwingUtilities.updateComponentTreeUI(textArea);
+
+        // Optionally, set explicit colors for dark/light mode if needed:
+        boolean isDark = LafManager.isDark();
+        if (isDark) {
+            textArea.setBackground(new java.awt.Color(60, 63, 65));
+            textArea.setForeground(new java.awt.Color(219, 219, 219));
+            textArea.setCaretColor(java.awt.Color.WHITE);
+        } else {
+            textArea.setBackground(java.awt.Color.WHITE);
+            textArea.setForeground(java.awt.Color.BLACK);
+            textArea.setCaretColor(java.awt.Color.BLACK);
+        }
+    }
+
+    /**
      * Gets the current text content.
      * @return The current text as a String.
      */
