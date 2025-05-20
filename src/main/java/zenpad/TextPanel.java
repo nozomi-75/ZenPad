@@ -65,7 +65,7 @@ public class TextPanel {
             + "<style>"
             + "body { font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 10px; padding: 5px; }"
             + "pre { background: #7F8C8D; padding: 8px; border-radius: 4px; }"
-            + "code { font-family: 'monospace'; }"
+            + "code { font-family: 'Fira Code', 'monospace'; }"
             + "h1, h2, h3, h4 { margin-top: 1.2em; }"
             + "</style>"
             + "</head><body>" + htmlBody + "</body></html>";
