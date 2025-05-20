@@ -37,7 +37,11 @@ public class TextPanel {
             @Override
             public void hyperlinkUpdate(HyperlinkEvent e) {
                 if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    System.err.println(e);
+                    try {
+                        java.awt.Desktop.getDesktop().browse(e.getURL().toURI());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
@@ -59,9 +63,9 @@ public class TextPanel {
         // Basic HTML template for better font and padding
         String html = "<html><head>"
             + "<style>"
-            + "body { font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 11px; padding: 12px; }"
-            + "pre { background: #f4f4f4; padding: 8px; border-radius: 4px; }"
-            + "code { font-family: 'JetBrains Mono', 'Fira Mono', 'monospace'; }"
+            + "body { font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 10px; padding: 5px; }"
+            + "pre { background: #7F8C8D; padding: 8px; border-radius: 4px; }"
+            + "code { font-family: 'monospace'; }"
             + "h1, h2, h3, h4 { margin-top: 1.2em; }"
             + "</style>"
             + "</head><body>" + htmlBody + "</body></html>";
@@ -72,7 +76,7 @@ public class TextPanel {
 
     /**
      * Loads text from a resource file asynchronously and sets it as Markdown.
-     * @param filePath the resource path (e.g., "samples/HelloWorld.java")
+     * @param filePath the resource path (e.g., "desc/HelloWorld.md")
      */
     public void loadTextFromResource(String filePath) {
         new SwingWorker<String, Void>() {
