@@ -54,8 +54,8 @@ public class Toolbar {
      */
     private void initToolbarComponents() {
         languageComboBox = new JComboBox<>(new String[] { "Java", "Python", "C" });
-        languageComboBox.setPreferredSize(new Dimension(155, 24));
-        languageComboBox.setMaximumSize(new Dimension(155, 24));
+        languageComboBox.setPreferredSize(new Dimension(154, 24));
+        languageComboBox.setMaximumSize(new Dimension(154, 24));
         toolbar.add(new JLabel("Lang:  "));
         toolbar.add(languageComboBox);
 
