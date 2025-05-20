@@ -8,15 +8,17 @@ import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
+
 public class NotePanel {
     private JPanel notePanel;
-    private JTextArea textArea;
-    private JScrollPane scrollPane;
+    private RSyntaxTextArea textArea;
+    private RTextScrollPane scrollPane;
     private String currentFilePath;
 
     /**
@@ -25,12 +27,12 @@ public class NotePanel {
     public NotePanel() {
         notePanel = new JPanel(new BorderLayout());
 
-        textArea = new JTextArea();
-        textArea.setEditable(false);
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
+        textArea = new RSyntaxTextArea();
+        RTextHelper.configureDefaults(textArea);
+        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_MARKDOWN);
 
-        scrollPane = new JScrollPane(textArea);
+        scrollPane = new RTextScrollPane(textArea);
+        scrollPane.getGutter().setLineNumbersEnabled(false);
         notePanel.add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -86,7 +88,8 @@ public class NotePanel {
             chooser.setFileFilter(filter);
 
             if (defaultFileName != null && !defaultFileName.isEmpty()) {
-                String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");                chooser.setSelectedFile(new java.io.File(baseName));
+                String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");
+                chooser.setSelectedFile(new java.io.File(baseName + ".md"));
             }
             
             int result = chooser.showSaveDialog(parent);
@@ -122,18 +125,6 @@ public class NotePanel {
         javax.swing.SwingUtilities.updateComponentTreeUI(notePanel);
         javax.swing.SwingUtilities.updateComponentTreeUI(scrollPane);
         javax.swing.SwingUtilities.updateComponentTreeUI(textArea);
-
-        // Optionally, set explicit colors for dark/light mode if needed:
-        boolean isDark = LafManager.isDark();
-        if (isDark) {
-            textArea.setBackground(new java.awt.Color(60, 63, 65));
-            textArea.setForeground(new java.awt.Color(219, 219, 219));
-            textArea.setCaretColor(java.awt.Color.WHITE);
-        } else {
-            textArea.setBackground(java.awt.Color.WHITE);
-            textArea.setForeground(java.awt.Color.BLACK);
-            textArea.setCaretColor(java.awt.Color.BLACK);
-        }
     }
 
     /**
@@ -150,6 +141,14 @@ public class NotePanel {
      */
     public void setEditable(boolean editable) {
         textArea.setEditable(editable);
+    }
+
+    /**
+     * Returns the RSyntaxTextArea instance for this panel.
+     * @return the RSyntaxTextArea.
+     */
+    public RSyntaxTextArea getTextArea() {
+        return textArea;
     }
 
     /**

@@ -6,11 +6,9 @@ import javax.swing.SwingWorker;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import java.awt.BorderLayout;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -40,31 +38,19 @@ public class EditorTab {
      * @param noteFile The description file path for this tab (may be null).
      */
     public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile) {
-        // Extract the file name from the file path (everything after the last '/')
         this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         panel = new JPanel(new BorderLayout());
 
-        // Set up the code editor area with syntax highlighting and other features
         codeArea = new RSyntaxTextArea();
+        RTextHelper.configureDefaults(codeArea);
         codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        codeArea.setAntiAliasingEnabled(true);
-        codeArea.setCodeFoldingEnabled(true);
-        codeArea.setLineWrap(true);
-        codeArea.setWrapStyleWord(true);
-        codeArea.setEditable(true);
 
-        applyRSyntaxTheme();
-
-        // Load the file content into the text area asynchronously
         loadFileContent(filePath);
 
-        // Wrap the code area in a scroll pane for scrolling support
         scrollPane = new RTextScrollPane(codeArea);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        // Create a custom tab header (with close button, etc.)
         tabHeader = new TabHeader(node, tabbedPane, panel, tabManager);
-
         this.noteFile = noteFile;
     }
 
@@ -96,50 +82,6 @@ public class EditorTab {
                 }
             }
         }.execute();
-    }
-
-    /**
-     * Applies the RSyntaxTextArea theme based on the current look and feel.
-     * Loads the theme XML from the classpath and applies it to the code area.
-     * 
-     * @see LafManager
-     * @see Toolbar
-     */
-    public void applyRSyntaxTheme() {
-
-        // Determine if the current theme is dark
-        boolean isDark = LafManager.isDark();
-
-        /**
-         * Available themes:
-         * dark: Sane dark mode color theme
-         * default: Vibrant highlighting on white backdrop.
-         * druid: Insane dark with terminal console feels.
-         * eclipse: Eclipse palette on white backdrop.
-         * idea: IntelliJ palette on white backdrop.
-         * monokai: Aesthetic, subtle, and readable dark theme.
-         * vs: Visual Studio light palette.
-         */
-        String themePath = isDark
-            ? "/org/fife/ui/rsyntaxtextarea/themes/dark.xml"
-            : "/org/fife/ui/rsyntaxtextarea/themes/vs.xml";
-
-        try (InputStream in = getClass().getResourceAsStream(themePath)) {
-            // Load the theme from the XML file
-            Theme theme = Theme.load(in);
-            theme.apply(codeArea);
-            setFontJetBrains();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setFontFiraCode() {
-        codeArea.setFont(FontUtils.loadFont("/fonts/FiraCode-Retina.ttf", 14f));
-    }
-    
-    public void setFontJetBrains() {
-        codeArea.setFont(FontUtils.loadFont("/fonts/JetBrainsMono-Regular.ttf", 14f));
     }
 
     /**
@@ -179,6 +121,14 @@ public class EditorTab {
      */
     public String getCode() {
         return codeArea.getText();
+    }
+
+    /**
+     * Returns the RSyntaxTextArea instance for this tab.
+     * @return The RSyntaxTextArea.
+     */
+    public RSyntaxTextArea getCodeArea() {
+        return codeArea;
     }
 
     /**

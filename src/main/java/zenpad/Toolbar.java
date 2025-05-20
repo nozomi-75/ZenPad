@@ -245,10 +245,9 @@ public class Toolbar {
 
         // Update RSyntaxTextArea theme for all open tabs
         for (EditorTab tab : tabManager.getOpenTabs()) {
-            tab.applyRSyntaxTheme();
+            RTextHelper.applyRSyntaxTheme(tab.getCodeArea());
+            RTextHelper.applyRSyntaxTheme(notePanel.getTextArea());
         }
-
-        notePanel.updateTheme();
 
         SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
     }
