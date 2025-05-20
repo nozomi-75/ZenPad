@@ -3,7 +3,7 @@
 
 # Custom Ignore List #
 ######################
-TempProgram.java
+/.vscode/
 /target/
 
 # Compiled source #
