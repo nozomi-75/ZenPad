@@ -37,8 +37,9 @@ public class TabManager {
         this.onTabsChanged = onTabsChanged;
     }
 
-    public void openNewTab(String filePath, String node) {
-        setupEditor(filePath, node);
+    // Update openNewTab to accept descFile
+    public void openNewTab(String filePath, String node, String descFile) {
+        setupEditor(filePath, node, descFile);
         if (onTabsChanged != null) onTabsChanged.run();
     }
 
@@ -53,8 +54,8 @@ public class TabManager {
      * @param node the display name for the tab (typically the file name or a label)
      * @see FileOpenerPanel
      */
-    public void setupEditor(String filePath, String node) {
-        EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this);
+    public void setupEditor(String filePath, String node, String descFile) {
+        EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this, descFile);
         openTabs.add(newTab);
         tabbedPane.addTab(node, newTab.getPanel());
         tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());
@@ -112,5 +113,13 @@ public class TabManager {
             tabbedPane.remove(index);
             if (onTabsChanged != null) onTabsChanged.run();
         }
+    }
+
+    // Add a method to get EditorTab by tab index
+    public EditorTab getEditorTabAt(int index) {
+        if (index >= 0 && index < openTabs.size()) {
+            return openTabs.get(index);
+        }
+        return null;
     }
 }

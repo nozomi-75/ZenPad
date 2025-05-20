@@ -80,6 +80,35 @@ public class AppFrame extends JFrame {
         tabManager = new TabManager(tabbedPane, this::updateTextPanelVisibility);
         codeRunner = new CodeRunner();
         fileOpenerPanel = new FileOpenerPanel(tabManager, textPanel);
+
+        addTabSwitchListener();
+    }
+
+    /**
+     * Adds a ChangeListener to the tabbedPane to update the NotePanel
+     * with the correct description when the selected tab changes.
+     * This ensures the NotePanel always displays the description
+     * corresponding to the currently active tab.
+     */
+    private void addTabSwitchListener() {
+        tabbedPane.addChangeListener(e -> updateNotePanelOnTabSwitch());
+    }
+
+    /**
+     * Updates the NotePanel with the description file associated with the currently selected tab.
+     * If no description file is available, displays a default message.
+     */
+    private void updateNotePanelOnTabSwitch() {
+        int idx = tabbedPane.getSelectedIndex();
+        if (idx >= 0) {
+            EditorTab editorTab = tabManager.getEditorTabAt(idx);
+            String descFile = (editorTab != null) ? editorTab.getDescFile() : null;
+            if (descFile != null && !descFile.isEmpty()) {
+                textPanel.loadTextFromResource(descFile);
+            } else {
+                textPanel.setText("No description available.");
+            }
+        }
     }
 
     /**
