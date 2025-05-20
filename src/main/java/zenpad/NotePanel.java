@@ -71,12 +71,23 @@ public class NotePanel {
         }.execute();
     }
 
-    public boolean saveNoteArea(javax.swing.JComponent parent) {
+    /**
+     * Saves the current note area to a file.
+     * If the current file path is null or starts with "notes/" or "samples/", a file chooser dialog is shown.
+     * @param parent
+     * @param defaultFileName
+     * @return boolean
+     */
+    public boolean saveNoteArea(javax.swing.JComponent parent, String defaultFileName) {
         if (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.  startsWith("samples/")) {
             JFileChooser chooser = new JFileChooser();
             chooser.setDialogTitle("Save Notes As");
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");
             chooser.setFileFilter(filter);
+
+            if (defaultFileName != null && !defaultFileName.isEmpty()) {
+                String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");                chooser.setSelectedFile(new java.io.File(baseName));
+            }
 
             int result = chooser.showSaveDialog(parent);
             if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
