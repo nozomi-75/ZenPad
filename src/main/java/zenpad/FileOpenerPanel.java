@@ -99,6 +99,8 @@ public class FileOpenerPanel {
                     } else {
                         textPanel.setText("No description available.");
                     }
+
+                    RTextHelper.applyRSyntaxTheme(textPanel.getTextArea());
                 }
             }
         });
