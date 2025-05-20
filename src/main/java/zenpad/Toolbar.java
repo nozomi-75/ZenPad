@@ -34,6 +34,7 @@ public class Toolbar {
     private JComboBox<String> languageComboBox;
     private JToggleButton themeToggleButton;
     private JToggleButton editNotesToggleButton;
+    private JButton saveNotesButton;
     
     public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel) {
         this.tabManager = tabManager;
@@ -70,6 +71,9 @@ public class Toolbar {
         toolbar.add(createButton("Reset", this::resetFontSize));
 
         createToggleButton("Dark mode", () -> themeToggle(themeToggleButton), btn -> themeToggleButton = btn);
+
+        saveNotesButton = createButton("Save notes", this::saveNotes);
+        toolbar.add(saveNotesButton);
         createToggleButton("Edit notes", this::toggleEditNotes, btn -> editNotesToggleButton = btn);
 
         toolbar.add(createButton("About", this::showAboutDialog));
@@ -184,6 +188,30 @@ public class Toolbar {
     private void resetFontSize() {
         for (EditorTab tab : tabManager.getOpenTabs()) {
             tab.resetFontSize();
+        }
+    }
+
+    /**
+     * Helper method for saving notes.
+     * It will show a dialog with a success or error message.
+     * @see NotePanel#saveNoteArea
+     */
+    private void saveNotes() {
+        boolean success = notePanel.saveNoteArea(toolbar);
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Note successfully saved.", "Save Notes", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to save notes. No file loaded or error occurred.", "Save Notes", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Enables or disables the save notes button based on the current state.
+     * @param enabled
+     */
+    public void setSaveNotesEnabled(boolean enabled) {
+        if (saveNotesButton != null) {
+            saveNotesButton.setEnabled(enabled);
         }
     }
 

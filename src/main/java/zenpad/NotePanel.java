@@ -2,16 +2,22 @@ package zenpad;
 
 import java.awt.BorderLayout;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class NotePanel {
     private JPanel notePanel;
     private JTextArea textArea;
     private JScrollPane scrollPane;
+    private String currentFilePath;
 
     /**
      * Constructs a NotePanel for displaying plain text.
@@ -42,6 +48,7 @@ public class NotePanel {
      * @param filePath the resource path (e.g., "desc/HelloWorld.txt")
      */
     public void loadTextFromResource(String filePath) {
+        this.currentFilePath = filePath;
         new SwingWorker<String, Void>() {
             @Override
             protected String doInBackground() throws Exception {
@@ -62,6 +69,39 @@ public class NotePanel {
                 }
             }
         }.execute();
+    }
+
+    public boolean saveNoteArea(javax.swing.JComponent parent) {
+        if (currentFilePath == null || currentFilePath.startsWith("desc/") || currentFilePath.  startsWith("samples/")) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Save Notes As");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");
+            chooser.setFileFilter(filter);
+
+            int result = chooser.showSaveDialog(parent);
+            if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
+                try {
+                    java.io.File file = chooser.getSelectedFile();
+                    if (!file.getName().toLowerCase().endsWith(".md")) {
+                        file = new java.io.File(file.getParentFile(), file.getName() + ".md");
+                    }
+                    Files.write(chooser.getSelectedFile().toPath(), getText().getBytes  (StandardCharsets.UTF_8));
+                    return true;
+                } catch (Exception e) {
+                    System.err.println(e);
+                    return false;
+                }
+            }
+            return false;
+        } else {
+            try {
+                Files.write(Paths.get(currentFilePath), getText().getBytes(StandardCharsets.UTF_8));
+                return true;
+            } catch (Exception e) {
+                System.err.println(e);
+                return false;
+            }
+        }
     }
 
     /**

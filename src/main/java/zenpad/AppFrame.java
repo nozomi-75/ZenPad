@@ -20,6 +20,8 @@ import java.awt.Dimension;
  */
 
 public class AppFrame extends JFrame {
+    // Instance of Toolbar object for toolbar management
+    private Toolbar toolbar;
 
     // Instance of TabManager object for external tab management logic
     private TabManager tabManager;
@@ -43,9 +45,9 @@ public class AppFrame extends JFrame {
         initializeFrame();
         initializeComponents();
         setupInnerSplit();
-        updateNotePanelVis();
         setupOuterSplit();
         layoutComponents();
+        updateNotePanelVis();
         setAppIcon();
     }
 
@@ -155,7 +157,7 @@ public class AppFrame extends JFrame {
      * @see #setupOuterSplit()
      */
     private void layoutComponents() {
-        Toolbar toolbar = new Toolbar(tabManager, codeRunner, notePanel);
+        toolbar = new Toolbar(tabManager, codeRunner, notePanel);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(outerSplitPane, BorderLayout.CENTER);
     }
@@ -171,9 +173,11 @@ public class AppFrame extends JFrame {
 
         if (tabManager.getOpenTabs().isEmpty()) {
             innerSplitPane.setBottomComponent(null);
+            toolbar.setSaveNotesEnabled(false);
         } else {
             innerSplitPane.setBottomComponent(notePanel.getNotePanel());
             notePanel.updateTheme();
+            toolbar.setSaveNotesEnabled(true);
             if (wasCollapsed) {
                 innerSplitPane.setDividerLocation(0.80);
                 return;
