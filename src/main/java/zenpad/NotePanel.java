@@ -45,7 +45,7 @@ public class NotePanel {
 
     /**
      * Loads text from a resource file asynchronously and sets it as plain text.
-     * @param filePath the resource path (e.g., "desc/HelloWorld.txt")
+     * @param filePath the resource path (e.g., "notes/HelloWorld.txt")
      */
     public void loadTextFromResource(String filePath) {
         this.currentFilePath = filePath;
@@ -72,7 +72,7 @@ public class NotePanel {
     }
 
     public boolean saveNoteArea(javax.swing.JComponent parent) {
-        if (currentFilePath == null || currentFilePath.startsWith("desc/") || currentFilePath.  startsWith("samples/")) {
+        if (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.  startsWith("samples/")) {
             JFileChooser chooser = new JFileChooser();
             chooser.setDialogTitle("Save Notes As");
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");

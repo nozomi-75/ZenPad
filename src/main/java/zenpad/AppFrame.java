@@ -104,9 +104,9 @@ public class AppFrame extends JFrame {
         int idx = tabbedPane.getSelectedIndex();
         if (idx >= 0) {
             EditorTab editorTab = tabManager.getEditorTabAt(idx);
-            String descFile = (editorTab != null) ? editorTab.getDescFile() : null;
-            if (descFile != null && !descFile.isEmpty()) {
-                notePanel.loadTextFromResource(descFile);
+            String noteFile = (editorTab != null) ? editorTab.getNoteFile() : null;
+            if (noteFile != null && !noteFile.isEmpty()) {
+                notePanel.loadTextFromResource(noteFile);
             } else {
                 notePanel.setText("No description available.");
             }

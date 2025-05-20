@@ -13,9 +13,9 @@ public class Branch {
     String parentName;
     String[] displayNames;
     String[] fileNames;
-    String[] descFile;
+    String[] noteFiles;
 
-    Branch(String parentName, String[] displayNames, String[] fileNames, String[] descFile) {
+    Branch(String parentName, String[] displayNames, String[] fileNames, String[] noteFiles) {
 
         if (displayNames.length != fileNames.length) {
             throw new InvalidBranchException(
@@ -38,7 +38,7 @@ public class Branch {
         this.parentName = parentName;
         this.displayNames = displayNames;
         this.fileNames = fileNames;
-        this.descFile = descFile;
+        this.noteFiles = noteFiles;
     }
     
     private static class InvalidBranchException extends RuntimeException {

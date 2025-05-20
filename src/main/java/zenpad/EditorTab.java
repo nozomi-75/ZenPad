@@ -28,7 +28,7 @@ public class EditorTab {
     private RTextScrollPane scrollPane;
     private TabHeader tabHeader;
     private String fileName;
-    private String descFile; // <-- add this
+    private String noteFile; // <-- add this
     
     /**
      * Constructs an EditorTab for displaying and editing the content of a file.
@@ -37,9 +37,9 @@ public class EditorTab {
      * @param node The name of the node that will serve as the tab title.
      * @param tabbedPane The parent JTabbedPane to which this tab belongs.
      * @param tabManager The TabManager instance managing the tabs.
-     * @param descFile The description file path for this tab (may be null).
+     * @param noteFile The description file path for this tab (may be null).
      */
-    public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String descFile) {
+    public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile) {
         // Extract the file name from the file path (everything after the last '/')
         this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         panel = new JPanel(new BorderLayout());
@@ -65,7 +65,7 @@ public class EditorTab {
         // Create a custom tab header (with close button, etc.)
         tabHeader = new TabHeader(node, tabbedPane, panel, tabManager);
 
-        this.descFile = descFile;
+        this.noteFile = noteFile;
     }
 
     /**
@@ -201,7 +201,7 @@ public class EditorTab {
         return fileName;
     }
 
-    public String getDescFile() {
-        return descFile;
+    public String getNoteFile() {
+        return noteFile;
     }
 }

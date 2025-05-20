@@ -54,18 +54,18 @@ public class FileOpenerPanel {
         for (Branch branch : branches) {
             DefaultMutableTreeNode parentNode = new DefaultMutableTreeNode(branch.parentName);
             for (int i = 0; i < branch.displayNames.length; i++) {
-                String descPath = (
-                    branch.descFile != null &&
-                    branch.descFile.length > i &&
-                    branch.descFile[i] != null &&
-                    !branch.descFile[i].isEmpty())
-                    ? "desc/" + branch.descFile[i]
+                String notePath = (
+                    branch.noteFiles != null &&
+                    branch.noteFiles.length > i &&
+                    branch.noteFiles[i] != null &&
+                    !branch.noteFiles[i].isEmpty())
+                    ? "notes/" + branch.noteFiles[i]
                     : null;
                 parentNode.add(new DefaultMutableTreeNode(
                     new SampleFile(
                         branch.displayNames[i],
                         "samples/" + branch.fileNames[i],
-                        descPath
+                        notePath
                     )
                 ));
             }
@@ -93,9 +93,9 @@ public class FileOpenerPanel {
                 Object userObj = selectedNode.getUserObject();
                 if (userObj instanceof SampleFile) {
                     SampleFile sample = (SampleFile) userObj;
-                    tabManager.openNewTab(sample.filePath, sample.displayName, sample.descFile);
-                    if (sample.descFile != null && !sample.descFile.isEmpty()) {
-                        textPanel.loadTextFromResource(sample.descFile);
+                    tabManager.openNewTab(sample.filePath, sample.displayName, sample.noteFile);
+                    if (sample.noteFile != null && !sample.noteFile.isEmpty()) {
+                        textPanel.loadTextFromResource(sample.noteFile);
                     } else {
                         textPanel.setText("No description available.");
                     }
@@ -209,12 +209,12 @@ public class FileOpenerPanel {
     private static class SampleFile {
         String displayName;
         String filePath;
-        String descFile;
+        String noteFile;
 
-        SampleFile(String displayName, String filePath, String descFile) {
+        SampleFile(String displayName, String filePath, String noteFile) {
             this.displayName = displayName;
             this.filePath = filePath;
-            this.descFile = descFile;
+            this.noteFile = noteFile;
         }
         @Override
         public String toString() {
