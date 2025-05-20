@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -75,48 +76,71 @@ public class NotePanel {
     }
 
     /**
-     * Saves the current note area to a file.
+     * Saves the current note area to a file asynchronously.
      * If the current file path is null or starts with "notes/" or "samples/", a file chooser dialog is shown.
+     * The result of the save operation is shown in a dialog.
      * @param parent
      * @param defaultFileName
-     * @return boolean
      */
-    public boolean saveNoteArea(javax.swing.JComponent parent, String defaultFileName) {
-        if (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.  startsWith("samples/")) {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setDialogTitle("Save Notes As");
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");
-            chooser.setFileFilter(filter);
+    public void saveNoteArea(javax.swing.JComponent parent, String defaultFileName) {
+        new SwingWorker<Boolean, Void>() {
+            private String savePath = null;
 
-            if (defaultFileName != null && !defaultFileName.isEmpty()) {
-                String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");
-                chooser.setSelectedFile(new java.io.File(baseName + ".md"));
-            }
-            
-            int result = chooser.showSaveDialog(parent);
-            if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
-                try {
-                    java.io.File file = chooser.getSelectedFile();
-                    if (!file.getName().toLowerCase().endsWith(".md")) {
-                        file = new java.io.File(file.getParentFile(), file.getName() + ".md");
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                if (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.startsWith("samples/")) {
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.setDialogTitle("Save Notes As");
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");
+                    chooser.setFileFilter(filter);
+
+                    if (defaultFileName != null && !defaultFileName.isEmpty()) {
+                        String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");
+                        chooser.setSelectedFile(new java.io.File(baseName + ".md"));
                     }
-                    Files.write(chooser.getSelectedFile().toPath(), getText().getBytes  (StandardCharsets.UTF_8));
+
+                    int result = chooser.showSaveDialog(parent);
+                    if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
+                        java.io.File file = chooser.getSelectedFile();
+                        if (!file.getName().toLowerCase().endsWith(".md")) {
+                            file = new java.io.File(file.getParentFile(), file.getName() + ".md");
+                        }
+                        savePath = file.getAbsolutePath();
+                        Files.write(file.toPath(), getText().getBytes(StandardCharsets.UTF_8));
+                        return true;
+                    }
+                    return false; // User cancelled
+                } else {
+                    savePath = currentFilePath;
+                    Files.write(Paths.get(currentFilePath), getText().getBytes(StandardCharsets.UTF_8));
                     return true;
-                } catch (Exception e) {
-                    System.err.println(e);
-                    return false;
                 }
             }
-            return false;
-        } else {
-            try {
-                Files.write(Paths.get(currentFilePath), getText().getBytes(StandardCharsets.UTF_8));
-                return true;
-            } catch (Exception e) {
-                System.err.println(e);
-                return false;
+
+            @Override
+            protected void done() {
+                try {
+                    boolean success = get();
+                    if (success) {
+                        // Update currentFilePath if a new file was saved
+                        if (savePath != null && (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.startsWith("samples/"))) {
+                             currentFilePath = savePath;
+                        }
+                        JOptionPane.showMessageDialog(null, "Note successfully saved.", "Save Notes", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                         // Only show error if savePath is null (user cancelled) or an exception occurred
+                         if (savePath == null) {
+                             // User cancelled, no message needed
+                         } else {
+                             JOptionPane.showMessageDialog(null, "Failed to save notes.", "Save Notes", JOptionPane.ERROR_MESSAGE);
+                         }
+                    }
+                } catch (Exception e) {
+                    System.err.println(e);
+                    JOptionPane.showMessageDialog(null, "Failed to save notes: " + e.getMessage(), "Save Notes", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }
+        }.execute();
     }
 
     /**

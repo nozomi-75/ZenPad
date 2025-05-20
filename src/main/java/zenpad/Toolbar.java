@@ -198,13 +198,7 @@ public class Toolbar {
      */
     private void saveNotes() {
         String codeFileName = tabManager.getSelectedFileName();
-
-        boolean success = notePanel.saveNoteArea(toolbar, codeFileName);
-        if (success) {
-            JOptionPane.showMessageDialog(null, "Note successfully saved.", "Save Notes", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to save notes. No file loaded or error occurred.", "Save Notes", JOptionPane.ERROR_MESSAGE);
-        }
+        notePanel.saveNoteArea(toolbar, codeFileName);
     }
 
     /**
