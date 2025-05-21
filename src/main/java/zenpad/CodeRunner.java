@@ -40,8 +40,9 @@ public class CodeRunner {
                     break;
                 }
                 case "C": {
-                    JOptionPane.showMessageDialog(null, "Logic not yet added: " + language, "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    CRHClang cExec = new CRHClang(this);
+                    cExec.executeCCode(code, fileName, tempDir);
+                    break;
                 }
                 default:
                     JOptionPane.showMessageDialog(null, "Unsupported language: " + language, "Error", JOptionPane.ERROR_MESSAGE);
