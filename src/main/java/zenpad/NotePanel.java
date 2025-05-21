@@ -1,6 +1,7 @@
 package zenpad;
 
 import java.awt.BorderLayout;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -95,13 +96,13 @@ public class NotePanel {
                     chooser.setFileFilter(filter);
 
                     if (defaultFileName != null && !defaultFileName.isEmpty()) {
-                        String baseName = defaultFileName.replaceAll("\\.[^.]+$", "");
+                        String baseName = defaultFileName.replaceAll("[^a-zA-Z0-9-_\\.]", "").replaceAll("\\.[^.]+$", "");
                         chooser.setSelectedFile(new java.io.File(baseName + ".md"));
                     }
 
                     int result = chooser.showSaveDialog(parent);
                     if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
-                        java.io.File file = chooser.getSelectedFile();
+                        File file = chooser.getSelectedFile();
                         if (!file.getName().toLowerCase().endsWith(".md")) {
                             file = new java.io.File(file.getParentFile(), file.getName() + ".md");
                         }
