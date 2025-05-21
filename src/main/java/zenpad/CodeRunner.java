@@ -30,13 +30,14 @@ public class CodeRunner {
 
             switch (language) {
                 case "Java": {
-                    JavaCRH javaCRH = new JavaCRH(this);
-                    javaCRH.executeJavaCode(code, fileName, tempDir);
+                    CRHJava javaExec = new CRHJava(this);
+                    javaExec.executeJavaCode(code, fileName, tempDir);
                     break;
                 }
                 case "Python": {
-                    JOptionPane.showMessageDialog(null, "Logic not yet added: " + language, "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    CRHPython pyExec = new CRHPython(this);
+                    pyExec.executePythonCode(code, fileName, tempDir);
+                    break;
                 }
                 case "C": {
                     JOptionPane.showMessageDialog(null, "Logic not yet added: " + language, "Error", JOptionPane.ERROR_MESSAGE);

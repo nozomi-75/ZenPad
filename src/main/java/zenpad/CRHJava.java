@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  * It handles the creation of a temporary Java file, compilation, and execution
  * in the appropriate terminal based on the operating system.
  */
-public class JavaCRH {
+public class CRHJava {
     private CodeRunner codeRunnerInstance;
 
     /**
      * Constructor for JavaCodeExecutor.
      * @param codeRunnerInstance An instance of CodeRunner to access shared utility methods.
      */
-    public JavaCRH(CodeRunner codeRunnerInstance) {
+    public CRHJava(CodeRunner codeRunnerInstance) {
         this.codeRunnerInstance = codeRunnerInstance;
     }
 
@@ -31,6 +31,11 @@ public class JavaCRH {
      * @return true if the code was successfully compiled and run, false otherwise.
      */
     public boolean executeJavaCode(String code, String fileName, File tempDir) {
+        if (!fileName.endsWith(".java")) {
+            JOptionPane.showMessageDialog(null, "The file is not a Java (.java) file.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
         try {
             String className = fileName.substring(0, fileName.lastIndexOf('.'));
             File javaFile = new File(tempDir, className + ".java");

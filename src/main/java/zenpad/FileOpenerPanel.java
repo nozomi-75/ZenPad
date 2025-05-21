@@ -192,6 +192,20 @@ public class FileOpenerPanel {
                 new String[] { "Encapsulation", "Getters and setters", "Inheritance", "Polymorphism", "Abstraction" },
                 new String[] { "Encapsulation.java", "GetterSetter.java", "Inheritance.java", "Polymorphism.java", "Abstraction.java" },
                 new String[] { }
+            ),
+
+            new Branch(
+                "Other Python Examples",
+                new String[] { "Hello world", "Data types" },
+                new String[] { "HelloWorld.py", "PrintData.py" },
+                new String[] { }
+            ),
+
+            new Branch(
+                "Other C Examples",
+                new String[] { "Hello world", "Data types" },
+                new String[] { "HelloWorld.c", "PrintData.c" },
+                new String[] { }
             )
 
             // Add more branches here as needed
