@@ -9,7 +9,10 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import java.awt.BorderLayout;
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * EditorTab is responsible for creating a tab view that displays the content of a file.
@@ -64,27 +67,37 @@ public class EditorTab {
      * @param filePath the relative path to the resource file within the classpath (e.g., "ent/sample1.txt")
      */
     private void loadFileContent(String filePath) {
-        new SwingWorker<String, Void>() {
+        new SwingWorker<Void, String>() {
             @Override
-            protected String doInBackground() throws Exception {
-                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-                    if (inputStream == null) {
-                        return "Error: Resource not found: " + filePath;
+            protected Void doInBackground() throws Exception {
+                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream  (filePath);
+                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    String line;
+                    StringBuilder batch = new StringBuilder();
+                    int linesRead = 0;
+                    while ((line = reader.readLine()) != null) {
+                        batch.append(line).append("\n");
+                        linesRead++;
+                        if (linesRead % 500 == 0) { // Update every 500 lines
+                            publish(batch.toString());
+                            batch.setLength(0);
+                        }
                     }
-                    return new String(inputStream.readAllBytes());
+                    if (batch.length() > 0) {
+                        publish(batch.toString());
+                    }
+                }
+                return null;
+            }
+            @Override
+            protected void process(List<String> chunks) {
+                for (String chunk : chunks) {
+                    codeArea.append(chunk);
                 }
             }
             @Override
             protected void done() {
-                try {
-                    String text = get();
-                    if (!text.equals(codeArea.getText())) {
-                        codeArea.setText(text);
-                        codeArea.setCaretPosition(0);
-                    }
-                } catch (Exception e) {
-                    codeArea.setText("Error loading " + filePath + ": " + e.getMessage());
-                }
+                codeArea.setCaretPosition(0);
             }
         }.execute();
     }
