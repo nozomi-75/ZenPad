@@ -37,9 +37,9 @@ public class TabManager {
         this.onTabsChanged = onTabsChanged;
     }
 
-    // Update openNewTab to accept noteFile
-    public void openNewTab(String filePath, String node, String noteFile) {
-        setupEditor(filePath, node, noteFile);
+    // Update openNewTab to accept noteFile and language
+    public void openNewTab(String filePath, String node, String noteFile, String language) {
+        setupEditor(filePath, node, noteFile, language);
         if (onTabsChanged != null) onTabsChanged.run();
     }
 
@@ -52,10 +52,12 @@ public class TabManager {
      *
      * @param filePath the full file path to be loaded in the new editor tab
      * @param node the display name for the tab (typically the file name or a label)
+     * @param noteFile the description file path for this tab (may be null)
+     * @param language the programming language for syntax highlighting
      * @see FileOpenerPanel
      */
-    public void setupEditor(String filePath, String node, String noteFile) {
-        EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this, noteFile);
+    public void setupEditor(String filePath, String node, String noteFile, String language) {
+        EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this, noteFile, language);
         openTabs.add(newTab);
         tabbedPane.addTab(node, newTab.getPanel());
         tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());

@@ -93,7 +93,8 @@ public class FileOpenerPanel {
                 Object userObj = selectedNode.getUserObject();
                 if (userObj instanceof SampleFile) {
                     SampleFile sample = (SampleFile) userObj;
-                    tabManager.openNewTab(sample.filePath, sample.displayName, sample.noteFile);
+                    String language = Toolbar.inferLanguageFromFileName(sample.filePath);
+                    tabManager.openNewTab(sample.filePath, sample.displayName, sample.noteFile, language);
                     if (sample.noteFile != null && !sample.noteFile.isEmpty()) {
                         textPanel.loadTextFromResource(sample.noteFile);
                     } else {

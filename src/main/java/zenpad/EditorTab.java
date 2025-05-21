@@ -26,8 +26,9 @@ public class EditorTab {
     private RTextScrollPane scrollPane;
     private TabHeader tabHeader;
     private String fileName;
-    private String noteFile; // <-- add this
-    
+    private String noteFile;
+    private String language;
+
     /**
      * Constructs an EditorTab for displaying and editing the content of a file.
      *
@@ -36,14 +37,16 @@ public class EditorTab {
      * @param tabbedPane The parent JTabbedPane to which this tab belongs.
      * @param tabManager The TabManager instance managing the tabs.
      * @param noteFile The description file path for this tab (may be null).
+     * @param language The programming language for syntax highlighting.
      */
-    public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile) {
+    public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile, String language) {
         this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
+        this.language = language;
         panel = new JPanel(new BorderLayout());
 
         codeArea = new RSyntaxTextArea();
         RTextHelper.configureDefaults(codeArea);
-        codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        codeArea.setSyntaxEditingStyle(getSyntaxStyleForLanguage(language));
 
         loadFileContent(filePath);
 
@@ -153,5 +156,35 @@ public class EditorTab {
 
     public String getNoteFile() {
         return noteFile;
+    }
+
+    /**
+     * Returns the RSyntaxTextArea syntax style string for a given language.
+     */
+    private String getSyntaxStyleForLanguage(String language) {
+        if (language == null) return SyntaxConstants.SYNTAX_STYLE_NONE;
+        switch (language.toLowerCase()) {
+            case "java":
+                return SyntaxConstants.SYNTAX_STYLE_JAVA;
+            case "python":
+                return SyntaxConstants.SYNTAX_STYLE_PYTHON;
+            case "c":
+                return SyntaxConstants.SYNTAX_STYLE_C;
+            default:
+                return SyntaxConstants.SYNTAX_STYLE_NONE;
+        }
+    }
+
+    /**
+     * Updates the syntax highlighting style based on the language.
+     * @param language The new language to set.
+     */
+    public void setLanguage(String language) {
+        this.language = language;
+        codeArea.setSyntaxEditingStyle(getSyntaxStyleForLanguage(language));
+    }
+
+    public String getLanguage() {
+        return language;
     }
 }

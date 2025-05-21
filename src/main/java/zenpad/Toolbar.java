@@ -6,15 +6,12 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.awt.Dimension;
 
 /**
  * Toolbar is responsible for creating a toolbar with buttons for various actions.
@@ -31,7 +28,6 @@ public class Toolbar {
     private TabManager tabManager;
     private CodeRunner codeRunner;
     private NotePanel notePanel;
-    private JComboBox<String> languageComboBox;
     private JToggleButton themeToggleButton;
     private JToggleButton editNotesToggleButton;
     private JButton saveNotesButton;
@@ -57,13 +53,6 @@ public class Toolbar {
      * </p>
      */
     private void initToolbarComponents() {
-        languageComboBox = new JComboBox<>(new String[] { "Java", "Python", "C" });
-        languageComboBox.setPreferredSize(new Dimension(154, 24));
-        languageComboBox.setMaximumSize(new Dimension(154, 24));
-        toolbar.add(new JLabel("Lang:  "));
-        toolbar.add(languageComboBox);
-
-        toolbar.addSeparator();
         toolbar.add(createButton("Copy", this::copyCode));
         toolbar.add(createButton("Run", this::runCode));
         toolbar.add(createButton("Font+", () -> changeFontSize(1)));
@@ -107,7 +96,6 @@ public class Toolbar {
      * 
      * @param text The text to display on the button.
      * @param action The action to perform when the button is clicked.
-     * @return A JButton configured with the specified text and action.
      */
     private void createToggleButton(String text, Runnable action, java.util.function.Consumer<JToggleButton> assignField) {
         JToggleButton btn = new JToggleButton(text);
@@ -147,12 +135,35 @@ public class Toolbar {
     }
     
     /**
+     * Infers the programming language from the file name extension.
+     * @param fileName The file name to check.
+     * @return The language string ("Java", "Python", "C"), or null if unsupported.
+     */
+    public static String inferLanguageFromFileName(String fileName) {
+        if (fileName != null) {
+            int dot = fileName.lastIndexOf('.');
+            String ext = (dot != -1) ? fileName.substring(dot + 1).toLowerCase() : "";
+            switch (ext) {
+                case "java": return "Java";
+                case "py": return "Python";
+                case "c": return "C";
+                default: return null;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Runs the code from the currently selected tab using the selected language.
      */
     private void runCode() {
         String code = tabManager.getSelectedCode();
         String fileName = tabManager.getSelectedFileName();
-        String language = (String) languageComboBox.getSelectedItem();
+        String language = inferLanguageFromFileName(fileName);
+        if (language == null) {
+            JOptionPane.showMessageDialog(null, "Unsupported file type for execution.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (!code.trim().isEmpty()) {
             codeRunner.runCode(code, fileName, language);
         } else {
@@ -240,9 +251,9 @@ public class Toolbar {
         // Update RSyntaxTextArea theme for all open tabs
         for (EditorTab tab : tabManager.getOpenTabs()) {
             RTextHelper.applyRSyntaxTheme(tab.getCodeArea());
-            RTextHelper.applyRSyntaxTheme(notePanel.getTextArea());
         }
 
+        RTextHelper.applyRSyntaxTheme(notePanel.getTextArea());
         SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
     }
 
