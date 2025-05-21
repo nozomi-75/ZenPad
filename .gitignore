@@ -3,7 +3,7 @@
 
 # Custom Ignore List #
 ######################
-.vscode/settings.json
+/.vscode/
 /target/
 
 # Compiled source #
