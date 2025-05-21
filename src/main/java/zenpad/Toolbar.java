@@ -31,6 +31,7 @@ public class Toolbar {
     private JToggleButton themeToggleButton;
     private JToggleButton editNotesToggleButton;
     private JButton saveNotesButton;
+    private String lastTheme = null;
     
     public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel) {
         this.tabManager = tabManager;
@@ -235,6 +236,8 @@ public class Toolbar {
      * @see TabManager#getOpenTabs()
      */
     private void themeToggle(JToggleButton toggleButton) {
+        String newTheme = toggleButton.isSelected() ? "Dark" : "Light";
+        if (lastTheme != null && lastTheme.equals(newTheme)) return;
         if (toggleButton.isSelected()) {
             LafManager.applyDarkLaf();
             toggleButton.setText("Light Mode");
@@ -242,19 +245,19 @@ public class Toolbar {
             LafManager.applyLightLaf();
             toggleButton.setText("Dark Mode");
         }
+        lastTheme = newTheme;
 
-        // Update all windows (for dialogs, etc.)
-        for (Window window : Window.getWindows()) {
-            SwingUtilities.updateComponentTreeUI(window);
-        }
-
-        // Update RSyntaxTextArea theme for all open tabs
-        for (EditorTab tab : tabManager.getOpenTabs()) {
-            RTextHelper.applyRSyntaxTheme(tab.getCodeArea());
-        }
-
-        RTextHelper.applyRSyntaxTheme(notePanel.getTextArea());
-        SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
+        // Batch UI updates
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            for (Window window : Window.getWindows()) {
+                SwingUtilities.updateComponentTreeUI(window);
+            }
+            for (EditorTab tab : tabManager.getOpenTabs()) {
+                RTextHelper.applyRSyntaxTheme(tab.getCodeArea());
+            }
+            RTextHelper.applyRSyntaxTheme(notePanel.getTextArea());
+            SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
+        });
     }
 
     /**

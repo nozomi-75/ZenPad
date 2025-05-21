@@ -22,6 +22,8 @@ public class NotePanel {
     private RSyntaxTextArea textArea;
     private RTextScrollPane scrollPane;
     private String currentFilePath;
+    private JFileChooser fileChooser = null;
+    private String lastTheme = null;
 
     /**
      * Constructs a NotePanel for displaying plain text.
@@ -44,8 +46,10 @@ public class NotePanel {
      * @param text The text content to display.
      */
     public void setText(String text) {
-        textArea.setText(text);
-        textArea.setCaretPosition(0);
+        if (!text.equals(textArea.getText())) {
+            textArea.setText(text);
+            textArea.setCaretPosition(0);
+        }
     }
 
     /**
@@ -90,19 +94,19 @@ public class NotePanel {
             @Override
             protected Boolean doInBackground() throws Exception {
                 if (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.startsWith("samples/")) {
-                    JFileChooser chooser = new JFileChooser();
-                    chooser.setDialogTitle("Save Notes As");
-                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");
-                    chooser.setFileFilter(filter);
-
+                    if (fileChooser == null) {
+                        fileChooser = new JFileChooser();
+                        fileChooser.setDialogTitle("Save Notes As");
+                        FileNameExtensionFilter filter = new FileNameExtensionFilter("Markdown Files (*.md)", "md");
+                        fileChooser.setFileFilter(filter);
+                    }
                     if (defaultFileName != null && !defaultFileName.isEmpty()) {
                         String baseName = defaultFileName.replaceAll("[^a-zA-Z0-9-_\\.]", "").replaceAll("\\.[^.]+$", "");
-                        chooser.setSelectedFile(new java.io.File(baseName + ".md"));
+                        fileChooser.setSelectedFile(new java.io.File(baseName + ".md"));
                     }
-
-                    int result = chooser.showSaveDialog(parent);
-                    if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
-                        File file = chooser.getSelectedFile();
+                    int result = fileChooser.showSaveDialog(parent);
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        File file = fileChooser.getSelectedFile();
                         if (!file.getName().toLowerCase().endsWith(".md")) {
                             file = new java.io.File(file.getParentFile(), file.getName() + ".md");
                         }
@@ -148,9 +152,15 @@ public class NotePanel {
      * Updates the colors of the text area and scroll pane to match the current Look and Feel.
      */
     public void updateTheme() {
-        javax.swing.SwingUtilities.updateComponentTreeUI(notePanel);
-        javax.swing.SwingUtilities.updateComponentTreeUI(scrollPane);
-        javax.swing.SwingUtilities.updateComponentTreeUI(textArea);
+        String currentTheme = javax.swing.UIManager.getLookAndFeel().getName();
+        if (!currentTheme.equals(lastTheme)) {
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                javax.swing.SwingUtilities.updateComponentTreeUI(notePanel);
+                javax.swing.SwingUtilities.updateComponentTreeUI(scrollPane);
+                javax.swing.SwingUtilities.updateComponentTreeUI(textArea);
+            });
+            lastTheme = currentTheme;
+        }
     }
 
     /**
@@ -183,5 +193,15 @@ public class NotePanel {
      */
     public JPanel getNotePanel() {
         return notePanel;
+    }
+
+    /**
+     * Lazy loads text from a resource file if the file path has changed.
+     * @param filePath the resource path (e.g., "notes/HelloWorld.txt")
+     */
+    public void lazyLoadTextFromResource(String filePath) {
+        if (!filePath.equals(currentFilePath)) {
+            loadTextFromResource(filePath);
+        }
     }
 }

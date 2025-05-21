@@ -67,7 +67,6 @@ public class EditorTab {
         new SwingWorker<String, Void>() {
             @Override
             protected String doInBackground() throws Exception {
-                // Try to load the file as a resource from the classpath
                 try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
                     if (inputStream == null) {
                         return "Error: Resource not found: " + filePath;
@@ -78,8 +77,11 @@ public class EditorTab {
             @Override
             protected void done() {
                 try {
-                    codeArea.setText(get());
-                    codeArea.setCaretPosition(0);
+                    String text = get();
+                    if (!text.equals(codeArea.getText())) {
+                        codeArea.setText(text);
+                        codeArea.setCaretPosition(0);
+                    }
                 } catch (Exception e) {
                     codeArea.setText("Error loading " + filePath + ": " + e.getMessage());
                 }
@@ -186,5 +188,16 @@ public class EditorTab {
 
     public String getLanguage() {
         return language;
+    }
+
+    /**
+     * Applies a theme to the code area only if it has changed.
+     * @param themeName The name of the theme to apply.
+     */
+    public void applyThemeIfNeeded(String themeName) {
+        if (!themeName.equals(codeArea.getClientProperty("theme"))) {
+            RTextHelper.applyRSyntaxTheme(codeArea);
+            codeArea.putClientProperty("theme", themeName);
+        }
     }
 }
