@@ -121,7 +121,7 @@ public class FileOpenerPanel {
                 "Java Basics",
                 new String[] { "Hello world", "Data types", "Type casting", "True or false" },
                 new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" },
-                new String[] { "HelloWorld.md", "HelloWorld.md", "HelloWorld.md", "HelloWorld.md" }
+                new String[] { "HelloWorld.md", "PrintData.md", "TypeCast.md", "Boolean.md" }
             ),
 
             new Branch(
