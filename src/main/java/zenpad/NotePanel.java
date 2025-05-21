@@ -2,9 +2,11 @@ package zenpad;
 
 import java.awt.BorderLayout;
 import java.io.File;
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFileChooser;
@@ -56,29 +58,47 @@ public class NotePanel {
      * Loads text from a resource file asynchronously and sets it as plain text.
      * @param filePath the resource path (e.g., "notes/HelloWorld.txt")
      */
-    public void loadTextFromResource(String filePath) {
-        this.currentFilePath = filePath;
-        new SwingWorker<String, Void>() {
-            @Override
-            protected String doInBackground() throws Exception {
-                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-                    if (inputStream == null) {
-                        return "Error: Resource not found: " + filePath;
+public void loadTextFromResource(String filePath) {
+    this.currentFilePath = filePath;
+    new SwingWorker<Void, String>() {
+        @Override
+        protected Void doInBackground() throws Exception {
+            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+                if (inputStream == null) {
+                    publish("Error: Resource not found: " + filePath);
+                    return null;
+                }
+                StringBuilder batch = new StringBuilder();
+                int linesRead = 0;
+                try (BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(inputStream))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        batch.append(line).append("\n");
+                        linesRead++;
+                        if (linesRead % 500 == 0) { // Publish every 500 lines
+                            publish(batch.toString());
+                            batch.setLength(0);
+                        }
                     }
-                    return new String(inputStream.readAllBytes());
+                    if (batch.length() > 0) {
+                        publish(batch.toString());
+                    }
                 }
             }
-            @Override
-            protected void done() {
-                try {
-                    String text = get();
-                    setText(text);
-                } catch (Exception e) {
-                    setText("Error loading " + filePath + ": " + e.getMessage());
+            return null;
+        }
+        @Override
+            protected void process(List<String> chunks) {
+                for (String chunk : chunks) {
+                    textArea.append(chunk);
                 }
             }
-        }.execute();
-    }
+        @Override
+        protected void done() {
+            textArea.setCaretPosition(0);
+        }
+    }.execute();
+}
 
     /**
      * Saves the current note area to a file asynchronously.

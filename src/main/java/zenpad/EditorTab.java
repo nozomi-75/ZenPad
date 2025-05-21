@@ -71,7 +71,7 @@ public class EditorTab {
             @Override
             protected Void doInBackground() throws Exception {
                 try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream  (filePath);
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
                     StringBuilder batch = new StringBuilder();
                     int linesRead = 0;
