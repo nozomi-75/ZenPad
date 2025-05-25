@@ -1,19 +1,26 @@
-accountHolder = "Park Ji-Won"
-accountType = 'S'
-branchNumber = 12
-accountNumber = 3456
-bankCode = 123_456
-cardNumber = 1234_5678_9012_3456
-interestRate = 2.5
-accountBalance = 150_000.75
+# Strings (text)
+account_holder = "Lee Hyun-seo"
+account_type = "Savings"
+
+# Integers (whole numbers)
+branch_number = 12
+account_number = 3456
+bank_code = 123456
+
+# Floats (numbers with decimals)
+interest_rate = 2.5
+account_balance = 150000.75
+
+# Boolean (true or false)
+account_active = True
 
 print("Bank Account Information")
 print("------------------------------")
-print("Account Holder: " + accountHolder)
-print("Account Type: " + accountType)
-print("Branch Number: " + str(branchNumber))
-print("Account Number: " + str(accountNumber))
-print("Bank Code: " + str(bankCode))
-print("Card Number: " + str(cardNumber))
-print("Interest Rate: " + str(interestRate) + "%")
-print("Account Balance: " + str(accountBalance))
+print("Account Holder:", account_holder)
+print("Account Type:", account_type)
+print("Branch Number:", branch_number)
+print("Account Number:", account_number)
+print("Bank Code:", bank_code)
+print("Interest Rate:", interest_rate, "%")
+print("Account Balance:", account_balance)
+print("Account Active:", account_active)

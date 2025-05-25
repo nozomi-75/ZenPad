@@ -59,7 +59,13 @@ public class NotePanel {
      * @param filePath the resource path (e.g., "notes/HelloWorld.txt")
      */
 public void loadTextFromResource(String filePath) {
+    if (filePath.equals(currentFilePath)) {
+        return;
+    }
+
     this.currentFilePath = filePath;
+    textArea.setText("");
+
     new SwingWorker<Void, String>() {
         @Override
         protected Void doInBackground() throws Exception {
@@ -87,12 +93,14 @@ public void loadTextFromResource(String filePath) {
             }
             return null;
         }
+
         @Override
             protected void process(List<String> chunks) {
                 for (String chunk : chunks) {
                     textArea.append(chunk);
                 }
             }
+            
         @Override
         protected void done() {
             textArea.setCaretPosition(0);
@@ -213,15 +221,5 @@ public void loadTextFromResource(String filePath) {
      */
     public JPanel getNotePanel() {
         return notePanel;
-    }
-
-    /**
-     * Lazy loads text from a resource file if the file path has changed.
-     * @param filePath the resource path (e.g., "notes/HelloWorld.txt")
-     */
-    public void lazyLoadTextFromResource(String filePath) {
-        if (!filePath.equals(currentFilePath)) {
-            loadTextFromResource(filePath);
-        }
     }
 }

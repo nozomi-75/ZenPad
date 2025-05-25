@@ -199,14 +199,14 @@ public class FileOpenerPanel {
                 "Other Python Examples",
                 new String[] { "Hello world", "Data types" },
                 new String[] { "HelloWorld.py", "PrintData.py" },
-                new String[] { }
+                new String[] { "PYHelloWorld.md", "PYPrintData.md" }
             ),
 
             new Branch(
                 "Other C Examples",
                 new String[] { "Hello world", "Data types" },
                 new String[] { "HelloWorld.c", "PrintData.c" },
-                new String[] { }
+                new String[] { "CHelloWorld.md", "CPrintData.md" }
             )
 
             // Add more branches here as needed

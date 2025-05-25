@@ -1,8 +1,10 @@
-# Hello World
+# Hello, World!
 
 ```java
 public class HelloWorld { ... }
 ```
+
+This is a basic example of a **Java** program. Think of a program as a set of instructions you give to a computer.
 
 In Java, everything we write is put inside something called a "class." You can think of a class as a blueprint or a container for all our instructions. It's like a special box where we put all the pieces of our program.
 
