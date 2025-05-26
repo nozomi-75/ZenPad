@@ -1,6 +1,6 @@
 # ZenPad
 
-ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment.
+ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment. ZenPad requires Java 17 or higher to run.
 
 ## Features
 
@@ -12,11 +12,6 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
 - 📝 **Note Panel:** Save your personal notes and descriptions for the code samples.
 - ▶️ **Run Java Code:** Execute sample programs directly within the app (requires JDK).
 - 📋 **Copy Code:** Copy code snippets to your clipboard for your own experiments.
-
-## Dependencies
-
-- [Java 17 or higher](https://www.java.com/en/download/manual.jsp)
-- [Maven](https://maven.apache.org/install.html) (for building from source)
 
 ## Running
 
@@ -38,18 +33,18 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
     cd ZenPad
     ```
 
-2. **Build the project and create the JAR using Maven:**
+2. **Build the project and create the JAR with dependencies using Maven:**
 
     ```sh
     mvn clean package
     ```
 
-    The JAR file will be generated at `target/ZenPad-1.2-SNAPSHOT.jar`.
+    The JAR file with all dependencies will be generated at `target/ZenPad-1.2-SNAPSHOT-jar-with-dependencies.jar`.
 
 3. **Run the generated JAR:**
 
     ```sh
-    java -jar target/ZenPad-1.2-SNAPSHOT.jar
+    java -jar target/ZenPad-1.2-SNAPSHOT-jar-with-dependencies.jar
     ```
 
 ## Project Structure
