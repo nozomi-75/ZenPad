@@ -121,8 +121,8 @@ public class FileOpenerPanel {
             new Branch(
                 "Java Basics",
                 new String[] { "Hello world", "Data types", "Type casting", "True or false" },
-                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" },
-                new String[] { "HelloWorld.md", "PrintData.md", "TypeCast.md", "Boolean.md" }
+                new String[] { "/java/basics/HelloWorld.java", "/java/basics/PrintData.java", "/java/basics/TypeCast.java", "/java/basics/Boolean.java" },
+                new String[] { "/java/basics/HelloWorld.md", "/java/basics/PrintData.md", "/java/basics/TypeCast.md", "/java/basics/Boolean.md" }
             ),
 
             new Branch(
@@ -198,15 +198,15 @@ public class FileOpenerPanel {
             new Branch(
                 "Other Python Examples",
                 new String[] { "Hello world", "Data types" },
-                new String[] { "HelloWorld.py", "PrintData.py" },
-                new String[] { "PYHelloWorld.md", "PYPrintData.md" }
+                new String[] { "/python/HelloWorld.py", "/python/PrintData.py" },
+                new String[] { "/python/HelloWorld.md", "/python/PrintData.md" }
             ),
 
             new Branch(
                 "Other C Examples",
                 new String[] { "Hello world", "Data types" },
-                new String[] { "HelloWorld.c", "PrintData.c" },
-                new String[] { "CHelloWorld.md", "CPrintData.md" }
+                new String[] { "/clang/HelloWorld.c", "/clang/PrintData.c" },
+                new String[] { "/clang/HelloWorld.md", "/clang/PrintData.md" }
             )
 
             // Add more branches here as needed
