@@ -136,9 +136,9 @@ public class FileOpenerPanel {
             new Branch(
                 "Java Conditions",
                 "/java/conditions/",
-                new String[] { "Ternary operator", "Traditional switch", "Rule switch" },
-                new String[] { "Ternary.java", "Switch.java", "RuleSwitch.java" },
-                new String[] { }
+                new String[] { "Else if structure", "Ternary operator", "Traditional switch", "Rule/modern switch" },
+                new String[] { "ElseIf.java", "Ternary.java", "Switch.java", "RuleSwitch.java" },
+                new String[] { "ElseIf.md", "Ternary.md", "Switch.md", "RuleSwitch.md" }
             ),
 
             new Branch(
@@ -146,7 +146,7 @@ public class FileOpenerPanel {
                 "/java/loops/",
                 new String[] { "For loop", "While loop", "Do-while loop", "Nested loops" },
                 new String[] { "ForLoop.java", "While.java", "DoWhile.java", "NestedLoop.java" },
-                new String[] { }
+                new String[] { "ForLoop.md", "While.md", "DoWhile.md", "NestedLoop.md" }
             ),
 
             new Branch(

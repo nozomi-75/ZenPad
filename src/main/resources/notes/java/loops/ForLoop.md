@@ -1,0 +1,7 @@
+# The For Loop
+
+The **for loop** is a powerful and compact way to repeat a block of code a predetermined number of times, making it especially useful **when you know exactly how many iterations you need**. A for loop typically has three main parts, all defined on one line inside the parentheses and separated by semicolons: initialization, condition, and iteration. 
+
+The initialization part runs only once at the beginning of the loop, setting up a counter variable such as `n` and giving it a starting value, like 0. The condition is checked before each repetition of the loop; as long as this condition is true, the loop continues to run. In the example, the loop continues as long as `n` is less than 11. The iteration part runs after each repetition of the loop’s body and is usually used to update the counter variable; here, `n++` increases the value of n by 1 after every time the code inside the loop runs.
+
+As the loop unfolds, `n` is first set to 0. The program checks if 0 is less than 11, which is true, so the code inside the loop runs and prints "n = 0". Then, `n` is updated to 1. The condition is checked again, and since 1 is less than 11, the loop continues, printing "n = 1" and updating `n` to 2. This process repeats until `n` becomes 11. When `n` is 11, the condition `n < 11` is no longer true, so the loop stops and the program continues with any code that comes after the loop.
