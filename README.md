@@ -38,16 +38,18 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
     cd ZenPad
     ```
 
-2. **Build the project using Maven:**
+2. **Build the project and create the JAR using Maven:**
 
     ```sh
-    mvn compile
+    mvn clean package
     ```
 
-3. **Run the application:**
+    The JAR file will be generated at `target/ZenPad-1.2-SNAPSHOT.jar`.
+
+3. **Run the generated JAR:**
 
     ```sh
-    mvn exec:java
+    java -jar target/ZenPad-1.2-SNAPSHOT.jar
     ```
 
 ## Project Structure
