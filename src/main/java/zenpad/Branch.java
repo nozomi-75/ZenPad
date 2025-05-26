@@ -11,11 +11,12 @@ package zenpad;
  */
 public class Branch {
     String parentName;
+    String baseDir;
     String[] displayNames;
     String[] fileNames;
     String[] noteFiles;
 
-    Branch(String parentName, String[] displayNames, String[] fileNames, String[] noteFiles) {
+    Branch(String parentName, String baseDir, String[] displayNames, String[] fileNames, String[] noteFiles) {
 
         if (displayNames.length != fileNames.length) {
             throw new InvalidBranchException(
@@ -36,6 +37,7 @@ public class Branch {
         }
 
         this.parentName = parentName;
+        this.baseDir = baseDir;
         this.displayNames = displayNames;
         this.fileNames = fileNames;
         this.noteFiles = noteFiles;

@@ -70,15 +70,19 @@ public class EditorTab {
         new SwingWorker<Void, String>() {
             @Override
             protected Void doInBackground() throws Exception {
-                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream  (filePath);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
+                if (inputStream == null) {
+                    publish("Error: Could not load file: " + filePath);
+                    return null;
+                }
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
                     StringBuilder batch = new StringBuilder();
                     int linesRead = 0;
                     while ((line = reader.readLine()) != null) {
                         batch.append(line).append("\n");
                         linesRead++;
-                        if (linesRead % 500 == 0) { // Update every 500 lines
+                        if (linesRead % 500 == 0) {
                             publish(batch.toString());
                             batch.setLength(0);
                         }
@@ -91,8 +95,13 @@ public class EditorTab {
             }
             @Override
             protected void process(List<String> chunks) {
-                for (String chunk : chunks) {
-                    codeArea.append(chunk);
+                // If the first chunk is an error message, show it and skip appending further
+                if (!chunks.isEmpty() && chunks.get(0).startsWith("Error:")) {
+                    codeArea.setText(chunks.get(0));
+                } else {
+                    for (String chunk : chunks) {
+                        codeArea.append(chunk);
+                    }
                 }
             }
             @Override
