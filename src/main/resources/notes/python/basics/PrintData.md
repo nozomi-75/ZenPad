@@ -1,4 +1,4 @@
-# Understanding Variables and Data Types in Python
+# Data Types in Python
 
 When you write a program, you often need to store information—like a name, a number, or a true/false value. In Python, you use **variables** to do this. You can think of a variable as a labeled box where you keep a piece of information you want to use later.
 

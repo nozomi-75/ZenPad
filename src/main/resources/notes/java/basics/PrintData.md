@@ -1,4 +1,4 @@
-# Understanding Variables and Data Types in Java
+# Data Types in Java
 
 Just like with "Hello World!", our program lives inside a class. Think of PrintData as the specific name for this program's container.
 

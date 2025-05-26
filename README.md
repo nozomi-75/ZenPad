@@ -13,6 +13,11 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
 - ▶️ **Run Java Code:** Execute sample programs directly within the app (requires JDK).
 - 📋 **Copy Code:** Copy code snippets to your clipboard for your own experiments.
 
+## Dependencies
+
+- [Java 17 or higher](https://www.java.com/en/download/manual.jsp)
+- [Maven](https://maven.apache.org/install.html) (for building from source)
+
 ## Running
 
 1. [Download the latest ZenPad JAR from the Releases page](https://github.com/nozomi-75/ZenPad/releases).
@@ -23,6 +28,27 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
     ```
 
    Alternatively, you may mark the file as executable and run it as a program.
+
+## Building from Source
+
+1. **Clone the repository:**
+
+    ```sh
+    git clone https://github.com/nozomi-75/ZenPad.git
+    cd ZenPad
+    ```
+
+2. **Build the project using Maven:**
+
+    ```sh
+    mvn compile
+    ```
+
+3. **Run the application:**
+
+    ```sh
+    mvn exec:java
+    ```
 
 ## Project Structure
 

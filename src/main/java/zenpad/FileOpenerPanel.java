@@ -58,7 +58,7 @@ public class FileOpenerPanel {
                 String notePath = (
                     branch.noteFiles != null && branch.noteFiles.length > i &&
                     branch.noteFiles[i] != null && !branch.noteFiles[i].isEmpty())
-                    ? "notes/" + branch.baseDir + branch.noteFiles[i]
+                    ? "notes" + branch.baseDir + branch.noteFiles[i]
                     : null;
                 parentNode.add(new DefaultMutableTreeNode(
                     new SampleFile(
@@ -130,7 +130,7 @@ public class FileOpenerPanel {
                 "/java/operators/",
                 new String[] { "Arithmetic operators", "Assignment operators", "Relational operators", "Logical operators" },
                 new String[] { "ArithmeticOperators.java", "AssignOperators.java", "RelationalOperators.java", "LogicalOperators.java" },
-                new String[] { }
+                new String[] { "ArithmeticOperators.md", "AssignOperators.md", "RelationalOperators.md", "LogicalOperators.md" }
             ),
 
             new Branch(

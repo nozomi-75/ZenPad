@@ -1,4 +1,4 @@
-# Understanding Variables and Data Types in C
+# Data Types in C
 
 In programming, you often need to store different kinds of information, such as names, numbers, or single characters. To do this, you use **variables**. Think of a variable as a labeled container that holds a value you want to use in your program.
 
