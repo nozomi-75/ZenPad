@@ -154,7 +154,7 @@ public class FileOpenerPanel {
                 "/java/loops-ch/",
                 new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
                 new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" },
-                new String[] { }
+                new String[] { "Floyd.md", "MultiplicationTable.md", "RightTriangle.md", "MatrixSum.md", "PlotCoordinates.md" }
             ),
 
             new Branch(
@@ -162,7 +162,7 @@ public class FileOpenerPanel {
                 "/java/arrays/",
                 new String[] { "Creating an array", "Array length property", "Enhanced for-loop", "Multidimensional array" },
                 new String[] { "CreateArrays.java", "ThroughFor.java", "ForEach.java", "MtdArray.java" },
-                new String[] { }
+                new String[] { "CreateArrays.md", "ThroughFor.md", "ForEach.md", "MtdArray.md" }
             ),
 
             new Branch(
