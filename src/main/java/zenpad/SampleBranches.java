@@ -73,7 +73,8 @@ public class SampleBranches {
                 "String contains()", "String substring()", "String equals()", "String replace()", "String trim()" },
                 new String[] { "StringLength.java", "StringIsEmpty.java", "StringCaseChange.java", "StringIndexOf.java",
                 "StringContains.java", "StringSubstring.java", "StringEquals.java", "StringReplace.java", "StringTrim.java" },
-                new String[] { }
+                new String[] { "StringLength.md", "StringIsEmpty.md", "StringCaseChange.md", "StringIndexOf.md",
+                "StringContains.md", "StringSubstring.md", "StringEquals.md", "StringReplace.md", "StringTrim.md" }
             ),
 
             new Branch(
