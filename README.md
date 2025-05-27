@@ -1,16 +1,16 @@
 # ZenPad
 
-ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment. ZenPad requires Java 17 or higher to run.
+ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment. ZenPad requires JDK 17 or higher to run. Other language support may require their specific software.
 
 ## Features
 
 - 📄 **Tabbed Viewer:** Browse and view multiple Java sample programs in tabs.
 - 🎨 **Syntax Highlighting:** Powered by RSyntaxTextArea for easy-to-read code.
-- 🌗 **Light/Dark Theme Toggle:** Instantly switch between light and dark modes for comfortable viewing.
+- 🌗 **Theme Toggle:** Instantly switch between light and dark modes for comfortable viewing.
 - 🔠 **Font Zoom:** Increase, decrease, or reset the font size for better readability.
-- 🧑‍💻️ **Sample Code Browser:** Easily access a curated collection of beginner-friendly Java examples.
+- 🧑‍💻️ **Code Browser:** Easily access a curated collection of beginner-friendly Java examples.
 - 📝 **Note Panel:** Save your personal notes and descriptions for the code samples.
-- ▶️ **Run Java Code:** Execute sample programs directly within the app (requires JDK).
+- ▶️ **Run Sample Code:** Execute sample programs directly within the app.
 - 📋 **Copy Code:** Copy code snippets to your clipboard for your own experiments.
 
 ## Running
@@ -50,20 +50,21 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
 ## Project Structure
 
 - `src/main/java/zenpad/` — Main Java source code
-- `src/main/resources/samples/` — Java sample files for learning
+- `src/main/resources/samples/` — Sample files for learning
+- `src/main/resources/notes/` — Markdown notes for sample files
 - `src/main/resources/icons/` — Application icons
 
 ## Customization
 
-- **Add your own samples:** Place `.java` files in `src/main/resources/samples/`.
+- **Add your own samples:** Place files in specific per-language folders in `src/main/resources/samples/`.
+- **Add your own notes:** Place files in specific per-language folders in `src/main/resources/notes/`.
 - **Change icons:** Replace images in `src/main/resources/icons/`.
 
 ## Credits
 
-- [RSyntaxTextArea](https://github.com/bobbylight/RSyntaxTextArea) for syntax highlighting
-- [FlatLaf](https://www.formdev.com/flatlaf/) for modern look and feel
-- [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) for monospace font
-- [Fira Code](https://github.com/tonsky/FiraCode) for alternate font
+- [FlatLaf](https://www.formdev.com/flatlaf/) is used for the look and feel of the program.
+- [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) is used for the monospace font.
+- [RSyntaxTextArea](https://github.com/bobbylight/RSyntaxTextArea) is used for syntax highlighting.
 
 ## License
 
