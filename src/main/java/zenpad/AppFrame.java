@@ -129,7 +129,7 @@ public class AppFrame extends JFrame {
         );
         // Set divider location to 85% of the height for the editor
         innerSplitPane.setDividerLocation(0.85);
-        innerSplitPane.setResizeWeight(0.85);
+        innerSplitPane.setResizeWeight(0.70);
         innerSplitPane.setDividerSize(8);
     }
 
@@ -179,7 +179,7 @@ public class AppFrame extends JFrame {
             notePanel.updateTheme();
             toolbar.setSaveNotesEnabled(true);
             if (wasCollapsed) {
-                innerSplitPane.setDividerLocation(0.80);
+                innerSplitPane.setDividerLocation(0.70);
                 return;
             }
         }

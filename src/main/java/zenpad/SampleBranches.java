@@ -82,7 +82,7 @@ public class SampleBranches {
                 "/java/methods/",
                 new String[] { "Simple method", "Method with parameters", "Method with return value", "Method with return only", "Static vs instance" },
                 new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" },
-                new String[] { }
+                new String[] { "VoidMethod.md", "MethodWithParameters.md", "MethodWithReturnValue.md", "MethodReturnOnly.md", "StaticVsInstance.md" }
             ),
 
             new Branch(
@@ -90,7 +90,7 @@ public class SampleBranches {
                 "/java/scanner/",
                 new String[] { "Scanner next()", "Scanner nextLine()", "Scanner hasNext()", "Scanner numbers" },
                 new String[] { "ScannerNext.java", "ScannerNextLine.java", "ScannerHasNext.java", "ScannerNumbers.java" },
-                new String[] { }
+                new String[] { "ScannerNext.md", "ScannerNextLine.md", "ScannerHasNext.md", "ScannerNumbers.md" }
             ), 
 
             new Branch(
