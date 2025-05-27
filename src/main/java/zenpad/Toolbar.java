@@ -1,11 +1,11 @@
 package zenpad;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
-import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.datatransfer.Clipboard;
@@ -28,15 +28,18 @@ public class Toolbar {
     private TabManager tabManager;
     private CodeRunner codeRunner;
     private NotePanel notePanel;
+    private JFrame parentFrame;
+
     private JToggleButton themeToggleButton;
     private JToggleButton editNotesToggleButton;
     private JButton saveNotesButton;
     private String lastTheme = null;
     
-    public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel) {
+    public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel, JFrame parentFrame) {
         this.tabManager = tabManager;
         this.codeRunner = codeRunner;
         this.notePanel = notePanel;
+        this.parentFrame = parentFrame;
 
         toolbar = new JToolBar();
         toolbar.setFloatable(false);
@@ -262,27 +265,10 @@ public class Toolbar {
 
     /**
      * Displays an "About" dialog with information about the application.
-     * <p>
-     * This method creates a modal dialog that shows the application's name, license,
-     * and author information. The dialog is displayed when the "About" button is clicked.
-     * </p>
+     * @see AboutDialog
      */
     private void showAboutDialog() {
-        String message = "<html>"
-            + "<strong>ZenPad</strong>"
-            + "<p>Version 1.2-SNAPSHOT<br>"
-            + "<p>&copy; 2025 Zens. Licensed under MIT.</p>"
-            + "</html>";
-
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/64x64.png"));
-            
-        JOptionPane.showMessageDialog(
-            null,
-            message,
-            "About",
-            JOptionPane.INFORMATION_MESSAGE,
-            icon
-        );
+        AboutDialog.show(parentFrame);
     }
 
     /**

@@ -26,7 +26,7 @@ public class NotePanel {
     private String currentFilePath;
     private JFileChooser fileChooser = null;
     private String lastTheme = null;
-
+    private String noDescMsg = "No description available.";
     /**
      * Constructs a NotePanel for displaying plain text.
      */
@@ -58,55 +58,69 @@ public class NotePanel {
      * Loads text from a resource file asynchronously and sets it as plain text.
      * @param filePath the resource path (e.g., "notes/HelloWorld.txt")
      */
-public void loadTextFromResource(String filePath) {
-    if (filePath.equals(currentFilePath)) {
-        return;
-    }
+    public void loadTextFromResource(String filePath) {
+        // If both filePath and currentFilePath are null, do nothing.
+        // There is no note to load, nothing is currently loaded.
+        if (filePath == null && currentFilePath == null) {
+            return;
+        }
+        // Skip reloading note if already loaded and displayed.
+        // If text area is showing noDescMsg, still reload.
+        if (filePath !=null && filePath.equals(currentFilePath)
+            && !textArea.getText().equals(noDescMsg)) {
+            return;
+        }
+        // Sets text area to show noDescMsg if filePath is null.
+        if (filePath == null) {
+            setText(noDescMsg);
+            currentFilePath = null;
+            return;
+        }
 
-    this.currentFilePath = filePath;
-    textArea.setText("");
+        this.currentFilePath = filePath;
+        textArea.setText("");
 
-    new SwingWorker<Void, String>() {
-        @Override
-        protected Void doInBackground() throws Exception {
-            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-                if (inputStream == null) {
-                    publish("Error: Resource not found: " + filePath);
-                    return null;
-                }
-                StringBuilder batch = new StringBuilder();
-                int linesRead = 0;
-                try (BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(inputStream))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        batch.append(line).append("\n");
-                        linesRead++;
-                        if (linesRead % 500 == 0) { // Publish every 500 lines
+        new SwingWorker<Void, String>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+                    if (inputStream == null) {
+                        publish("Error: Resource not found: " + filePath);
+                        return null;
+                    }
+                    StringBuilder batch = new StringBuilder();
+                    int linesRead = 0;
+                    try (BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(inputStream))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            batch.append(line).append("\n");
+                            linesRead++;
+                            if (linesRead % 500 == 0) { // Publish every 500 lines
+                                publish(batch.toString());
+                                batch.setLength(0);
+                            }
+                        }
+                        if (batch.length() > 0) {
                             publish(batch.toString());
-                            batch.setLength(0);
                         }
                     }
-                    if (batch.length() > 0) {
-                        publish(batch.toString());
+                }
+                return null;
+            }
+
+            @Override
+                protected void process(List<String> chunks) {
+                    for (String chunk : chunks) {
+                        textArea.append(chunk);
                     }
                 }
-            }
-            return null;
-        }
 
-        @Override
-            protected void process(List<String> chunks) {
-                for (String chunk : chunks) {
-                    textArea.append(chunk);
-                }
+            @Override
+            protected void done() {
+                textArea.setCaretPosition(0);
             }
-            
-        @Override
-        protected void done() {
-            textArea.setCaretPosition(0);
-        }
-    }.execute();
-}
+        }.execute();
+    }
 
     /**
      * Saves the current note area to a file asynchronously.
@@ -121,7 +135,7 @@ public void loadTextFromResource(String filePath) {
 
             @Override
             protected Boolean doInBackground() throws Exception {
-                if (currentFilePath == null || currentFilePath.startsWith("notes/") || currentFilePath.startsWith("samples/")) {
+                if (!(currentFilePath == null) || currentFilePath.startsWith("notes/") || currentFilePath.startsWith("samples/")) {
                     if (fileChooser == null) {
                         fileChooser = new JFileChooser();
                         fileChooser.setDialogTitle("Save Notes As");
@@ -189,6 +203,10 @@ public void loadTextFromResource(String filePath) {
             });
             lastTheme = currentTheme;
         }
+    }
+
+    public void clearCurrentFilePath() {
+        this.currentFilePath = null;
     }
 
     /**

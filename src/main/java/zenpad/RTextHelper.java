@@ -56,10 +56,6 @@ public class RTextHelper {
         }
     }
 
-    public static void setFontFiraCode(RSyntaxTextArea textArea) {
-        textArea.setFont(FontUtils.loadFont("/fonts/FiraCode-Retina.ttf", 14f));
-    }
-
     public static void setFontJetBrains(RSyntaxTextArea textArea) {
         textArea.setFont(FontUtils.loadFont("/fonts/JetBrainsMono-Regular.ttf", 14f));
     }

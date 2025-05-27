@@ -157,7 +157,7 @@ public class AppFrame extends JFrame {
      * @see #setupOuterSplit()
      */
     private void layoutComponents() {
-        toolbar = new Toolbar(tabManager, codeRunner, notePanel);
+        toolbar = new Toolbar(tabManager, codeRunner, notePanel, this);
         add(toolbar.getToolbar(), BorderLayout.NORTH);
         add(outerSplitPane, BorderLayout.CENTER);
     }

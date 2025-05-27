@@ -63,20 +63,8 @@ public class CodeRunner {
      */
     public String detectLinuxTerminal() {
         String [] terminals = {
-            "gnome-terminal",
-            "gnome-console",
-            "konsole",
-            "guake",
-            "quake",
-            "mate-terminal",
-            "xfce4-terminal",
-            "lxterminal",
-            "alacritty",
-            "tilix",
-            "ghostty",
-            "wezterm",
-            "terminator",
-            "xterm"
+            "gnome-terminal", "gnome-console", "konsole", "guake", "quake", "mate-terminal", "xfce4-terminal",
+            "lxterminal", "alacritty", "tilix", "ghostty", "wezterm", "terminator", "xterm", "foot"
         };
 
         for (String term : terminals) {
@@ -85,7 +73,6 @@ public class CodeRunner {
             }
         }
 
-        // Fallback to the default terminal if not found yet
         return "x-terminal-emulator";
     }
 
@@ -105,7 +92,6 @@ public class CodeRunner {
             Process findCommand = new ProcessBuilder("which", command).start();
             return findCommand.waitFor() == 0;
         } catch (IOException | InterruptedException e) {
-            // Command not found
             return false;
         }
     }

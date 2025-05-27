@@ -10,7 +10,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 import java.awt.GridLayout;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,7 +47,7 @@ public class FileOpenerPanel {
 
     private JTree createSampleTree(TabManager tabManager) {
 
-        List<Branch> branches = getBranches();
+        List<Branch> branches = SampleBranches.getBranches();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
 
         for (Branch branch : branches) {
@@ -77,14 +76,13 @@ public class FileOpenerPanel {
         tree.setRootVisible(false);
         tree.setShowsRootHandles(true);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.addTreeSelectionListener(createTreeSelectionListener(tabManager, tree));
 
-        /*
-         * Adds a TreeSelectionListener to the JTree.
-         * When the user selects a node, this listener is triggered.
-         * It checks if a valid node is selected and whether its user object is a SampleFile.
-         * If so, it retrieves the SampleFile and opens a new tab with the associated file path and display name.
-         */
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
+        return tree;
+    }
+
+    private TreeSelectionListener createTreeSelectionListener(TabManager tabManager, JTree tree) {
+        return new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
@@ -94,138 +92,11 @@ public class FileOpenerPanel {
                     SampleFile sample = (SampleFile) userObj;
                     String language = Toolbar.inferLanguageFromFileName(sample.filePath);
                     tabManager.openNewTab(sample.filePath, sample.displayName, sample.noteFile, language);
-                    if (sample.noteFile != null && !sample.noteFile.isEmpty()) {
-                        textPanel.loadTextFromResource(sample.noteFile);
-                    } else {
-                        textPanel.setText("No description available.");
-                    }
-
+                    textPanel.loadTextFromResource(sample.noteFile);
                     RTextHelper.applyRSyntaxTheme(textPanel.getTextArea());
                 }
             }
-        });
-
-        return tree;
-    }
-
-
-    /**
-     * Returns a list of branches, each containing display names and file names.
-     * This method is used to populate the JTree with sample files.
-     * 
-     * @return List of Branch objects representing the sample files.
-     */
-    private List<Branch> getBranches() {
-        return Arrays.asList(
-            new Branch(
-                "Java Basics",
-                "/java/basics/",
-                new String[] { "Hello world", "Data types", "Type casting", "True or false" },
-                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" },
-                new String[] { "HelloWorld.md", "PrintData.md", "TypeCast.md", "Boolean.md" }
-            ),
-
-            new Branch(
-                "Java Operators",
-                "/java/operators/",
-                new String[] { "Arithmetic operators", "Assignment operators", "Relational operators", "Logical operators" },
-                new String[] { "ArithmeticOperators.java", "AssignOperators.java", "RelationalOperators.java", "LogicalOperators.java" },
-                new String[] { "ArithmeticOperators.md", "AssignOperators.md", "RelationalOperators.md", "LogicalOperators.md" }
-            ),
-
-            new Branch(
-                "Java Conditions",
-                "/java/conditions/",
-                new String[] { "Else if structure", "Ternary operator", "Traditional switch", "Rule/modern switch" },
-                new String[] { "ElseIf.java", "Ternary.java", "Switch.java", "RuleSwitch.java" },
-                new String[] { "ElseIf.md", "Ternary.md", "Switch.md", "RuleSwitch.md" }
-            ),
-
-            new Branch(
-                "Java Loops",
-                "/java/loops/",
-                new String[] { "For loop", "While loop", "Do-while loop", "Nested loops" },
-                new String[] { "ForLoop.java", "While.java", "DoWhile.java", "NestedLoop.java" },
-                new String[] { "ForLoop.md", "While.md", "DoWhile.md", "NestedLoop.md" }
-            ),
-
-            new Branch(
-                "Java Loops Challenge",
-                "/java/loops-ch/",
-                new String[] { "Floyd's triangle", "Multiplication table", "Right triangle", "Sum of a matrix", "Coordinates" },
-                new String[] { "Floyd.java", "MultiplicationTable.java", "RightTriangle.java", "MatrixSum.java", "PlotCoordinates.java" },
-                new String[] { "Floyd.md", "MultiplicationTable.md", "RightTriangle.md", "MatrixSum.md", "PlotCoordinates.md" }
-            ),
-
-            new Branch(
-                "Java Arrays",
-                "/java/arrays/",
-                new String[] { "Creating an array", "Array length property", "Enhanced for-loop", "Multidimensional array" },
-                new String[] { "CreateArrays.java", "ThroughFor.java", "ForEach.java", "MtdArray.java" },
-                new String[] { "CreateArrays.md", "ThroughFor.md", "ForEach.md", "MtdArray.md" }
-            ),
-
-            new Branch(
-                "Java String Methods",
-                "/java/string-methods/",
-                new String[] { "String length()", "String isEmpty()", "String case()", "String indexOf()",
-                "String contains()", "String substring()", "String equals()", "String replace()", "String trim()" },
-                new String[] { "StringLength.java", "StringIsEmpty.java", "StringCaseChange.java", "StringIndexOf.java",
-                "StringContains.java", "StringSubstring.java", "StringEquals.java", "StringReplace.java", "StringTrim.java" },
-                new String[] { }
-            ),
-
-            new Branch(
-                "Java Methods",
-                "/java/methods/",
-                new String[] { "Simple method", "Method with parameters", "Method with return value", "Method with return only", "Static vs instance" },
-                new String[] { "VoidMethod.java", "MethodWithParameters.java", "MethodWithReturnValue.java", "MethodReturnOnly.java", "StaticVsInstance.java" },
-                new String[] { }
-            ),
-
-            new Branch(
-                "Java Scanner",
-                "/java/scanner/",
-                new String[] { "Scanner next()", "Scanner nextLine()", "Scanner hasNext()", "Scanner numbers" },
-                new String[] { "ScannerNext.java", "ScannerNextLine.java", "ScannerHasNext.java", "ScannerNumbers.java" },
-                new String[] { }
-            ), 
-
-            new Branch(
-                "Java Exception Handling",
-                "/java/exceptions/",
-                new String[] { "Try-catch", "Try-catch-finally", "Multiple catch blocks", "Throwing exceptions" },
-                new String[] { "TryCatch.java", "TryCatchFinally.java", "MultipleCatchBlocks.java", "ThrowingExceptions.java" },
-                new String[] { }
-            ),
-
-            new Branch(
-                "Java Object-Oriented",
-                "/java/oop/",
-                new String[] { "Encapsulation", "Getters and setters", "Inheritance", "Polymorphism", "Abstraction" },
-                new String[] { "Encapsulation.java", "GetterSetter.java", "Inheritance.java", "Polymorphism.java", "Abstraction.java" },
-                new String[] { }
-            ),
-
-            new Branch(
-                "Other Python Examples",
-                "/python/basics/",
-                new String[] { "Hello world", "Data types" },
-                new String[] { "HelloWorld.py", "PrintData.py" },
-                new String[] { "HelloWorld.md", "PrintData.md" }
-            ),
-
-            new Branch(
-                "Other C Examples",
-                "/clang/basics/",
-                new String[] { "Hello world", "Data types" },
-                new String[] { "HelloWorld.c", "PrintData.c" },
-                new String[] { "HelloWorld.md", "PrintData.md" }
-            )
-
-            // Add more branches here as needed
-            // new Branch("Another Branch", new String[] {...}, new String[] {...})
-        );
+        };
     }
 
     /**
@@ -236,7 +107,6 @@ public class FileOpenerPanel {
      * @see createSampleTree
      * @see Branch
      */
-
     private static class SampleFile {
         String displayName;
         String filePath;
@@ -259,7 +129,6 @@ public class FileOpenerPanel {
      * @return panel: The JPanel containing the file opener UI.
      * @see AppFrame
      */
-
     public JPanel getPanel() {
         return panel;
     }

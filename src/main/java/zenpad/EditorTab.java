@@ -199,15 +199,6 @@ public class EditorTab {
         }
     }
 
-    /**
-     * Updates the syntax highlighting style based on the language.
-     * @param language The new language to set.
-     */
-    public void setLanguage(String language) {
-        this.language = language;
-        codeArea.setSyntaxEditingStyle(getSyntaxStyleForLanguage(language));
-    }
-
     public String getLanguage() {
         return language;
     }
