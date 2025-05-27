@@ -1,0 +1,9 @@
+# Abstraction in OOP
+
+This Java code provides a comprehensive illustration of **Abstraction**, a key OOP principle that focuses on showing only essential information and hiding the complex implementation details. It also introduces **abstract classes** and **interfaces**.
+
+An **abstract class** like `Appliance` is a blueprint that cannot be instantiated directly (you can't create `new Appliance()`). It can contain both concrete methods (like `turnOff()`, which has an implementation) and **abstract methods** (like `abstract void turnOn()`). An abstract method is declared without an implementation; it acts as a contract, forcing any non-abstract subclass to provide its own concrete implementation for that method. This means any `Appliance` *must* define how it `turnOn()`, but they all share a common `turnOff()` behavior.
+
+An **interface** like `SmartDevice` is a contract that defines a set of methods that a class *must* implement if it chooses to "implement" that interface. It can only contain abstract methods (before Java 8, all interface methods were implicitly abstract). Here, `SmartDevice` requires any implementing class to have a `connectToWifi()` method. An interface establishes a "can do" relationship; a class "is-a" `Appliance`, but it "can" be a `SmartDevice`.
+
+The `SmartTV` class demonstrates abstraction by **extending** the `Appliance` abstract class (thus inheriting its general appliance characteristics and being forced to implement `turnOn()`) and **implementing** the `SmartDevice` interface (thus being forced to implement `connectToWifi()`). The `SmartTV` class itself provides the concrete, specific details for how a smart TV turns on and connects to Wi-Fi. This setup allows for a high level of abstraction, where you can interact with a `SmartTV` knowing it's an `Appliance` and a `SmartDevice` without needing to know the intricate internal workings of how it performs those actions.

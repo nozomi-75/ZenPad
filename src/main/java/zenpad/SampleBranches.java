@@ -98,7 +98,7 @@ public class SampleBranches {
                 "/java/exceptions/",
                 new String[] { "Try-catch", "Try-catch-finally", "Multiple catch blocks", "Throwing exceptions" },
                 new String[] { "TryCatch.java", "TryCatchFinally.java", "MultipleCatchBlocks.java", "ThrowingExceptions.java" },
-                new String[] { }
+                new String[] { "TryCatch.md", "TryCatchFinally.md", "MultipleCatchBlocks.md", "ThrowingExceptions.md" }
             ),
 
             new Branch(
@@ -106,7 +106,7 @@ public class SampleBranches {
                 "/java/oop/",
                 new String[] { "Encapsulation", "Getters and setters", "Inheritance", "Polymorphism", "Abstraction" },
                 new String[] { "Encapsulation.java", "GetterSetter.java", "Inheritance.java", "Polymorphism.java", "Abstraction.java" },
-                new String[] { }
+                new String[] { "Encapsulation.md", "GetterSetter.md", "Inheritance.md", "Polymorphism.md", "Abstraction.md" }
             ),
 
             new Branch(
