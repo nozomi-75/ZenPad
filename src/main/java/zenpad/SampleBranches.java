@@ -21,9 +21,9 @@ public class SampleBranches {
             new Branch(
                 "Java Basics",
                 "/java/basics/",
-                new String[] { "Hello world", "Data types", "Type casting", "True or false" },
-                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java" },
-                new String[] { "HelloWorld.md", "PrintData.md", "TypeCast.md", "Boolean.md" }
+                new String[] { "Hello world", "Data types", "Type casting", "True or false", "Increments" },
+                new String[] { "HelloWorld.java", "PrintData.java", "TypeCast.java", "Boolean.java", "Increment.java" },
+                new String[] { "HelloWorld.md", "PrintData.md", "TypeCast.md", "Boolean.md", "Increment.md" }
             ),
 
             new Branch(
