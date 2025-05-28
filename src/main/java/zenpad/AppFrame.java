@@ -39,6 +39,7 @@ public class AppFrame extends JFrame {
     private JTabbedPane tabbedPane;
     private JSplitPane innerSplitPane;
     private JSplitPane outerSplitPane;
+    private int lastSelectedTabIndex = -1;
 
     public AppFrame(String title) {
         super(title);
@@ -93,7 +94,18 @@ public class AppFrame extends JFrame {
      * corresponding to the currently active tab.
      */
     private void addTabSwitchListener() {
-        tabbedPane.addChangeListener(e -> updateNotePanelOnTabSwitch());
+        tabbedPane.addChangeListener(e -> {
+            // Save note edits for the previous tab
+            if (lastSelectedTabIndex >= 0) {
+                EditorTab prevTab = tabManager.getEditorTabAt(lastSelectedTabIndex);
+                if (prevTab != null) {
+                    prevTab.setNoteContent(notePanel.getText());
+                }
+            }
+            // Update note area for the new tab
+            updateNotePanelOnTabSwitch();
+            lastSelectedTabIndex = tabbedPane.getSelectedIndex();
+        });
     }
 
     /**
@@ -104,11 +116,18 @@ public class AppFrame extends JFrame {
         int idx = tabbedPane.getSelectedIndex();
         if (idx >= 0) {
             EditorTab editorTab = tabManager.getEditorTabAt(idx);
-            String noteFile = (editorTab != null) ? editorTab.getNoteFile() : null;
-            if (noteFile != null && !noteFile.isEmpty()) {
-                notePanel.loadTextFromResource(noteFile);
-            } else {
-                notePanel.setText("No description available.");
+            if (editorTab != null) {
+                String noteContent = editorTab.getNoteContent();
+                if (noteContent != null) {
+                    notePanel.setText(noteContent);
+                } else {
+                    String noteFile = editorTab.getNoteFile();
+                    if (noteFile != null && !noteFile.isEmpty()) {
+                        notePanel.loadTextFromResource(noteFile);
+                    } else {
+                        notePanel.setText("No description available.");
+                    }
+                }
             }
         }
     }

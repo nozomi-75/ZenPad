@@ -32,6 +32,8 @@ public class EditorTab {
     private String noteFile;
     private String language;
 
+    private String noteContent = null;
+
     /**
      * Constructs an EditorTab for displaying and editing the content of a file.
      *
@@ -125,6 +127,14 @@ public class EditorTab {
 
     public void resetFontSize() {
         codeArea.setFont(codeArea.getFont().deriveFont(14f));
+    }
+
+    public void setNoteContent(String content) {
+        this.noteContent = content;
+    }
+
+    public String getNoteContent() {
+        return noteContent;
     }
 
     /**
