@@ -90,7 +90,7 @@ public class FileOpenerPanel {
                 Object userObj = selectedNode.getUserObject();
                 if (userObj instanceof SampleFile) {
                     SampleFile sample = (SampleFile) userObj;
-                    String language = Toolbar.inferLanguageFromFileName(sample.filePath);
+                    String language = CodeRunner.inferLanguageFromFileName(sample.filePath);
                     tabManager.openNewTab(sample.filePath, sample.displayName, sample.noteFile, language);
                     textPanel.loadTextFromResource(sample.noteFile);
                     RTextHelper.applyRSyntaxTheme(textPanel.getTextArea());

@@ -14,15 +14,6 @@ import java.util.List;
  * each open tab.
  * </p>
  * 
- * <p>
- * Usage:
- * <ul>
- *   <li>Instantiate TabManager with a JTabbedPane instance.</li>
- *   <li>Call {@link #openNewTab(String, String)} to add new tabs.</li>
- *   <li>Use {@link #getSelectedCode()} and {@link #getSelectedFileName()} to access the current tab's content.</li>
- * </ul>
- * </p>
- * 
  * @see AppFrame
  * @see EditorTab
  * @see FileOpenerPanel
@@ -37,7 +28,6 @@ public class TabManager {
         this.onTabsChanged = onTabsChanged;
     }
 
-    // Update openNewTab to accept noteFile and language
     public void openNewTab(String filePath, String node, String noteFile, String language) {
         setupEditor(filePath, node, noteFile, language);
         if (onTabsChanged != null) onTabsChanged.run();
@@ -45,10 +35,6 @@ public class TabManager {
 
     /**
      * Creates an EditorTab object and configures its settings.
-     * <p>
-     * This method creates a new {@link EditorTab} using the provided file path and node name.
-     * The tab is added to the JTabbedPane, its custom header is set, and it becomes the selected tab.
-     * </p>
      *
      * @param filePath the full file path to be loaded in the new editor tab
      * @param node the display name for the tab (typically the file name or a label)
@@ -66,7 +52,6 @@ public class TabManager {
 
     /**
      * Returns a list of all currently open {@link EditorTab} instances.
-     *
      * @return a list containing all open editor tabs
      */
     public List<EditorTab> getOpenTabs() {
@@ -75,11 +60,6 @@ public class TabManager {
 
     /**
      * Retrieves the code/text content from the currently selected editor tab.
-     * <p>
-     * This method returns the text from the editor area of the selected tab.
-     * If no tab is selected or the selected index is invalid, an empty string is returned.
-     * </p>
-     *
      * @return the code/text from the selected tab, or an empty string if unavailable
      * @see Toolbar
      */
@@ -93,11 +73,6 @@ public class TabManager {
 
     /**
      * Retrieves the file name associated with the currently selected editor tab.
-     * <p>
-     * This method returns the file name as displayed in the selected tab.
-     * If no tab is selected or the selected index is invalid, an empty string is returned.
-     * </p>
-     *
      * @return the file name of the selected tab, or an empty string if unavailable
      * @see Toolbar
      */
@@ -117,11 +92,22 @@ public class TabManager {
         }
     }
 
-    // Add a method to get EditorTab by tab index
     public EditorTab getEditorTabAt(int index) {
         if (index >= 0 && index < openTabs.size()) {
             return openTabs.get(index);
         }
         return null;
+    }
+
+    public void changeAllFontSizes(int delta) {
+        for (EditorTab tab : openTabs) {
+            tab.changeFontSize(delta);
+        }
+    }
+
+    public void resetAllFontSizes() {
+        for (EditorTab tab : openTabs) {
+            tab.resetFontSize();
+        }
     }
 }

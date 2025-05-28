@@ -28,7 +28,7 @@ public class EditorTab {
     private RSyntaxTextArea codeArea;
     private RTextScrollPane scrollPane;
     private TabHeader tabHeader;
-    
+
     private String fileName;
     private String noteFile;
     private String language;
@@ -128,48 +128,22 @@ public class EditorTab {
         return noteContent;
     }
 
-    /**
-     * Returns the main panel containing the editor and scroll pane.
-     * @return the JPanel representing this tab's content
-     * @see TabManager
-     */
     public JPanel getPanel() {
         return panel;
     }
 
-    /**
-     * Returns the current text/code in the editor area.
-     * @return the code as a String
-     * @see TabManager
-     */
     public String getCode() {
         return codeArea.getText();
     }
 
-    /**
-     * Returns the RSyntaxTextArea instance for this tab.
-     * @return The RSyntaxTextArea.
-     */
     public RSyntaxTextArea getCodeArea() {
         return codeArea;
     }
 
-    /**
-     * Returns the tab header component (with close button, etc.).
-     * @return headerPanel the custom tab header panel
-     * 
-     * @see TabHeader
-     * @see TabManager
-     */
     public JPanel getTabHeader() {
         return tabHeader.getHeaderPanel();
     }
 
-    /**
-     * Returns the file name of the current tab (not the full path).
-     * @return fileName the name of the file being edited
-     * @see TabManager
-     */
     public String getFileName() {
         return fileName;
     }

@@ -16,14 +16,36 @@ import javax.swing.JOptionPane;
  */
 
 public class CodeRunner {
+    public static String inferLanguageFromFileName(String fileName) {
+        if (fileName != null) {
+            int dot = fileName.lastIndexOf('.');
+            String ext = (dot != -1) ? fileName.substring(dot + 1).toLowerCase() : "";
+            switch (ext) {
+                case "java": return "Java";
+                case "py": return "Python";
+                case "c": return "C";
+                default: return null;
+            }
+        }
+        return null;
+    }
 
-    /**
-     * Compiles and runs the provided code in the selected language.
-     *
-     * @param code The code to be compiled and run.
-     * @param fileName The name of the file to be created (with extension).
-     * @param language The programming language selected.
-     */
+    public void runSelectedTab(TabManager tabManager) {
+        String code = tabManager.getSelectedCode();
+        String fileName = tabManager.getSelectedFileName();
+        String language = inferLanguageFromFileName(fileName);
+
+        if (language == null) {
+            JOptionPane.showMessageDialog(null, "Unsupported file type for execution.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (code == null || code.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No code to run.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        runCode(code, fileName, language);
+    }
+
     public void runCode(String code, String fileName, String language) {
         try {
             File tempDir = Files.createTempDirectory("samples").toFile();
@@ -78,14 +100,8 @@ public class CodeRunner {
 
     /**
      * Checks if a command is available in the system's PATH.
-     * <p>
-     * This method uses the 'which' command to check if the specified command is available.
-     * </p>
-     *
      * @param command The command to check for availability.
      * @return true if the command is available, false otherwise.
-     * @see #detectLinuxTerminal()
-     * @see #runCode(String)
      */
     public boolean isCommandAvailable(String command) {
         try {
