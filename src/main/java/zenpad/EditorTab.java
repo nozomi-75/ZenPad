@@ -28,22 +28,13 @@ public class EditorTab {
     private RSyntaxTextArea codeArea;
     private RTextScrollPane scrollPane;
     private TabHeader tabHeader;
+    
     private String fileName;
     private String noteFile;
     private String language;
 
     private String noteContent = null;
 
-    /**
-     * Constructs an EditorTab for displaying and editing the content of a file.
-     *
-     * @param filePath The full file path to be opened in the new tab.
-     * @param node The name of the node that will serve as the tab title.
-     * @param tabbedPane The parent JTabbedPane to which this tab belongs.
-     * @param tabManager The TabManager instance managing the tabs.
-     * @param noteFile The description file path for this tab (may be null).
-     * @param language The programming language for syntax highlighting.
-     */
     public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile, String language) {
         this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         this.language = language;

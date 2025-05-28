@@ -128,7 +128,6 @@ public class Toolbar {
      * </p>
      * 
      * @see TabManager#getSelectedCode()
-     * @see TabManager
      * @see EditorTab
      */
     private void copyCode() {
@@ -177,11 +176,6 @@ public class Toolbar {
 
     /**
      * Changes the font size of the code editor in all open tabs.
-     * <p>
-     * This method iterates through all open tabs and adjusts the font size
-     * based on the provided delta value.
-     * </p>
-     * 
      * @param delta The amount to change the font size by (positive or negative).
      * @see EditorTab#changeFontSize(int)
      */
@@ -193,11 +187,6 @@ public class Toolbar {
 
     /**
      * Resets the font size of the code editor in all open tabs to the default size.
-     * <p>
-     * This method iterates through all open tabs and resets the font size
-     * to a predefined default value.
-     * </p>
-     * 
      * @see EditorTab#resetFontSize()
      */
     private void resetFontSize() {
@@ -208,7 +197,6 @@ public class Toolbar {
 
     /**
      * Helper method for saving notes.
-     * It will show a dialog with a success or error message.
      * @see NotePanel#saveNoteArea
      */
     private void saveNotes() {
@@ -228,11 +216,6 @@ public class Toolbar {
 
     /**
      * Toggles the theme of the application between light and dark modes.
-     * <p>
-     * This method applies the selected theme using the LafManager and updates
-     * all open tabs to reflect the new theme.
-     * </p>
-     * 
      * @param toggleButton The JToggleButton that triggers the theme change.
      * @see LafManager
      * @see EditorTab#applyRSyntaxTheme()
