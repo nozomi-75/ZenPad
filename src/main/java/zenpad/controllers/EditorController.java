@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
 
 import zenpad.models.EditorModel;
-import zenpad.models.TabHeader;
+import zenpad.ui.TabHeader;
 import zenpad.ui.TabManager;
 import zenpad.views.EditorView;;
 
