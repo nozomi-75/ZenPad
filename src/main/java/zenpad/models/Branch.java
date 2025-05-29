@@ -12,13 +12,13 @@ import zenpad.ui.FileOpenerPanel;
  * @param fileNames An array of file names for the files in the branch.
  */
 public class Branch {
-    String parentName;
-    String baseDir;
-    String[] displayNames;
-    String[] fileNames;
-    String[] noteFiles;
+    public String parentName;
+    public String baseDir;
+    public String[] displayNames;
+    public String[] fileNames;
+    public String[] noteFiles;
 
-    Branch(String parentName, String baseDir, String[] displayNames, String[] fileNames, String[] noteFiles) {
+    public Branch(String parentName, String baseDir, String[] displayNames, String[] fileNames, String[] noteFiles) {
 
         if (displayNames.length != fileNames.length) {
             throw new InvalidBranchException(
