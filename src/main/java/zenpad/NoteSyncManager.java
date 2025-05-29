@@ -2,6 +2,10 @@ package zenpad;
 
 import javax.swing.JTabbedPane;
 
+import zenpad.ui.EditorTab;
+import zenpad.ui.NotePanel;
+import zenpad.ui.TabManager;
+
 /**
  * NoteSyncManager provides static utility methods for synchronizing note content
  * between the shared {@link NotePanel} and individual {@link EditorTab} instances

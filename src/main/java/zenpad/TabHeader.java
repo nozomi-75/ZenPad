@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import zenpad.ui.TabManager;
+
 import java.awt.Font;
 
 public class TabHeader {

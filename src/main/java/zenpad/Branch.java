@@ -1,5 +1,7 @@
 package zenpad;
 
+import zenpad.ui.FileOpenerPanel;
+
 /**
  * Branch class represents a branch in the file tree structure.
  * It contains the parent name, display names, and file names associated with the branch.

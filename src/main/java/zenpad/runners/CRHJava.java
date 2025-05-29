@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.runners;
 
 import java.io.File;
 import java.io.IOException;

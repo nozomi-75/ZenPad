@@ -6,6 +6,12 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 
+import zenpad.runners.CodeRunner;
+import zenpad.ui.NotePanel;
+import zenpad.ui.TabManager;
+import zenpad.utils.ButtonFactory;
+import zenpad.utils.LafManager;
+
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;

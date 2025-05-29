@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.ui;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -8,6 +8,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+
+import zenpad.Branch;
+import zenpad.SampleBranches;
+import zenpad.launcher.AppFrame;
 
 import java.awt.GridLayout;
 import java.util.List;

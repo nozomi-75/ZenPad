@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.ui;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -7,6 +7,9 @@ import javax.swing.SwingWorker;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+
+import zenpad.TabHeader;
+import zenpad.utils.RTextHelper;
 
 import java.awt.BorderLayout;
 import java.io.BufferedReader;

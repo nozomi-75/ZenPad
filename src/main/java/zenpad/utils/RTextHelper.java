@@ -1,7 +1,9 @@
-package zenpad;
+package zenpad.utils;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
+
+import zenpad.Toolbar;
 
 import java.io.IOException;
 import java.io.InputStream;

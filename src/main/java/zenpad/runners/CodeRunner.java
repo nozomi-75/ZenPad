@@ -1,10 +1,14 @@
-package zenpad;
+package zenpad.runners;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
 import javax.swing.JOptionPane;
+
+import zenpad.Toolbar;
+import zenpad.ui.EditorTab;
+import zenpad.ui.TabManager;
 
 /**
  * CodeRunner is responsible for compiling and running Java code.

@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.ui;
 
 import java.awt.BorderLayout;
 import java.io.File;
@@ -18,6 +18,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+
+import zenpad.utils.RTextHelper;
 
 public class NotePanel {
     private JPanel notePanel;

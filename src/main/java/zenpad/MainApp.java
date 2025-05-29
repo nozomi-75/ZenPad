@@ -2,6 +2,9 @@ package zenpad;
 
 import javax.swing.SwingUtilities;
 
+import zenpad.launcher.AppFrame;
+import zenpad.utils.LafManager;
+
 /**
  * This is the main entry point for the application.
  * It initializes the GUI and sets up the main application frame.

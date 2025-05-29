@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.utils;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;

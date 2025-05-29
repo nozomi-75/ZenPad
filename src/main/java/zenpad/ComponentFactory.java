@@ -3,6 +3,9 @@ package zenpad;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import zenpad.launcher.AppFrame;
+import zenpad.ui.NotePanel;
+
 /**
  * ComponentFactory provides static factory methods for creating and configuring
  * common UI components used in the {@link AppFrame}.

@@ -1,7 +1,10 @@
-package zenpad;
+package zenpad.utils;
 
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
+
+import zenpad.Toolbar;
+
 import java.awt.Insets;
 import java.util.function.Consumer;
 

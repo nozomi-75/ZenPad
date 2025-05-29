@@ -1,6 +1,9 @@
-package zenpad;
+package zenpad.ui;
 
 import javax.swing.JTabbedPane;
+
+import zenpad.Toolbar;
+import zenpad.launcher.AppFrame;
 
 import java.util.ArrayList;
 import java.util.List;

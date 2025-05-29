@@ -1,6 +1,12 @@
-package zenpad;
+package zenpad.utils;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
+import zenpad.launcher.AppFrame;
+import zenpad.ui.EditorTab;
+import zenpad.ui.NotePanel;
+import zenpad.ui.TabManager;
+
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.JToggleButton;
