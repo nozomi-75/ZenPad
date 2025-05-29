@@ -40,21 +40,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>zenpad.MainApp</mainClass>
-                </configuration>
-            </plugin>
-            <!-- Plugin to build a JAR file -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>zenpad.MainApp</mainClass>
-                        </manifest>
-                    </archive>
+                    <mainClass>zenpad.launcher.MainApp</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -64,7 +50,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>zenpad.MainApp</mainClass>
+                            <mainClass>zenpad.launcher.MainApp</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
