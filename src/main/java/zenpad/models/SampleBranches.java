@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.models;
 
 import java.util.Arrays;
 import java.util.List;

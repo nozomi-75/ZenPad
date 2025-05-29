@@ -1,9 +1,9 @@
-package zenpad;
+package zenpad.utils;
 
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-import zenpad.launcher.AppFrame;
+import zenpad.core.AppFrame;
 import zenpad.ui.NotePanel;
 
 /**

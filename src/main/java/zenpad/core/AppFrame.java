@@ -1,19 +1,16 @@
-package zenpad.launcher;
+package zenpad.core;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
-import zenpad.ComponentFactory;
-import zenpad.LayoutManager;
-import zenpad.NotePanelVisMan;
-import zenpad.NoteSyncManager;
-import zenpad.Toolbar;
 import zenpad.runners.CodeRunner;
 import zenpad.ui.FileOpenerPanel;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
+import zenpad.utils.ComponentFactory;
+import zenpad.utils.NoteSyncManager;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

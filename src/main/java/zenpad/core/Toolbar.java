@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.core;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,6 +7,7 @@ import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 
 import zenpad.runners.CodeRunner;
+import zenpad.ui.AboutDialog;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
 import zenpad.utils.ButtonFactory;

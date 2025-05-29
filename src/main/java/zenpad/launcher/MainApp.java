@@ -1,8 +1,8 @@
-package zenpad;
+package zenpad.launcher;
 
 import javax.swing.SwingUtilities;
 
-import zenpad.launcher.AppFrame;
+import zenpad.core.AppFrame;
 import zenpad.utils.LafManager;
 
 /**

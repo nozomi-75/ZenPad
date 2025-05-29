@@ -6,7 +6,7 @@ import java.nio.file.Files;
 
 import javax.swing.JOptionPane;
 
-import zenpad.Toolbar;
+import zenpad.core.Toolbar;
 import zenpad.ui.EditorTab;
 import zenpad.ui.TabManager;
 

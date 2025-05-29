@@ -8,7 +8,7 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import zenpad.TabHeader;
+import zenpad.models.TabHeader;
 import zenpad.utils.RTextHelper;
 
 import java.awt.BorderLayout;

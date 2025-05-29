@@ -9,9 +9,9 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
-import zenpad.Branch;
-import zenpad.SampleBranches;
-import zenpad.launcher.AppFrame;
+import zenpad.core.AppFrame;
+import zenpad.models.Branch;
+import zenpad.models.SampleBranches;
 
 import java.awt.GridLayout;
 import java.util.List;

@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.models;
 
 import zenpad.ui.FileOpenerPanel;
 

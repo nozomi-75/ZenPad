@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.core;
 
 import javax.swing.JSplitPane;
 
@@ -7,7 +7,7 @@ import zenpad.ui.TabManager;
 
 /**
  * NotePanelVisMan provides a static utility method for managing the visibility and state
- * of the note panel area within the application's {@link zenpad.LayoutManager#createInnerSplitPane}.
+ * of the note panel area within the application's {@link zenpad.core.LayoutManager#createInnerSplitPane}.
  * <p>
  * This class ensures that the note panel is shown or hidden appropriately based on
  * whether any tabs are open, updates the note panel's theme, and enables or disables

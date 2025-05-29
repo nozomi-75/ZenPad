@@ -1,10 +1,9 @@
-package zenpad;
+package zenpad.core;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
-import zenpad.launcher.AppFrame;
 import zenpad.ui.NotePanel;
 
 import java.awt.Dimension;

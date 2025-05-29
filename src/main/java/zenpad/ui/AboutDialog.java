@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.ui;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

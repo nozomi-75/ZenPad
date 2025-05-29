@@ -1,4 +1,4 @@
-package zenpad;
+package zenpad.models;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
