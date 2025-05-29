@@ -1,5 +1,7 @@
 package zenpad.models;
 
+import java.awt.Font;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -9,8 +11,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import zenpad.ui.TabManager;
-
-import java.awt.Font;
 
 public class TabHeader {
     private JPanel headerPanel;

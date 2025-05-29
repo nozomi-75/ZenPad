@@ -1,12 +1,12 @@
 package zenpad.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 
 import zenpad.core.Toolbar;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 public class RTextHelper {
 

@@ -1,5 +1,11 @@
 package zenpad.ui;
 
+import java.awt.BorderLayout;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
@@ -10,12 +16,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import zenpad.models.TabHeader;
 import zenpad.utils.RTextHelper;
-
-import java.awt.BorderLayout;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * EditorTab is responsible for creating a tab view that displays the content of a file.

@@ -1,5 +1,9 @@
 package zenpad.core;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
@@ -12,10 +16,6 @@ import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
 import zenpad.utils.ButtonFactory;
 import zenpad.utils.LafManager;
-
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.Toolkit;
 
 /**
  * Toolbar is responsible for creating a toolbar with buttons for various actions.

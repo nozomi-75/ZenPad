@@ -1,13 +1,13 @@
 package zenpad.ui;
 
 import java.awt.BorderLayout;
-import java.io.File;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;

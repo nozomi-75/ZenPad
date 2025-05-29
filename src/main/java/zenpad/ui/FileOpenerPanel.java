@@ -1,5 +1,8 @@
 package zenpad.ui;
 
+import java.awt.GridLayout;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -14,9 +17,6 @@ import zenpad.models.Branch;
 import zenpad.models.SampleBranches;
 import zenpad.runners.CodeRunner;
 import zenpad.utils.RTextHelper;
-
-import java.awt.GridLayout;
-import java.util.List;
 
 /**
  * FileOpenerPanel is responsible for creating a panel with nodes to open files.

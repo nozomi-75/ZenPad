@@ -1,5 +1,8 @@
 package zenpad.core;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
@@ -11,9 +14,6 @@ import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
 import zenpad.utils.ComponentFactory;
 import zenpad.utils.NoteSyncManager;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 /**
  * AppFrame is the main application window that contains the tabbed pane and the file opener panel.

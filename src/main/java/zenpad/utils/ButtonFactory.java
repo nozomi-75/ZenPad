@@ -1,12 +1,12 @@
 package zenpad.utils;
 
+import java.awt.Insets;
+import java.util.function.Consumer;
+
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import zenpad.core.Toolbar;
-
-import java.awt.Insets;
-import java.util.function.Consumer;
 
 /**
  * ButtonFactory provides static factory methods for creating

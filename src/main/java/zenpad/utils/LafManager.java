@@ -1,20 +1,19 @@
 package zenpad.utils;
 
+import java.awt.Window;
+
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import zenpad.core.AppFrame;
 import zenpad.ui.EditorTab;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
-
-import com.formdev.flatlaf.FlatDarkLaf;
-
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
-import javax.swing.SwingUtilities;
-
-import java.awt.Window;
 
 /**
  * LafManager is responsible for managing the Look and Feel (Laf) of the application.

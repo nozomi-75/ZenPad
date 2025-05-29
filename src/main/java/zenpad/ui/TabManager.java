@@ -1,12 +1,12 @@
 package zenpad.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JTabbedPane;
 
 import zenpad.core.AppFrame;
 import zenpad.core.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TabManager is responsible for managing the tabs within the application's main window.

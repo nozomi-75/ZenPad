@@ -1,12 +1,12 @@
 package zenpad.core;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
 import zenpad.ui.NotePanel;
-
-import java.awt.Dimension;
 
 /**
  * LayoutManager provides static utility methods for constructing and configuring
