@@ -1,6 +1,8 @@
 # ZenPad
 
-ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment. ZenPad requires JDK 17 or higher to run. Other language support may require their specific software.
+ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment. 
+
+ZenPad requires JDK 17 or higher to run. Other language support may require their specific software.
 
 ## Features
 
@@ -56,9 +58,8 @@ ZenPad is a beginner-friendly Java program showcase and learning tool built with
 
 ## Customization
 
-- **Add your own samples:** Place files in specific per-language folders in `src/main/resources/samples/`.
-- **Add your own notes:** Place files in specific per-language folders in `src/main/resources/notes/`.
-- **Change icons:** Replace images in `src/main/resources/icons/`.
+> Adding more samples and notes will be better supported in the future 1.3 release.
+- **Change icons:** Replace images in `src/main/resources/icons/`. 
 
 ## Credits
 
