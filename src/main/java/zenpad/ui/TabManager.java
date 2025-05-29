@@ -1,116 +1,57 @@
 package zenpad.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTabbedPane;
 
-import zenpad.core.AppFrame;
-import zenpad.core.Toolbar;
+import zenpad.controllers.TabController;
+import zenpad.views.TabView;
 
-/**
- * TabManager is responsible for managing the tabs within the application's main window.
- * <p>
- * It provides functionality to open new editor tabs, retrieve information about open tabs,
- * and access the code or file name from the currently selected tab. The TabManager maintains
- * a reference to the JTabbedPane UI component and a list of EditorTab objects representing
- * each open tab.
- * </p>
- * 
- * @see AppFrame
- * @see EditorTab
- * @see FileOpenerPanel
- */
 public class TabManager {
-    private JTabbedPane tabbedPane;
-    private List<EditorTab> openTabs = new ArrayList<>();
-    private Runnable onTabsChanged;
+    private final TabController controller;
+    private final TabView view;
+    private final JTabbedPane tabbedPane;
 
     public TabManager(JTabbedPane tabbedPane, Runnable onTabsChanged) {
         this.tabbedPane = tabbedPane;
-        this.onTabsChanged = onTabsChanged;
+        this.controller = new TabController(onTabsChanged);
+        this.view = new TabView(tabbedPane);
     }
 
     public void openNewTab(String filePath, String node, String noteFile, String language) {
-        setupEditor(filePath, node, noteFile, language);
-        if (onTabsChanged != null) onTabsChanged.run();
-    }
-
-    /**
-     * Creates an EditorTab object and configures its settings.
-     *
-     * @param filePath the full file path to be loaded in the new editor tab
-     * @param node the display name for the tab (typically the file name or a label)
-     * @param noteFile the description file path for this tab (may be null)
-     * @param language the programming language for syntax highlighting
-     * @see FileOpenerPanel
-     */
-    public void setupEditor(String filePath, String node, String noteFile, String language) {
         EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this, noteFile, language);
-        openTabs.add(newTab);
-        tabbedPane.addTab(node, newTab.getPanel());
-        tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, newTab.getTabHeader());
-        tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
-    }
-
-    /**
-     * Returns a list of all currently open {@link EditorTab} instances.
-     * @return a list containing all open editor tabs
-     */
-    public List<EditorTab> getOpenTabs() {
-        return openTabs;
-    }
-
-    /**
-     * Retrieves the code/text content from the currently selected editor tab.
-     * @return the code/text from the selected tab, or an empty string if unavailable
-     * @see Toolbar
-     */
-    public String getSelectedCode() {
-        int selectedIndex = tabbedPane.getSelectedIndex();
-        if (selectedIndex >=0 && selectedIndex < openTabs.size()) {
-            return openTabs.get(selectedIndex).getCode();
-        }
-        return "";
-    }
-
-    /**
-     * Retrieves the file name associated with the currently selected editor tab.
-     * @return the file name of the selected tab, or an empty string if unavailable
-     * @see Toolbar
-     */
-    public String getSelectedFileName() {
-        int selectedIndex = tabbedPane.getSelectedIndex();
-        if (selectedIndex >=0 && selectedIndex < openTabs.size()) {
-            return openTabs.get(selectedIndex).getFileName();
-        }
-        return "";
+        controller.addTab(newTab);
+        view.addEditorTab(newTab, node);
     }
 
     public void closeTab(int index) {
-        if (index >= 0 && index < openTabs.size()) {
-            openTabs.remove(index);
-            tabbedPane.remove(index);
-            if (onTabsChanged != null) onTabsChanged.run();
-        }
+        controller.removeTab(index);
+        view.removeTab(index);
+    }
+
+    public List<EditorTab> getOpenTabs() {
+        return controller.getOpenTabs();
+    }
+
+    public String getSelectedCode() {
+        int selectedIndex = view.getSelectedIndex();
+        return controller.getSelectedCode(selectedIndex);
+    }
+
+    public String getSelectedFileName() {
+        int selectedIndex = view.getSelectedIndex();
+        return controller.getSelectedFileName(selectedIndex);
     }
 
     public EditorTab getEditorTabAt(int index) {
-        if (index >= 0 && index < openTabs.size()) {
-            return openTabs.get(index);
-        }
-        return null;
+        return controller.getTabAt(index);
     }
 
     public void changeAllFontSizes(int delta) {
-        for (EditorTab tab : openTabs) {
-            tab.changeFontSize(delta);
-        }
+        controller.changeAllFontSizes(delta);
     }
 
     public void resetAllFontSizes() {
-        for (EditorTab tab : openTabs) {
-            tab.resetFontSize();
-        }
+        controller.resetAllFontSizes();
     }
 }

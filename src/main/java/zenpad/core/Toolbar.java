@@ -1,128 +1,32 @@
 package zenpad.core;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
-import javax.swing.border.EmptyBorder;
 
+import zenpad.controllers.ToolbarController;
 import zenpad.runners.CodeRunner;
-import zenpad.ui.AboutDialog;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
-import zenpad.utils.ButtonFactory;
-import zenpad.utils.LafManager;
+import zenpad.views.ToolbarView;
 
 /**
- * Toolbar is responsible for creating a toolbar with buttons for various actions.
- * It initializes a JToolBar and adds buttons for copy, run, and about functionalities.
- * The toolbar is designed to be non-floatable and has a specific border layout.
- * 
- * @see TabManager
- * @see CodeRunner
- * @param tabManager The TabManager instance used to manage tabs in the application.
- * @param codeRunner The CodeRunner instance used to execute code.
+ * Toolbar is a facade that assembles the ToolbarView and ToolbarController,
+ * and exposes a simple interface to the rest of the application.
  */
 public class Toolbar {
-    private JToolBar toolbar;
-    private TabManager tabManager;
-    private CodeRunner codeRunner;
-    private NotePanel notePanel;
-    private JFrame parentFrame;
+    private final ToolbarController controller;
+    private final ToolbarView view;
 
-    private JToggleButton themeToggleButton;
-    private JToggleButton editNotesToggleButton;
-    private JButton saveNotesButton;
-
-    @SuppressWarnings("unused")
-    private String lastTheme = null;
-    
     public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel, JFrame parentFrame) {
-        this.tabManager = tabManager;
-        this.codeRunner = codeRunner;
-        this.notePanel = notePanel;
-        this.parentFrame = parentFrame;
-
-        initializeToolbar();
-        initToolbarComponents();
-    }
-
-    private void initializeToolbar() {
-        toolbar = new JToolBar();
-        toolbar.setFloatable(false);
-        toolbar.setBorder(new EmptyBorder(3, 5, 0, 0));
-    }
-
-    private void initToolbarComponents() {
-        toolbar.add(ButtonFactory.createButton("Copy", this::copyCode));
-        toolbar.add(ButtonFactory.createButton("Run", this::runCode));
-        toolbar.add(ButtonFactory.createButton("Font+", () -> changeFontSize(1)));
-        toolbar.add(ButtonFactory.createButton("Font-", () -> changeFontSize(-1)));
-        toolbar.add(ButtonFactory.createButton("Reset", this::resetFontSize));
-    
-        ButtonFactory.createToggleButton("Dark mode", () -> themeToggle(themeToggleButton),
-        btn -> themeToggleButton = btn, toolbar);
-    
-        saveNotesButton = ButtonFactory.createButton("Save notes", this::saveNotes);
-        toolbar.add(saveNotesButton);
-
-        ButtonFactory.createToggleButton("Edit notes", this::toggleEditNotes,
-        btn -> editNotesToggleButton = btn, toolbar);
-    
-        toolbar.add(ButtonFactory.createButton("About", this::showAboutDialog));
-    }
-
-    private void toggleEditNotes() {
-        boolean editable = editNotesToggleButton.isSelected();
-        notePanel.setEditable(editable);
-        editNotesToggleButton.setText(editable ? "Lock notes" : "Edit notes");
-    }
-
-    private void copyCode() {
-        String code = tabManager.getSelectedCode();
-        StringSelection selection = new StringSelection(code);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(selection, null);
-    }
-
-    private void runCode() {
-        codeRunner.runSelectedTab(tabManager);
-    }
-
-    private void changeFontSize(int delta) {
-        tabManager.changeAllFontSizes(delta);
-    }
-
-    private void resetFontSize() {
-        tabManager.resetAllFontSizes();
-    }
-
-    private void saveNotes() {
-        String codeFileName = tabManager.getSelectedFileName();
-        notePanel.saveNoteArea(toolbar, codeFileName);
-    }
-
-    public void setSaveNotesEnabled(boolean enabled) {
-        if (saveNotesButton != null) {
-            saveNotesButton.setEnabled(enabled);
-        }
-    }
-
-    private void themeToggle(JToggleButton toggleButton) {
-        boolean darkMode = toggleButton.isSelected();
-        LafManager.toggleTheme(darkMode, toggleButton, tabManager, notePanel, toolbar);
-        lastTheme = darkMode ? "Dark" : "Light";
-    }
-
-    private void showAboutDialog() {
-        AboutDialog.show(parentFrame);
+        controller = new ToolbarController(tabManager, codeRunner, notePanel, parentFrame);
+        view = controller.getView(); // internal getter, shown below
     }
 
     public JToolBar getToolbar() {
-        return toolbar;
+        return view.getToolbar();
+    }
+
+    public void setSaveNotesEnabled(boolean enabled) {
+        controller.setSaveNotesEnabled(enabled);
     }
 }
