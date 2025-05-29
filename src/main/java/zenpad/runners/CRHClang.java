@@ -35,8 +35,9 @@ public class CRHClang {
             compileProcess.waitFor();
 
             if (compileProcess.exitValue() != 0) {
-                String err = new String(compileProcess.getErrorStream().readAllBytes());
-                JOptionPane.showMessageDialog(null, "Compilation failed:\n" + err, "Error", JOptionPane.ERROR_MESSAGE);
+                String errorMessage = new String(compileProcess.getErrorStream().readAllBytes());
+                logCompilationError(errorMessage);
+                JOptionPane.showMessageDialog(null, "Compilation failed. See compiler-error.log for more information.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
 
@@ -61,6 +62,15 @@ public class CRHClang {
         } catch (IOException | InterruptedException e) {
             JOptionPane.showMessageDialog(null, "An error occurred while running the C code: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }
+    }
+
+    private void logCompilationError(String errorMessage) {
+        try {
+            File logFile = new File("compiler-error.log");
+            Files.writeString(logFile.toPath(), errorMessage, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            System.err.println("Failed to log compilation error: " + e.getMessage());
         }
     }
 }

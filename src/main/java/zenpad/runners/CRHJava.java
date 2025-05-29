@@ -50,7 +50,7 @@ public class CRHJava {
             if (compileProcess.exitValue() != 0) {
                 String errorMessage = new String(compileProcess.getErrorStream().readAllBytes());
                 logCompilationError(errorMessage);
-                JOptionPane.showMessageDialog(null, "Compilation failed. Please check your code.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Compilation failed. See compiler-error.log for more information.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             
@@ -90,5 +90,4 @@ public class CRHJava {
             System.err.println("Failed to log compilation error: " + e.getMessage());
         }
     }
-    
 }
