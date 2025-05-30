@@ -9,13 +9,15 @@ import org.fife.ui.rsyntaxtextarea.Theme;
 import zenpad.core.Toolbar;
 
 public class RTextHelper {
+    @SuppressWarnings("unused")
+    private boolean setEditable;
 
     /**
      * Configures the RSyntaxTextArea with default settings.
      * @param textArea
      */
-    public static void configureDefaults(RSyntaxTextArea textArea) {
-        textArea.setEditable(false);
+    public static void configureDefaults(RSyntaxTextArea textArea, Boolean setEditable) {
+        textArea.setEditable(setEditable);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setCodeFoldingEnabled(true);

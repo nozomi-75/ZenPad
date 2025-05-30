@@ -18,7 +18,7 @@ public class NoteView {
         notePanel = new JPanel(new BorderLayout());
 
         textArea = new RSyntaxTextArea();
-        RTextHelper.configureDefaults(textArea);
+        RTextHelper.configureDefaults(textArea, false);
         textArea.setSyntaxEditingStyle(org.fife.ui.rsyntaxtextarea.SyntaxConstants.SYNTAX_STYLE_MARKDOWN);
 
         scrollPane = new RTextScrollPane(textArea);

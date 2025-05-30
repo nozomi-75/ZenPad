@@ -18,7 +18,7 @@ public class EditorView {
     public EditorView(String language) {
         panel = new JPanel(new BorderLayout());
         codeArea = new RSyntaxTextArea();
-        RTextHelper.configureDefaults(codeArea);
+        RTextHelper.configureDefaults(codeArea, true);
         codeArea.setSyntaxEditingStyle(getSyntaxStyleForLanguage(language));
 
         scrollPane = new RTextScrollPane(codeArea);
