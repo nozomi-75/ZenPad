@@ -26,7 +26,7 @@ public class TerminalLauncher {
 
     private static String detectLinuxTerminal() {
         List<String> terminals = Arrays.asList(
-            "gnome-terminal", "xfce4-terminal", "konsole", "xterm", "lxterminal", "mate-terminal", "alacritty"
+            "gnome-terminal", "gnome-console", "xfce4-terminal", "konsole", "foot", "lxterminal", "mate-terminal", "alacritty", "xterm"
         );
         for (String term : terminals) {
             try {
