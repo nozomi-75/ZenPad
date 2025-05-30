@@ -1,8 +1,10 @@
 # ZenPad
 
-ZenPad is a beginner-friendly Java program showcase and learning tool built with Java Swing. It is designed to help new programmers explore, run, and understand Java code samples in an interactive and visually clear environment. 
+ZenPad is a beginner-friendly code exploration and learning tool built with Java Swing. It provides an interactive and visually intuitive environment for running and understanding code samples. Ideal for new programmers, ZenPad currently supports Java, C, and Python.
 
-ZenPad requires JDK 17 or higher to run. Other language support may require their specific software.
+## Requirements
+- ZenPad requires **JDK 17 or higher** to run.
+- To run C or Python programs, make sure **GCC** and **Python** are installed on your system.
 
 ## Features
 
@@ -10,7 +12,7 @@ ZenPad requires JDK 17 or higher to run. Other language support may require thei
 - 🎨 **Syntax Highlighting:** Powered by RSyntaxTextArea for easy-to-read code.
 - 🌗 **Theme Toggle:** Instantly switch between light and dark modes for comfortable viewing.
 - 🔠 **Font Zoom:** Increase, decrease, or reset the font size for better readability.
-- 🧑‍💻️ **Code Browser:** Easily access a curated collection of beginner-friendly Java examples.
+- 🧑‍💻️ **Code Browser:** Easily access a curated collection of beginner-friendly code examples.
 - 📝 **Note Panel:** Save your personal notes and descriptions for the code samples.
 - ▶️ **Run Sample Code:** Execute sample programs directly within the app.
 - 📋 **Copy Code:** Copy code snippets to your clipboard for your own experiments.
