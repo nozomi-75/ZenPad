@@ -8,7 +8,7 @@ import java.util.Map;
 
 import zenpad.runners.exec.*;
 import zenpad.ui.TabManager;
-import zenpad.utils.ErrDialog;
+import zenpad.utils.DialogUtils;
 
 public class CodeRunner {
     private final Map<String, CodeExec> executors = new HashMap<>();
@@ -25,11 +25,11 @@ public class CodeRunner {
         String language = inferLanguageFromFileName(fileName);
 
         if (language == null) {
-            ErrDialog.showError("Unsupported file type for execution.");
+            DialogUtils.showError("Unsupported file type for execution.", "Error");
             return;
         }
         if (code == null || code.trim().isEmpty()) {
-            ErrDialog.showError("No code to run.");
+            DialogUtils.showError("No code to run.", "Error");
             return;
         }
 
@@ -39,10 +39,10 @@ public class CodeRunner {
             if (executor != null) {
                 executor.execute(code, fileName, tempDir);
             } else {
-                ErrDialog.showError("No executor available for: " + language);
+                DialogUtils.showError("No executor available for: " + language, "No executor available");
             }
         } catch (IOException e) {
-            ErrDialog.showError("Failed to create temporary directory: " + e.getMessage());
+            DialogUtils.showError("Failed to create temporary directory: " + e.getMessage(), "Error");
         }
     }
 

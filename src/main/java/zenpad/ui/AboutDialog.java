@@ -1,8 +1,8 @@
 package zenpad.ui;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+
+import zenpad.utils.DialogUtils;
 
 /**
  * Displays an "About" dialog with information about the application.
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * </p>
  */
 public class AboutDialog {
-    public static void show(JFrame parent) {
+    public static void show() {
         String message = "<html>"
             + "<strong>ZenPad</strong>"
             + "<p>Version 1.2-SNAPSHOT<br>"
@@ -20,13 +20,6 @@ public class AboutDialog {
             + "</html>";
 
         ImageIcon icon = new ImageIcon(AboutDialog.class.getResource("/icons/64x64.png"));
-            
-        JOptionPane.showMessageDialog(
-            parent,
-            message,
-            "About",
-            JOptionPane.INFORMATION_MESSAGE,
-            icon
-        );
+        DialogUtils.showCustomDialog(message, "About", icon);
     }
 }

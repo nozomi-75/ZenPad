@@ -1,6 +1,5 @@
 package zenpad.controllers;
 
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -19,6 +18,7 @@ public class ToolbarController implements ToolbarView.Listener {
     private final TabManager tabManager;
     private final CodeRunner codeRunner;
     private final NotePanel notePanel;
+    @SuppressWarnings("unused")
     private final JFrame parentFrame;
     private final ToolbarView view;
     
@@ -81,7 +81,7 @@ public class ToolbarController implements ToolbarView.Listener {
     
     @Override
     public void onShowAbout() {
-        AboutDialog.show(parentFrame);
+        AboutDialog.show();
     }
     
     public ToolbarView getView() {

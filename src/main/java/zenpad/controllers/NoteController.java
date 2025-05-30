@@ -10,11 +10,11 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import zenpad.models.NoteModel;
+import zenpad.utils.DialogUtils;
 import zenpad.views.NoteView;
 
 public class NoteController {
@@ -138,12 +138,12 @@ public class NoteController {
                             model.getCurrentFilePath().startsWith("samples/"))) {
                             model.setCurrentFilePath(savePath);
                         }
-                        JOptionPane.showMessageDialog(null, "Note successfully saved.", "Save Notes", JOptionPane.INFORMATION_MESSAGE);
+                        DialogUtils.showInfo("Note saved successfully.", "Save notes");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Failed to save notes.", "Save Notes", JOptionPane.ERROR_MESSAGE);
+                        DialogUtils.showError("Failed to save notes.", "Error");
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Failed to save notes: " + e.getMessage(), "Save Notes", JOptionPane.ERROR_MESSAGE);
+                    DialogUtils.showError("Failed to save notes: " +e.getMessage(), "Error");
                 }
             }
         }.execute();
