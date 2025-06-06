@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import zenpad.misc.DialogUtils;
+import zenpad.misc.DialogFactory;
 
 public class NoteController {
     private final NoteModel model;
@@ -136,12 +136,12 @@ public class NoteController {
                             model.getCurrentFilePath().startsWith("samples/"))) {
                             model.setCurrentFilePath(savePath);
                         }
-                        DialogUtils.showInfo("Note saved successfully.", "Save notes");
+                        DialogFactory.showInfo("Note saved successfully.", "Save notes");
                     } else {
-                        DialogUtils.showError("Failed to save notes.", "Error");
+                        DialogFactory.showError("Failed to save notes.", "Error");
                     }
                 } catch (Exception e) {
-                    DialogUtils.showError("Failed to save notes: " +e.getMessage(), "Error");
+                    DialogFactory.showError("Failed to save notes: " +e.getMessage(), "Error");
                 }
             }
         }.execute();

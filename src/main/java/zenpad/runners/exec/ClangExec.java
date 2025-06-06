@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-import zenpad.misc.DialogUtils;
+import zenpad.misc.DialogFactory;
 import zenpad.misc.LogUtils;
 import zenpad.runners.TerminalLauncher;
 
@@ -13,7 +13,7 @@ public class ClangExec implements CodeExec {
     @Override
     public boolean execute(String code, String fileName, File tempDir) {
         if (!fileName.endsWith(".c")) {
-            DialogUtils.showError("The file is not a C (.c) file.", "Error");
+            DialogFactory.showError("The file is not a C (.c) file.", "Error");
             return false;
         }
 
@@ -31,7 +31,7 @@ public class ClangExec implements CodeExec {
 
             if (compile.exitValue() != 0) {
                 LogUtils.logError(compile.getErrorStream());
-                DialogUtils.showError("C compilation failed. See compiler-error.log.", "Compilation error");
+                DialogFactory.showError("C compilation failed. See compiler-error.log.", "Compilation error");
                 return false;
             }
 
@@ -39,7 +39,7 @@ public class ClangExec implements CodeExec {
             return true;
 
         } catch (IOException | InterruptedException e) {
-            DialogUtils.showError("Error running C code: " + e.getMessage(), "Error");
+            DialogFactory.showError("Error running C code: " + e.getMessage(), "Error");
             return false;
         }
     }

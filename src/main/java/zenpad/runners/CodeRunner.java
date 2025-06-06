@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-import zenpad.misc.DialogUtils;
+import zenpad.misc.DialogFactory;
 import zenpad.runners.exec.*;
 import zenpad.tab.TabManager;
 
@@ -25,11 +25,11 @@ public class CodeRunner {
         String language = inferLanguageFromFileName(fileName);
 
         if (language == null) {
-            DialogUtils.showError("Unsupported file type for execution.", "Error");
+            DialogFactory.showError("Unsupported file type for execution.", "Error");
             return;
         }
         if (code == null || code.trim().isEmpty()) {
-            DialogUtils.showError("No code to run.", "Error");
+            DialogFactory.showError("No code to run.", "Error");
             return;
         }
 
@@ -39,10 +39,10 @@ public class CodeRunner {
             if (executor != null) {
                 executor.execute(code, fileName, tempDir);
             } else {
-                DialogUtils.showError("No executor available for: " + language, "No executor available");
+                DialogFactory.showError("No executor available for: " + language, "No executor available");
             }
         } catch (IOException e) {
-            DialogUtils.showError("Failed to create temporary directory: " + e.getMessage(), "Error");
+            DialogFactory.showError("Failed to create temporary directory: " + e.getMessage(), "Error");
         }
     }
 

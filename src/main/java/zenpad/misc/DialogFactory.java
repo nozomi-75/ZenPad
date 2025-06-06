@@ -3,7 +3,7 @@ package zenpad.misc;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
-public class DialogUtils {
+public class DialogFactory {
     public static void showError(String message, String windowTitle) {
         JOptionPane.showMessageDialog(null, message, windowTitle, JOptionPane.ERROR_MESSAGE);
     }

@@ -2,7 +2,7 @@ package zenpad.ui;
 
 import javax.swing.ImageIcon;
 
-import zenpad.misc.DialogUtils;
+import zenpad.misc.DialogFactory;
 
 /**
  * Displays an "About" dialog with information about the application.
@@ -20,6 +20,6 @@ public class AboutDialog {
             + "</html>";
 
         ImageIcon icon = new ImageIcon(AboutDialog.class.getResource("/icons/64x64.png"));
-        DialogUtils.showCustomDialog(message, "About", icon);
+        DialogFactory.showCustomDialog(message, "About", icon);
     }
 }
