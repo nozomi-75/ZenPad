@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import zenpad.models.Branch;
-import zenpad.models.SampleBranches;
+import zenpad.branch.Branch;
+import zenpad.branch.SampleBranches;
 
 public class FileOpenerModel {
 

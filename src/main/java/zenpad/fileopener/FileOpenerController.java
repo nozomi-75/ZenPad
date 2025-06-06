@@ -8,7 +8,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
-import zenpad.utils.RTextHelper;
+import zenpad.utils.RTextFactory;
 
 public class FileOpenerController {
 
@@ -25,7 +25,7 @@ public class FileOpenerController {
                     String language = CodeRunner.inferLanguageFromFileName(file.filePath);
                     tabManager.openNewTab(file.filePath, file.displayName, file.noteFile, language);
                     textPanel.loadTextFromResource(file.noteFile);
-                    RTextHelper.applyRSyntaxTheme(textPanel.getTextArea());
+                    RTextFactory.applyRSyntaxTheme(textPanel.getTextArea());
                 }
             }
         });

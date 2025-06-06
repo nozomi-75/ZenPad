@@ -78,9 +78,9 @@ public class LafManager {
                 SwingUtilities.updateComponentTreeUI(window);
             }
             for (EditorTab tab : tabManager.getOpenTabs()) {
-                RTextHelper.applyRSyntaxTheme(tab.getCodeArea());
+                RTextFactory.applyRSyntaxTheme(tab.getCodeArea());
             }
-            RTextHelper.applyRSyntaxTheme(notePanel.getTextArea());
+            RTextFactory.applyRSyntaxTheme(notePanel.getTextArea());
             if (toolbar != null) {
                 SwingUtilities.updateComponentTreeUI(toolbar.getTopLevelAncestor());
             }

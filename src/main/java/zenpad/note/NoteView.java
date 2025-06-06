@@ -8,7 +8,7 @@ import javax.swing.SwingUtilities;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import zenpad.utils.RTextHelper;
+import zenpad.utils.RTextFactory;
 
 public class NoteView {
     private JPanel notePanel;
@@ -19,7 +19,7 @@ public class NoteView {
         notePanel = new JPanel(new BorderLayout());
 
         textArea = new RSyntaxTextArea();
-        RTextHelper.configureDefaults(textArea, false);
+        RTextFactory.configureDefaults(textArea, false);
         textArea.setSyntaxEditingStyle(org.fife.ui.rsyntaxtextarea.SyntaxConstants.SYNTAX_STYLE_MARKDOWN);
 
         scrollPane = new RTextScrollPane(textArea);

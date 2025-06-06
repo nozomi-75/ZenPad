@@ -8,7 +8,7 @@ import org.fife.ui.rsyntaxtextarea.Theme;
 
 import zenpad.toolbar.Toolbar;
 
-public class RTextHelper {
+public class RTextFactory {
     @SuppressWarnings("unused")
     private boolean setEditable;
 
@@ -51,7 +51,7 @@ public class RTextHelper {
             ? "/org/fife/ui/rsyntaxtextarea/themes/dark.xml"
             : "/org/fife/ui/rsyntaxtextarea/themes/vs.xml";
         
-        try (InputStream in = RTextHelper.class.getResourceAsStream(themePath)) {
+        try (InputStream in = RTextFactory.class.getResourceAsStream(themePath)) {
             Theme theme = Theme.load(in);
             theme.apply(textArea);
             setFontJetBrains(textArea);

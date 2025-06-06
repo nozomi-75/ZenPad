@@ -8,7 +8,7 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import zenpad.utils.RTextHelper;
+import zenpad.utils.RTextFactory;
 
 public class EditorView {
     private JPanel panel;
@@ -18,7 +18,7 @@ public class EditorView {
     public EditorView(String language) {
         panel = new JPanel(new BorderLayout());
         codeArea = new RSyntaxTextArea();
-        RTextHelper.configureDefaults(codeArea, true);
+        RTextFactory.configureDefaults(codeArea, true);
         codeArea.setSyntaxEditingStyle(getSyntaxStyleForLanguage(language));
 
         scrollPane = new RTextScrollPane(codeArea);
@@ -46,7 +46,7 @@ public class EditorView {
 
     public void applyThemeIfNeeded(String themeName) {
         if (!themeName.equals(codeArea.getClientProperty("theme"))) {
-            RTextHelper.applyRSyntaxTheme(codeArea);
+            RTextFactory.applyRSyntaxTheme(codeArea);
             codeArea.putClientProperty("theme", themeName);
         }
     }
