@@ -1,8 +1,11 @@
-package zenpad.models;
+package zenpad.fileopener;
 
 import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import zenpad.models.Branch;
+import zenpad.models.SampleBranches;
 
 public class FileOpenerModel {
 

@@ -1,11 +1,10 @@
-package zenpad.controllers;
+package zenpad.fileopener;
 
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import zenpad.models.FileOpenerModel;
 import zenpad.runners.CodeRunner;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;

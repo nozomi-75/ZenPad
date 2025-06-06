@@ -1,10 +1,9 @@
-package zenpad.ui;
+package zenpad.fileopener;
 
 import javax.swing.JPanel;
 
-import zenpad.controllers.FileOpenerController;
-import zenpad.models.FileOpenerModel;
-import zenpad.views.FileOpenerView;
+import zenpad.ui.NotePanel;
+import zenpad.ui.TabManager;
 
 /**
  * Facade for the file opener MVC components.

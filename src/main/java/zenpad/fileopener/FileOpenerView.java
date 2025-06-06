@@ -1,4 +1,4 @@
-package zenpad.views;
+package zenpad.fileopener;
 
 import java.awt.GridLayout;
 

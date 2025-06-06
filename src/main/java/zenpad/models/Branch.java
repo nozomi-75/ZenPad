@@ -1,6 +1,6 @@
 package zenpad.models;
 
-import zenpad.ui.FileOpenerPanel;
+import zenpad.fileopener.FileOpenerPanel;
 
 /**
  * Branch class represents a branch in the file tree structure.

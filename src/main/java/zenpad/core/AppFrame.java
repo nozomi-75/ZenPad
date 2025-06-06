@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
+import zenpad.fileopener.FileOpenerPanel;
 import zenpad.runners.CodeRunner;
-import zenpad.ui.FileOpenerPanel;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
 import zenpad.utils.ComponentFactory;
