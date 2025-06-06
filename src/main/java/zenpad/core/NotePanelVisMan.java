@@ -26,11 +26,11 @@ public class NotePanelVisMan {
 
         if (tabManager.getOpenTabs().isEmpty()) {
             innerSplitPane.setBottomComponent(null);
-            toolbar.setSaveNotesEnabled(false);
+            toolbar.setButtonEnabled(false);
         } else {
             innerSplitPane.setBottomComponent(notePanel.getNotePanel());
             notePanel.updateTheme();
-            toolbar.setSaveNotesEnabled(true);
+            toolbar.setButtonEnabled(true);
             if (wasCollapsed) {
                 innerSplitPane.setDividerLocation(0.70);
                 return;

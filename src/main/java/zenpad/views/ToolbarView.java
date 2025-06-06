@@ -13,6 +13,7 @@ public class ToolbarView {
     private JToggleButton themeToggleButton;
     private JToggleButton editNotesToggleButton;
     private JButton saveNotesButton;
+    private JButton runButton;
     
     private Listener listener;
     
@@ -40,9 +41,10 @@ public class ToolbarView {
         return toolbar;
     }
     
-    public void setSaveNotesEnabled(boolean enabled) {
+    public void setToolbarButtonEnabled(boolean enabled) {
         if (saveNotesButton != null) {
             saveNotesButton.setEnabled(enabled);
+            runButton.setEnabled(enabled);
         }
     }
     
@@ -54,7 +56,10 @@ public class ToolbarView {
     
     private void initToolbarComponents() {
         toolbar.add(ButtonFactory.createButton("Copy", () -> listener.onCopy()));
-        toolbar.add(ButtonFactory.createButton("Run", () -> listener.onRun()));
+
+        runButton = ButtonFactory.createButton("Run", () -> listener.onRun());
+        toolbar.add(runButton);
+
         toolbar.add(ButtonFactory.createButton("Font+", () -> listener.onFontSizeChange(1)));
         toolbar.add(ButtonFactory.createButton("Font-", () -> listener.onFontSizeChange(-1)));
         toolbar.add(ButtonFactory.createButton("Reset", () -> listener.onResetFontSize()));

@@ -26,7 +26,7 @@ public class Toolbar {
         return view.getToolbar();
     }
 
-    public void setSaveNotesEnabled(boolean enabled) {
-        controller.setSaveNotesEnabled(enabled);
+    public void setButtonEnabled(boolean enabled) {
+        controller.setToolbarButtonEnabled(enabled);
     }
 }

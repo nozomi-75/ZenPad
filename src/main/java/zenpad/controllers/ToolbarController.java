@@ -36,8 +36,8 @@ public class ToolbarController implements ToolbarView.Listener {
         return view.getToolbar();
     }
     
-    public void setSaveNotesEnabled(boolean enabled) {
-        view.setSaveNotesEnabled(enabled);
+    public void setToolbarButtonEnabled(boolean enabled) {
+        view.setToolbarButtonEnabled(enabled);
     }
     
     @Override
