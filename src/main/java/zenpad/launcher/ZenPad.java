@@ -3,7 +3,7 @@ package zenpad.launcher;
 import javax.swing.SwingUtilities;
 
 import zenpad.core.AppFrame;
-import zenpad.utils.LafManager;
+import zenpad.misc.LafManager;
 
 /**
  * This is the main entry point for the application.

@@ -2,7 +2,7 @@ package zenpad.ui;
 
 import javax.swing.ImageIcon;
 
-import zenpad.utils.DialogUtils;
+import zenpad.misc.DialogUtils;
 
 /**
  * Displays an "About" dialog with information about the application.

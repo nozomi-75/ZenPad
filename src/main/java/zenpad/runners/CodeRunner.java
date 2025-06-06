@@ -6,9 +6,9 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
+import zenpad.misc.DialogUtils;
 import zenpad.runners.exec.*;
 import zenpad.tab.TabManager;
-import zenpad.utils.DialogUtils;
 
 public class CodeRunner {
     private final Map<String, CodeExec> executors = new HashMap<>();

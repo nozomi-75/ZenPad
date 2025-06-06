@@ -9,12 +9,12 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
 import zenpad.fileopener.FileOpenerPanel;
+import zenpad.misc.ComponentFactory;
+import zenpad.misc.NoteSyncManager;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
 import zenpad.toolbar.Toolbar;
-import zenpad.utils.ComponentFactory;
-import zenpad.utils.NoteSyncManager;
 
 /**
  * AppFrame is the main application window that contains the tabbed pane and the file opener panel.

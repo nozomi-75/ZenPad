@@ -5,10 +5,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import zenpad.misc.RTextFactory;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
-import zenpad.utils.RTextFactory;
 
 public class FileOpenerController {
 

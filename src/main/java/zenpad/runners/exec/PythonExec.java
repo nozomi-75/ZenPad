@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
+import zenpad.misc.DialogUtils;
 import zenpad.runners.TerminalLauncher;
-import zenpad.utils.DialogUtils;
 
 public class PythonExec implements CodeExec {
     @Override

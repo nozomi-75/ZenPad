@@ -7,11 +7,11 @@ import java.awt.datatransfer.StringSelection;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
+import zenpad.misc.LafManager;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
 import zenpad.ui.AboutDialog;
-import zenpad.utils.LafManager;
 
 public class ToolbarController implements ToolbarView.Listener {
     private final TabManager tabManager;

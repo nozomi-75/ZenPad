@@ -8,7 +8,7 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import zenpad.utils.RTextFactory;
+import zenpad.misc.RTextFactory;
 
 public class EditorView {
     private JPanel panel;

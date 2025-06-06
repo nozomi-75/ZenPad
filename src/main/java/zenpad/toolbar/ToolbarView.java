@@ -9,7 +9,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 
-import zenpad.utils.ButtonFactory;
+import zenpad.misc.ButtonFactory;
 
 public class ToolbarView {
     // This toolbar

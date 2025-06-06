@@ -1,4 +1,4 @@
-package zenpad.utils;
+package zenpad.misc;
 
 import java.io.File;
 import java.io.IOException;

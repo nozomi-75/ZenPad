@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
+import zenpad.misc.DialogUtils;
+import zenpad.misc.LogUtils;
 import zenpad.runners.TerminalLauncher;
-import zenpad.utils.DialogUtils;
-import zenpad.utils.LogUtils;
 
 public class ClangExec implements CodeExec {
     @Override
