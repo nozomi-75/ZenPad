@@ -23,6 +23,7 @@ import zenpad.misc.factory.ButtonFactory;
  */
 public class WelcomeDialog extends JDialog {
     private static final String PREF_KEY = "zenpad_welcome_dialog_shown";
+    private Preferences prefs;
 
     public static void showIfNeeded(Frame parent) {
         Preferences prefs = Preferences.userRoot().node("ZenPad");
@@ -34,12 +35,20 @@ public class WelcomeDialog extends JDialog {
 
     private WelcomeDialog(Frame parent, Preferences prefs) {
         super(parent, "Welcome to ZenPad", true);
+        this.prefs = prefs;
+        initializePanel();
+        setupLayout();
+        setLocationRelativeTo(parent);
+    }
+
+    private void initializePanel() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(500, 250);
         setResizable(false);
-        setLocationRelativeTo(parent);
         setLayout(new BorderLayout(10, 10));
+    }
 
+    private JLabel createMessageLabel() {
         JLabel messageLabel = new JLabel(
             "<html><div>" +
             "<b>Welcome to ZenPad!</b><br><br>" +
@@ -50,8 +59,11 @@ public class WelcomeDialog extends JDialog {
             "</div></html>"
         );
         messageLabel.setBorder(new EmptyBorder(10, 15, 10, 15));
+        return messageLabel;
+    }
 
-        JCheckBox dontShowAgain = new JCheckBox("Don't show this message again");
+    private JPanel createActionPanel() {
+        JCheckBox dontShowAgain = new JCheckBox(" Don't show this message again");
 
         JButton okButton = ButtonFactory.createSizedButton("OK", () -> {
             if (dontShowAgain.isSelected()) {
@@ -60,12 +72,15 @@ public class WelcomeDialog extends JDialog {
             dispose();
         }, new Dimension(60, 25));
 
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        buttonPanel.add(dontShowAgain, BorderLayout.WEST);
-        buttonPanel.add(okButton, BorderLayout.EAST);
+        JPanel actionPanel = new JPanel(new BorderLayout());
+        actionPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+        actionPanel.add(dontShowAgain, BorderLayout.WEST);
+        actionPanel.add(okButton, BorderLayout.EAST);
+        return actionPanel;
+    }
 
-        add(messageLabel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+    private void setupLayout() {
+        add(createMessageLabel(), BorderLayout.CENTER);
+        add(createActionPanel(), BorderLayout.SOUTH);
     }
 }
