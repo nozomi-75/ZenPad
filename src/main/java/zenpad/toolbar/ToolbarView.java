@@ -29,25 +29,14 @@ public class ToolbarView {
 
     private List<JButton> actionButtons;
     
-    private Listener listener;
-    
-    public interface Listener {
-        void onCopy();
-        void onRun();
-        void onFontSizeChange(int delta);
-        void onResetFontSize();
-        void onToggleTheme(boolean darkMode);
-        void onSaveNotes();
-        void onToggleEditNotes(boolean editable);
-        void onShowAbout();
-    }
+    private ToolbarListener listener;
     
     public ToolbarView() {
         initializeToolbar();
         initToolbarComponents();
     }
     
-    public void setListener(Listener listener) {
+    public void setListener(ToolbarListener listener) {
         this.listener = listener;
     }
     

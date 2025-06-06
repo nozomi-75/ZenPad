@@ -18,6 +18,16 @@ public class CodeModel {
         this.language = language;
     }
 
+    /**
+     * Loads the content of a resource file located in the classpath as a string.
+     * <p>
+     * The file is read line by line using a buffered reader and returned as a single
+     * string with newline characters preserved.
+     * </p>
+     *
+     * @return the full contents of the file as a string
+     * @throws Exception if the file cannot be found or read
+     */
     public String loadFileContent() throws Exception {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
         if (inputStream == null) {

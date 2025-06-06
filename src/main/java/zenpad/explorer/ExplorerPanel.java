@@ -6,7 +6,11 @@ import zenpad.note.NotePanel;
 import zenpad.tab.TabManager;
 
 /**
- * Facade for the file opener MVC components.
+ * Facade class that wires together the MVC components of the file explorer panel in ZenPad.
+ * <p>
+ * This panel displays a file browser that allows users to select and open code samples.
+ * Internally, it sets up the {@link ExplorerModel}, {@link ExplorerView}, and {@link ExplorerController},
+ * and exposes the assembled {@code JPanel} for integration into the main application frame.
  */
 public class ExplorerPanel {
     private JPanel panel;

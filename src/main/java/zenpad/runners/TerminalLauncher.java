@@ -5,6 +5,16 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Utility class to launch terminal processes in the system's native terminal emulator.
+ * <p>
+ * Supports launching commands in:
+ * <ul>
+ *   <li>Windows: via {@code cmd.exe}</li>
+ *   <li>macOS: via AppleScript to invoke Terminal.app</li>
+ *   <li>Linux: via a detected terminal emulator (e.g., GNOME Terminal, Konsole, XTerm, etc.)</li>
+ * </ul>
+ */
 public class TerminalLauncher {
     public static void launchCommand(File workingDir, String command) throws IOException {
         String os = System.getProperty("os.name").toLowerCase();

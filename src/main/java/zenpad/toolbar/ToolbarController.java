@@ -13,7 +13,7 @@ import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
 
-public class ToolbarController implements ToolbarView.Listener {
+public class ToolbarController implements ToolbarListener {
     private final TabManager tabManager;
     private final CodeRunner codeRunner;
     private final NotePanel notePanel;

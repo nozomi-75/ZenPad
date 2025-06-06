@@ -13,7 +13,7 @@ import java.io.InputStream;
  * </p>
  *
  * <p>
- * Example usage:
+ * <b>Example usage:</b>
  * <pre>
  *     Font customFont = FontUtils.loadFont("/fonts/MyFont.ttf", 14f);
  * </pre>

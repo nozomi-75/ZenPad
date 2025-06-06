@@ -7,13 +7,13 @@ import zenpad.tab.TabManager;
 import zenpad.toolbar.Toolbar;
 
 /**
- * NotePanelVisMan provides a static utility method for managing the visibility and state
- * of the note panel area within the application's {@link zenpad.core.LayoutManager#createInnerSplitPane}.
- * <p>
- * This class ensures that the note panel is shown or hidden appropriately based on
- * whether any tabs are open, updates the note panel's theme, and enables or disables
- * the "Save Notes" toolbar button as needed.
- * </p>
+ * Provides a static utility method for managing the visibility and state
+ * of the note panel area within {@link LayoutManager#createInnerSplitPane}.
+ * <ul>
+ *  <li>Show or hide note panel based on whether any tabs are open</li>
+ *  <li>Update the note panel's theme properly, if necessary</li>
+ *  <li>Enables or disables the toolbar buttons as needed</li>
+ * </ul
  */
 public class NotePanelMediator {
     public static void updateNotePanelVis(

@@ -10,6 +10,13 @@ import zenpad.misc.factory.DialogFactory;
 import zenpad.runners.exec.*;
 import zenpad.tab.TabManager;
 
+/**
+ * Manages code execution for supported languages.
+ * <p>
+ * This class serves as a coordinator that maps programming languages to their respective
+ * {@link CodeExec} implementations and executes code from the currently selected tab
+ * in the application.
+ */
 public class CodeRunner {
     private final Map<String, CodeExec> executors = new HashMap<>();
 
@@ -19,6 +26,10 @@ public class CodeRunner {
         executors.put("C", new ClangExec());
     }
 
+    /**
+     * Executes the code in the currently selected tab using the appropriate executor.
+     * @param tabManager the {@link TabManager} used to retrieve the selected code and file name
+     */
     public void runSelectedTab(TabManager tabManager) {
         String code = tabManager.getSelectedCode();
         String fileName = tabManager.getSelectedFileName();
@@ -45,7 +56,13 @@ public class CodeRunner {
             DialogFactory.showError("Failed to create temporary directory: " + e.getMessage(), "Error");
         }
     }
-
+    
+    /**
+     * Infers the programming language from a given file name based on its extension.
+     *
+     * @param fileName the file name (e.g., {@code HelloWorld.java})
+     * @return the inferred language ("Java", "Python", or "C"), or {@code null} if unsupported
+     */
     public static String inferLanguageFromFileName(String fileName) {
         if (fileName != null && fileName.contains(".")) {
             String ext = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();

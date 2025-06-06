@@ -17,7 +17,7 @@ public class Toolbar {
 
     public Toolbar(TabManager tabManager, CodeRunner codeRunner, NotePanel notePanel, JFrame parentFrame) {
         controller = new ToolbarController(tabManager, codeRunner, notePanel, parentFrame);
-        view = controller.getView(); // internal getter, shown below
+        view = controller.getView();
     }
 
     public JToolBar getToolbar() {

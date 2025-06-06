@@ -9,7 +9,12 @@ import zenpad.tab.TabManager;
 import javax.swing.JPanel;
 
 /**
- * Facade class for using MVC-based EditorTab.
+ * Facade class that assembles and exposes the MVC components of a code editing tab in ZenPad.
+ * <p>
+ * {@code CodePanel} wires together the {@code CodeModel}, {@code CodeView}, and {@code CodeController},
+ * and provides a simplified interface for external classes to interact with the code editor.
+ * It is used to initialize and manage a single editor tab associated with a specific file and language.
+ * </p>
  */
 public class CodePanel {
     private CodeModel model;

@@ -11,9 +11,9 @@ public class TabView {
         this.tabbedPane = tabbedPane;
     }
 
-    public void addEditorTab(CodePanel editorTab, String title) {
-        tabbedPane.addTab(title, editorTab.getPanel());
-        tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, editorTab.getTabHeader());
+    public void addCodePanel(CodePanel codePanel, String title) {
+        tabbedPane.addTab(title, codePanel.getPanel());
+        tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, codePanel.getTabHeader());
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
     }
 

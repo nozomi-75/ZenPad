@@ -20,6 +20,15 @@ public class CodeController {
         loadFileContentAsync();
     }
 
+    /**
+     * Loads file content asynchronously using a {@link SwingWorker} to prevent thread-blocking.
+     * <ul>
+     *   <li><b>doInBackground:</b> Reads the content from the model and publishes it to the UI thread.</li>
+     *   <li><b>process:</b> Receives content or error message and updates the view accordingly.</li>
+     * </ul>
+     * 
+     * @see CodeModel#loadFileContent()
+     */
     private void loadFileContentAsync() {
         new SwingWorker<Void, String>() {
             @Override

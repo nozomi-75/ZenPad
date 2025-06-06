@@ -6,6 +6,12 @@ import javax.swing.UIManager;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
+/**
+ * Facade class for the MVC-based note-taking component in ZenPad.
+ * <p>
+ * This panel displays and manages an editable note area, which supports syntax highlighting.
+ * </p>
+ */
 public class NotePanel {
     private final NoteView view;
     private final NoteModel model;
