@@ -8,12 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
+import zenpad.explorer.ExplorerPanel;
+import zenpad.misc.factory.ComponentFactory;
+import zenpad.misc.manager.NoteSyncManager;
+import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
-import zenpad.ui.FileOpenerPanel;
-import zenpad.ui.NotePanel;
-import zenpad.ui.TabManager;
-import zenpad.utils.ComponentFactory;
-import zenpad.utils.NoteSyncManager;
+import zenpad.tab.TabManager;
+import zenpad.toolbar.Toolbar;
 
 /**
  * AppFrame is the main application window that contains the tabbed pane and the file opener panel.
@@ -21,7 +22,7 @@ import zenpad.utils.NoteSyncManager;
  * The frame is created with a title and has a default close operation to exit the application.
  * 
  * @see TabManager
- * @see FileOpenerPanel
+ * @see ExplorerPanel
  * @param title The title of the application window.
  */
 
@@ -32,8 +33,8 @@ public class AppFrame extends JFrame {
     // Instance of TabManager object for external tab management logic
     private TabManager tabManager;
 
-    // Instance of FileOpenerPanel object for sidebar management
-    private FileOpenerPanel fileOpenerPanel;
+    // Instance of ExplorerPanel object for sidebar management
+    private ExplorerPanel explorerPanel;
 
     // Instance of CodeRunner object for code execution
     private CodeRunner codeRunner;
@@ -71,7 +72,7 @@ public class AppFrame extends JFrame {
 
         tabManager = new TabManager(tabbedPane, this::updateNotePanelVis);
         codeRunner = new CodeRunner();
-        fileOpenerPanel = new FileOpenerPanel(tabManager, notePanel);
+        explorerPanel = new ExplorerPanel(tabManager, notePanel);
 
         addTabSwitchListener();
     }
@@ -105,11 +106,11 @@ public class AppFrame extends JFrame {
     }
 
     private void setupOuterSplit() {
-        outerSplitPane = LayoutManager.createOuterSplitPane(fileOpenerPanel.getPanel(), innerSplitPane);
+        outerSplitPane = LayoutManager.createOuterSplitPane(explorerPanel.getPanel(), innerSplitPane);
     }
 
     public void updateNotePanelVis() {
-        NotePanelVisMan.updateNotePanelVis(
+        NotePanelMediator.updateNotePanelVis(
             innerSplitPane,
             tabManager,
             notePanel,

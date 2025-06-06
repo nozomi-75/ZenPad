@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
+import zenpad.misc.factory.DialogFactory;
 import zenpad.runners.TerminalLauncher;
-import zenpad.utils.DialogUtils;
 
 public class PythonExec implements CodeExec {
     @Override
     public boolean execute(String code, String fileName, File tempDir) {
         if (!fileName.endsWith(".py")) {
-            DialogUtils.showError("The file is not a Python (.py) file.", "Error");
+            DialogFactory.showError("The file is not a Python (.py) file.", "Error");
             return false;
         }
 
@@ -24,7 +24,7 @@ public class PythonExec implements CodeExec {
             return true;
 
         } catch (IOException e) {
-            DialogUtils.showError("Error running Python: " + e.getMessage(), "Error");
+            DialogFactory.showError("Error running Python: " + e.getMessage(), "Error");
             return false;
         }
     }

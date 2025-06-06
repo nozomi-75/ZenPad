@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
+import zenpad.misc.factory.DialogFactory;
+import zenpad.misc.util.LogUtility;
 import zenpad.runners.TerminalLauncher;
-import zenpad.utils.DialogUtils;
-import zenpad.utils.LogUtils;
 
 public class JavaExec implements CodeExec {
     @Override
     public boolean execute(String code, String fileName, File tempDir) {
         if (!fileName.endsWith(".java")) {
-            DialogUtils.showError("The file is not a Java (.java) file.", "Error");
+            DialogFactory.showError("The file is not a Java (.java) file.", "Error");
             return false;
         }
 
@@ -27,8 +27,8 @@ public class JavaExec implements CodeExec {
             compile.waitFor();
 
             if (compile.exitValue() != 0) {
-                LogUtils.logError(compile.getErrorStream());
-                DialogUtils.showError("Compilation failed. See compiler-error.log.", "Compilation error");
+                LogUtility.logError(compile.getErrorStream());
+                DialogFactory.showError("Compilation failed. See compiler-error.log.", "Compilation error");
                 return false;
             }
 
@@ -36,7 +36,7 @@ public class JavaExec implements CodeExec {
             return true;
 
         } catch (IOException | InterruptedException e) {
-            DialogUtils.showError("Error running Java: " + e.getMessage(), "Error");
+            DialogFactory.showError("Error running Java: " + e.getMessage(), "Error");
             return false;
         }
     }
