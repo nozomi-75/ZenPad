@@ -122,8 +122,4 @@ public class AppFrame extends JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/48x48.png"));
         setIconImage(icon.getImage());
     }
-
-    public void showWindow() {
-        setVisible(true);
-    }
 }

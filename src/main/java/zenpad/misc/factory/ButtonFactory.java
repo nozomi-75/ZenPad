@@ -1,5 +1,6 @@
 package zenpad.misc.factory;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.util.function.Consumer;
 
@@ -18,6 +19,14 @@ public class ButtonFactory {
         button.setFocusPainted(false);
         button.addActionListener(e -> action.run());
         button.setMargin(new Insets(2, 5, 2, 5));
+        return button;
+    }
+
+    public static JButton createSizedButton(String text, Runnable action, Dimension dimension) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.addActionListener(e -> action.run());
+        button.setPreferredSize(dimension);
         return button;
     }
 

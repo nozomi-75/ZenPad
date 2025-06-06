@@ -1,7 +1,9 @@
 package zenpad.core;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import zenpad.misc.dialog.WelcomeDialog;
 import zenpad.misc.manager.LafManager;
 
 /**
@@ -16,7 +18,9 @@ public class ZenPad {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LafManager.applyLightLaf();
-            new AppFrame("ZenPad").showWindow();
+            JFrame appFrame = new AppFrame("Zenpad");
+            appFrame.setVisible(true);
+            WelcomeDialog.showIfNeeded(appFrame);
         });
     }
 }

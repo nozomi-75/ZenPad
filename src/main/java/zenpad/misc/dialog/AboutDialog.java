@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.dialog;
 
 import javax.swing.ImageIcon;
 
