@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-public class LogUtils {
+public class LogUtility {
     public static void logError(InputStream errorStream) {
         try {
             String message = new String(errorStream.readAllBytes());

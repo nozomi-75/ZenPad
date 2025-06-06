@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-import zenpad.misc.LogUtils;
 import zenpad.misc.factory.DialogFactory;
+import zenpad.misc.util.LogUtility;
 import zenpad.runners.TerminalLauncher;
 
 public class ClangExec implements CodeExec {
@@ -30,7 +30,7 @@ public class ClangExec implements CodeExec {
             compile.waitFor();
 
             if (compile.exitValue() != 0) {
-                LogUtils.logError(compile.getErrorStream());
+                LogUtility.logError(compile.getErrorStream());
                 DialogFactory.showError("C compilation failed. See compiler-error.log.", "Compilation error");
                 return false;
             }

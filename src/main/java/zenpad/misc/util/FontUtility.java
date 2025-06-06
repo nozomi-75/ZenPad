@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.util;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -19,9 +19,9 @@ import java.io.InputStream;
  * </pre>
  * </p>
  */
-public class FontUtils {
+public class FontUtility {
     public static Font loadFont(String resourcePath, float size) {
-        try (InputStream getFont = FontUtils.class.getResourceAsStream(resourcePath)) {
+        try (InputStream getFont = FontUtility.class.getResourceAsStream(resourcePath)) {
             Font font = Font.createFont(Font.TRUETYPE_FONT, getFont).deriveFont(size);
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
             return font;

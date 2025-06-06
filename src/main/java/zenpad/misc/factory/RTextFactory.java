@@ -6,8 +6,8 @@ import java.io.InputStream;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 
-import zenpad.misc.FontUtils;
 import zenpad.misc.LafManager;
+import zenpad.misc.util.FontUtility;
 import zenpad.toolbar.Toolbar;
 
 public class RTextFactory {
@@ -63,6 +63,6 @@ public class RTextFactory {
     }
 
     public static void setFontJetBrains(RSyntaxTextArea textArea) {
-        textArea.setFont(FontUtils.loadFont("/fonts/JetBrainsMono-Regular.ttf", 14f));
+        textArea.setFont(FontUtility.loadFont("/fonts/JetBrainsMono-Regular.ttf", 14f));
     }
 }
