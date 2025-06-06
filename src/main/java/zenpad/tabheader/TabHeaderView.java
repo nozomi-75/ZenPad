@@ -1,4 +1,4 @@
-package zenpad.views;
+package zenpad.tabheader;
 
 import java.awt.Font;
 

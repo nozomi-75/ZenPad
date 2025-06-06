@@ -1,10 +1,10 @@
-package zenpad.ui;
+package zenpad.tabheader;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import zenpad.models.TabHeaderModel;
-import zenpad.views.TabHeaderView;
-import zenpad.controllers.TabHeaderController;
+import zenpad.ui.TabManager;
 
 public class TabHeader {
     private final TabHeaderModel model;
