@@ -1,5 +1,9 @@
 package zenpad.views;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
@@ -8,12 +12,22 @@ import javax.swing.border.EmptyBorder;
 import zenpad.utils.ButtonFactory;
 
 public class ToolbarView {
+    // This toolbar
     private JToolBar toolbar;
     
+    // Toggle buttons
     private JToggleButton themeToggleButton;
     private JToggleButton editNotesToggleButton;
-    private JButton saveNotesButton;
+
+    // Normal action buttons
+    private JButton copyButton;
     private JButton runButton;
+    private JButton plusButton;
+    private JButton minButton;
+    private JButton resetButton;
+    private JButton saveNotesButton;
+
+    private List<JButton> actionButtons;
     
     private Listener listener;
     
@@ -43,8 +57,8 @@ public class ToolbarView {
     
     public void setToolbarButtonEnabled(boolean enabled) {
         if (saveNotesButton != null) {
-            saveNotesButton.setEnabled(enabled);
-            runButton.setEnabled(enabled);
+            actionButtons = Arrays.asList(copyButton, runButton, plusButton, minButton, resetButton, saveNotesButton);
+            actionButtons.stream().forEach(button -> button.setEnabled(enabled));
         }
     }
     
@@ -55,28 +69,24 @@ public class ToolbarView {
     }
     
     private void initToolbarComponents() {
-        toolbar.add(ButtonFactory.createButton("Copy", () -> listener.onCopy()));
-
+        copyButton = ButtonFactory.createButton("Copy", () -> listener.onCopy());
         runButton = ButtonFactory.createButton("Run", () -> listener.onRun());
-        toolbar.add(runButton);
-
-        toolbar.add(ButtonFactory.createButton("Font+", () -> listener.onFontSizeChange(1)));
-        toolbar.add(ButtonFactory.createButton("Font-", () -> listener.onFontSizeChange(-1)));
-        toolbar.add(ButtonFactory.createButton("Reset", () -> listener.onResetFontSize()));
-        
-        ButtonFactory.createToggleButton("Dark mode", () -> {
-            boolean darkMode = themeToggleButton.isSelected();
-            listener.onToggleTheme(darkMode);
-        }, btn -> themeToggleButton = btn, toolbar);
-        
+        plusButton = ButtonFactory.createButton("Font+", () -> listener.onFontSizeChange(1));
+        minButton = ButtonFactory.createButton("Font-", () -> listener.onFontSizeChange(-1));
+        resetButton = ButtonFactory.createButton("Reset", () -> listener.onResetFontSize());
         saveNotesButton = ButtonFactory.createButton("Save notes", () -> listener.onSaveNotes());
-        toolbar.add(saveNotesButton);
+        Stream.of(copyButton, runButton, plusButton, minButton, resetButton, saveNotesButton).forEach(btn -> toolbar.add(btn));
         
         ButtonFactory.createToggleButton("Edit notes", () -> {
             boolean editable = editNotesToggleButton.isSelected();
             editNotesToggleButton.setText(editable ? "Lock notes" : "Edit notes");
             listener.onToggleEditNotes(editable);
         }, btn -> editNotesToggleButton = btn, toolbar);
+
+        ButtonFactory.createToggleButton("Dark mode", () -> {
+            boolean darkMode = themeToggleButton.isSelected();
+            listener.onToggleTheme(darkMode);
+        }, btn -> themeToggleButton = btn, toolbar);
         
         toolbar.add(ButtonFactory.createButton("About", () -> listener.onShowAbout()));
     }
