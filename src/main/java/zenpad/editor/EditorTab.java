@@ -1,14 +1,12 @@
-package zenpad.ui;
+package zenpad.editor;
 
 import javax.swing.JTabbedPane;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.JPanel;
+import zenpad.ui.TabManager;
 
-import zenpad.controllers.EditorController;
-import zenpad.models.EditorModel;
-import zenpad.views.EditorView;
+import javax.swing.JPanel;
 
 /**
  * Facade class for using MVC-based EditorTab.

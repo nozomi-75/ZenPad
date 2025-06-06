@@ -1,4 +1,4 @@
-package zenpad.models;
+package zenpad.editor;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

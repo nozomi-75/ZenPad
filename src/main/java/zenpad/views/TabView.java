@@ -2,7 +2,7 @@ package zenpad.views;
 
 import javax.swing.JTabbedPane;
 
-import zenpad.ui.EditorTab;
+import zenpad.editor.EditorTab;
 
 public class TabView {
     private final JTabbedPane tabbedPane;

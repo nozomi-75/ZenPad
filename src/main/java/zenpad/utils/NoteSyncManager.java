@@ -2,7 +2,7 @@ package zenpad.utils;
 
 import javax.swing.JTabbedPane;
 
-import zenpad.ui.EditorTab;
+import zenpad.editor.EditorTab;
 import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
 

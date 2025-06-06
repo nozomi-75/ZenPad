@@ -3,7 +3,7 @@ package zenpad.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import zenpad.ui.EditorTab;
+import zenpad.editor.EditorTab;
 
 public class TabController {
     private final List<EditorTab> openTabs = new ArrayList<>();

@@ -1,4 +1,4 @@
-package zenpad.views;
+package zenpad.editor;
 
 import java.awt.BorderLayout;
 

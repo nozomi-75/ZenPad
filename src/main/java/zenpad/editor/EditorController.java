@@ -1,14 +1,12 @@
-package zenpad.controllers;
+package zenpad.editor;
 
 import java.util.List;
 
 import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
 
-import zenpad.models.EditorModel;
 import zenpad.ui.TabHeader;
-import zenpad.ui.TabManager;
-import zenpad.views.EditorView;;
+import zenpad.ui.TabManager;;
 
 public class EditorController {
     private EditorModel model;
