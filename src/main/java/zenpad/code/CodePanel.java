@@ -1,4 +1,4 @@
-package zenpad.editor;
+package zenpad.code;
 
 import javax.swing.JTabbedPane;
 
@@ -11,15 +11,15 @@ import javax.swing.JPanel;
 /**
  * Facade class for using MVC-based EditorTab.
  */
-public class EditorTab {
-    private EditorModel model;
-    private EditorView view;
-    private EditorController controller;
+public class CodePanel {
+    private CodeModel model;
+    private CodeView view;
+    private CodeController controller;
 
-    public EditorTab(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile, String language) {
-        model = new EditorModel(filePath, noteFile, language);
-        view = new EditorView(language);
-        controller = new EditorController(model, view, tabbedPane, node, tabManager);
+    public CodePanel(String filePath, String node, JTabbedPane tabbedPane, TabManager tabManager, String noteFile, String language) {
+        model = new CodeModel(filePath, noteFile, language);
+        view = new CodeView(language);
+        controller = new CodeController(model, view, tabbedPane, node, tabManager);
     }
 
     // Exposed functionality

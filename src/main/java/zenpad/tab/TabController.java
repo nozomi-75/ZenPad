@@ -3,17 +3,17 @@ package zenpad.tab;
 import java.util.ArrayList;
 import java.util.List;
 
-import zenpad.editor.EditorTab;
+import zenpad.code.CodePanel;
 
 public class TabController {
-    private final List<EditorTab> openTabs = new ArrayList<>();
+    private final List<CodePanel> openTabs = new ArrayList<>();
     private final Runnable onTabsChanged;
 
     public TabController(Runnable onTabsChanged) {
         this.onTabsChanged = onTabsChanged;
     }
 
-    public void addTab(EditorTab tab) {
+    public void addTab(CodePanel tab) {
         openTabs.add(tab);
         notifyTabsChanged();
     }
@@ -25,11 +25,11 @@ public class TabController {
         }
     }
 
-    public List<EditorTab> getOpenTabs() {
+    public List<CodePanel> getOpenTabs() {
         return openTabs;
     }
 
-    public EditorTab getTabAt(int index) {
+    public CodePanel getTabAt(int index) {
         if (index >= 0 && index < openTabs.size()) {
             return openTabs.get(index);
         }
@@ -51,13 +51,13 @@ public class TabController {
     }
 
     public void changeAllFontSizes(int delta) {
-        for (EditorTab tab : openTabs) {
+        for (CodePanel tab : openTabs) {
             tab.changeFontSize(delta);
         }
     }
 
     public void resetAllFontSizes() {
-        for (EditorTab tab : openTabs) {
+        for (CodePanel tab : openTabs) {
             tab.resetFontSize();
         }
     }

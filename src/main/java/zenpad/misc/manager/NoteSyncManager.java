@@ -2,13 +2,13 @@ package zenpad.misc.manager;
 
 import javax.swing.JTabbedPane;
 
-import zenpad.editor.EditorTab;
+import zenpad.code.CodePanel;
 import zenpad.note.NotePanel;
 import zenpad.tab.TabManager;
 
 /**
  * NoteSyncManager provides static utility methods for synchronizing note content
- * between the shared {@link NotePanel} and individual {@link EditorTab} instances
+ * between the shared {@link NotePanel} and individual {@link CodePanel} instances
  * when switching tabs in the application.
  * <p>
  * This class ensures that any unsaved edits in the note area are retained per tab,
@@ -24,7 +24,7 @@ public class NoteSyncManager {
     ) {
         // Save note edits for the previous tab (if any tab was previously selected)
         if (lastSelectedTabIndex >= 0) {
-            EditorTab prevTab = tabManager.getEditorTabAt(lastSelectedTabIndex);
+            CodePanel prevTab = tabManager.getEditorTabAt(lastSelectedTabIndex);
             if (prevTab != null) {
                 // Store the current text from the shared NotePanel into the previous tab's memory
                 prevTab.setNoteContent(notePanel.getText());
@@ -34,7 +34,7 @@ public class NoteSyncManager {
         // Restore note content for the new tab
         int idx = tabbedPane.getSelectedIndex();
         if (idx >= 0) {
-            EditorTab editorTab = tabManager.getEditorTabAt(idx);
+            CodePanel editorTab = tabManager.getEditorTabAt(idx);
             if (editorTab != null) {
                 // Try to get any previously saved note content for this tab
                 String noteContent = editorTab.getNoteContent();

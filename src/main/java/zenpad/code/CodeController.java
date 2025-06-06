@@ -1,4 +1,4 @@
-package zenpad.editor;
+package zenpad.code;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import javax.swing.SwingWorker;
 import zenpad.tab.TabManager;
 import zenpad.tabheader.TabHeader;;
 
-public class EditorController {
-    private EditorModel model;
-    private EditorView view;
+public class CodeController {
+    private CodeModel model;
+    private CodeView view;
     private TabHeader tabHeader;
 
-    public EditorController(EditorModel model, EditorView view, JTabbedPane tabbedPane, String node, TabManager tabManager) {
+    public CodeController(CodeModel model, CodeView view, JTabbedPane tabbedPane, String node, TabManager tabManager) {
         this.model = model;
         this.view = view;
         this.tabHeader = new TabHeader(node, tabbedPane, view.getPanel(), tabManager);
@@ -47,7 +47,7 @@ public class EditorController {
     }
 
     // Public accessors
-    public EditorModel getModel() { return model; }
-    public EditorView getView() { return view; }
+    public CodeModel getModel() { return model; }
+    public CodeView getView() { return view; }
     public TabHeader getTabHeader() { return tabHeader; }
 }

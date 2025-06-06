@@ -1,17 +1,17 @@
-package zenpad.editor;
+package zenpad.code;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class EditorModel {
+public class CodeModel {
     private String fileName;
     private String filePath;
     private String noteFile;
     private String language;
     private String noteContent;
 
-    public EditorModel(String filePath, String noteFile, String language) {
+    public CodeModel(String filePath, String noteFile, String language) {
         this.filePath = filePath;
         this.fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
         this.noteFile = noteFile;

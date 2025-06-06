@@ -1,4 +1,4 @@
-package zenpad.editor;
+package zenpad.code;
 
 import java.awt.BorderLayout;
 
@@ -10,12 +10,12 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import zenpad.misc.factory.RTextFactory;
 
-public class EditorView {
+public class CodeView {
     private JPanel panel;
     private RSyntaxTextArea codeArea;
     private RTextScrollPane scrollPane;
 
-    public EditorView(String language) {
+    public CodeView(String language) {
         panel = new JPanel(new BorderLayout());
         codeArea = new RSyntaxTextArea();
         RTextFactory.configureDefaults(codeArea, true);

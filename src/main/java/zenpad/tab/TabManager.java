@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JTabbedPane;
 
-import zenpad.editor.EditorTab;
+import zenpad.code.CodePanel;
 
 public class TabManager {
     private final TabController controller;
@@ -18,7 +18,7 @@ public class TabManager {
     }
 
     public void openNewTab(String filePath, String node, String noteFile, String language) {
-        EditorTab newTab = new EditorTab(filePath, node, tabbedPane, this, noteFile, language);
+        CodePanel newTab = new CodePanel(filePath, node, tabbedPane, this, noteFile, language);
         controller.addTab(newTab);
         view.addEditorTab(newTab, node);
     }
@@ -28,7 +28,7 @@ public class TabManager {
         view.removeTab(index);
     }
 
-    public List<EditorTab> getOpenTabs() {
+    public List<CodePanel> getOpenTabs() {
         return controller.getOpenTabs();
     }
 
@@ -42,7 +42,7 @@ public class TabManager {
         return controller.getSelectedFileName(selectedIndex);
     }
 
-    public EditorTab getEditorTabAt(int index) {
+    public CodePanel getEditorTabAt(int index) {
         return controller.getTabAt(index);
     }
 

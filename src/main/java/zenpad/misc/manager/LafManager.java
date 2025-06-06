@@ -10,8 +10,8 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
+import zenpad.code.CodePanel;
 import zenpad.core.AppFrame;
-import zenpad.editor.EditorTab;
 import zenpad.misc.factory.RTextFactory;
 import zenpad.note.NotePanel;
 import zenpad.tab.TabManager;
@@ -78,7 +78,7 @@ public class LafManager {
             for (Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window);
             }
-            for (EditorTab tab : tabManager.getOpenTabs()) {
+            for (CodePanel tab : tabManager.getOpenTabs()) {
                 RTextFactory.applyRSyntaxTheme(tab.getCodeArea());
             }
             RTextFactory.applyRSyntaxTheme(notePanel.getTextArea());

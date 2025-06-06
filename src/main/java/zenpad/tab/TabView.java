@@ -2,7 +2,7 @@ package zenpad.tab;
 
 import javax.swing.JTabbedPane;
 
-import zenpad.editor.EditorTab;
+import zenpad.code.CodePanel;
 
 public class TabView {
     private final JTabbedPane tabbedPane;
@@ -11,7 +11,7 @@ public class TabView {
         this.tabbedPane = tabbedPane;
     }
 
-    public void addEditorTab(EditorTab editorTab, String title) {
+    public void addEditorTab(CodePanel editorTab, String title) {
         tabbedPane.addTab(title, editorTab.getPanel());
         tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, editorTab.getTabHeader());
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
