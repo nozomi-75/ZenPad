@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.factory;
 
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;

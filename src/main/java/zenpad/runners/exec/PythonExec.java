@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-import zenpad.misc.DialogFactory;
+import zenpad.misc.factory.DialogFactory;
 import zenpad.runners.TerminalLauncher;
 
 public class PythonExec implements CodeExec {

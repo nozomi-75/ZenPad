@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.factory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +6,8 @@ import java.io.InputStream;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 
+import zenpad.misc.FontUtils;
+import zenpad.misc.LafManager;
 import zenpad.toolbar.Toolbar;
 
 public class RTextFactory {

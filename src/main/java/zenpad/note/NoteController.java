@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import zenpad.misc.DialogFactory;
+import zenpad.misc.factory.DialogFactory;
 
 public class NoteController {
     private final NoteModel model;

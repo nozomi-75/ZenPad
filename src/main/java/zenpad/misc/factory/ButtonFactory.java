@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.factory;
 
 import java.awt.Insets;
 import java.util.function.Consumer;

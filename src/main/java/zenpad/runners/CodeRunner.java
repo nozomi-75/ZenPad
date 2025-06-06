@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-import zenpad.misc.DialogFactory;
+import zenpad.misc.factory.DialogFactory;
 import zenpad.runners.exec.*;
 import zenpad.tab.TabManager;
 

@@ -9,8 +9,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
 import zenpad.fileopener.FileOpenerPanel;
-import zenpad.misc.ComponentFactory;
 import zenpad.misc.NoteSyncManager;
+import zenpad.misc.factory.ComponentFactory;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;

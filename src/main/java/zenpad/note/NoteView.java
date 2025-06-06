@@ -8,7 +8,7 @@ import javax.swing.SwingUtilities;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import zenpad.misc.RTextFactory;
+import zenpad.misc.factory.RTextFactory;
 
 public class NoteView {
     private JPanel notePanel;
