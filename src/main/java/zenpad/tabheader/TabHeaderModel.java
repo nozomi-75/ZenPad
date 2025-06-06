@@ -1,4 +1,4 @@
-package zenpad.models;
+package zenpad.tabheader;
 
 public class TabHeaderModel {
     private String title;

@@ -3,7 +3,6 @@ package zenpad.tabheader;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import zenpad.models.TabHeaderModel;
 import zenpad.ui.TabManager;
 
 public class TabHeader {
