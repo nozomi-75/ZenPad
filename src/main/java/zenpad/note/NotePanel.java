@@ -1,14 +1,10 @@
-package zenpad.ui;
+package zenpad.note;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
-import zenpad.controllers.NoteController;
-import zenpad.models.NoteModel;
-import zenpad.views.NoteView;
 
 public class NotePanel {
     private final NoteView view;

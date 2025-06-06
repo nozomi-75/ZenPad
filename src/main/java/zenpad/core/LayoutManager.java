@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
-import zenpad.ui.NotePanel;
+import zenpad.note.NotePanel;
 
 /**
  * LayoutManager provides static utility methods for constructing and configuring

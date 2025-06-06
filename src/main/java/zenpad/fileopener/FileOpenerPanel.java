@@ -2,7 +2,7 @@ package zenpad.fileopener;
 
 import javax.swing.JPanel;
 
-import zenpad.ui.NotePanel;
+import zenpad.note.NotePanel;
 import zenpad.ui.TabManager;
 
 /**

@@ -4,7 +4,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import zenpad.core.AppFrame;
-import zenpad.ui.NotePanel;
+import zenpad.note.NotePanel;
 
 /**
  * ComponentFactory provides static factory methods for creating and configuring

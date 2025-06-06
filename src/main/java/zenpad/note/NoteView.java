@@ -1,8 +1,9 @@
-package zenpad.views;
+package zenpad.note;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -51,10 +52,10 @@ public class NoteView {
     }
 
     public void updateTheme() {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            javax.swing.SwingUtilities.updateComponentTreeUI(notePanel);
-            javax.swing.SwingUtilities.updateComponentTreeUI(scrollPane);
-            javax.swing.SwingUtilities.updateComponentTreeUI(textArea);
+        SwingUtilities.invokeLater(() -> {
+            SwingUtilities.updateComponentTreeUI(notePanel);
+            SwingUtilities.updateComponentTreeUI(scrollPane);
+            SwingUtilities.updateComponentTreeUI(textArea);
         });
     }
 }

@@ -1,4 +1,4 @@
-package zenpad.controllers;
+package zenpad.note;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,9 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import zenpad.models.NoteModel;
 import zenpad.utils.DialogUtils;
-import zenpad.views.NoteView;
 
 public class NoteController {
     private final NoteModel model;

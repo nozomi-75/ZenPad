@@ -7,9 +7,9 @@ import java.awt.datatransfer.StringSelection;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
+import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.ui.AboutDialog;
-import zenpad.ui.NotePanel;
 import zenpad.ui.TabManager;
 import zenpad.utils.LafManager;
 import zenpad.views.ToolbarView;

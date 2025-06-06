@@ -2,7 +2,7 @@ package zenpad.core;
 
 import javax.swing.JSplitPane;
 
-import zenpad.ui.NotePanel;
+import zenpad.note.NotePanel;
 import zenpad.ui.TabManager;
 
 /**

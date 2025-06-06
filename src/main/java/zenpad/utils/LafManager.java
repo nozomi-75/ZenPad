@@ -12,7 +12,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import zenpad.core.AppFrame;
 import zenpad.editor.EditorTab;
-import zenpad.ui.NotePanel;
+import zenpad.note.NotePanel;
 import zenpad.ui.TabManager;
 
 /**

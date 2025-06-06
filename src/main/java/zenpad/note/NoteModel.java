@@ -1,4 +1,4 @@
-package zenpad.models;
+package zenpad.note;
 
 public class NoteModel {
     private String currentFilePath;
