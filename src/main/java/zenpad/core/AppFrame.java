@@ -9,8 +9,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
 import zenpad.fileopener.FileOpenerPanel;
-import zenpad.misc.NoteSyncManager;
 import zenpad.misc.factory.ComponentFactory;
+import zenpad.misc.manager.NoteSyncManager;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
@@ -110,7 +110,7 @@ public class AppFrame extends JFrame {
     }
 
     public void updateNotePanelVis() {
-        NotePanelVisMan.updateNotePanelVis(
+        NotePanelMediator.updateNotePanelVis(
             innerSplitPane,
             tabManager,
             notePanel,

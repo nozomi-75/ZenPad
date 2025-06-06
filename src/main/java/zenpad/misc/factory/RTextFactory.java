@@ -6,7 +6,7 @@ import java.io.InputStream;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 
-import zenpad.misc.LafManager;
+import zenpad.misc.manager.LafManager;
 import zenpad.misc.util.FontUtility;
 import zenpad.toolbar.Toolbar;
 

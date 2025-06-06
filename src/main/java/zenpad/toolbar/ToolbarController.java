@@ -7,7 +7,7 @@ import java.awt.datatransfer.StringSelection;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
-import zenpad.misc.LafManager;
+import zenpad.misc.manager.LafManager;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;

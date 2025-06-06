@@ -15,7 +15,7 @@ import zenpad.toolbar.Toolbar;
  * the "Save Notes" toolbar button as needed.
  * </p>
  */
-public class NotePanelVisMan {
+public class NotePanelMediator {
     public static void updateNotePanelVis(
             JSplitPane innerSplitPane,
             TabManager tabManager,

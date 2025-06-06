@@ -1,4 +1,4 @@
-package zenpad.misc;
+package zenpad.misc.manager;
 
 import java.awt.Window;
 
