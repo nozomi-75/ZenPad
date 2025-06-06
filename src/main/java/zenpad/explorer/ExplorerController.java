@@ -1,4 +1,4 @@
-package zenpad.fileopener;
+package zenpad.explorer;
 
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
@@ -10,9 +10,9 @@ import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
 
-public class FileOpenerController {
+public class ExplorerController {
 
-    public FileOpenerController(JTree tree, TabManager tabManager, NotePanel textPanel) {
+    public ExplorerController(JTree tree, TabManager tabManager, NotePanel textPanel) {
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
@@ -20,8 +20,8 @@ public class FileOpenerController {
                 if (selectedNode == null) return;
 
                 Object obj = selectedNode.getUserObject();
-                if (obj instanceof FileOpenerModel.SampleFile) {
-                    FileOpenerModel.SampleFile file = (FileOpenerModel.SampleFile) obj;
+                if (obj instanceof ExplorerModel.SampleFile) {
+                    ExplorerModel.SampleFile file = (ExplorerModel.SampleFile) obj;
                     String language = CodeRunner.inferLanguageFromFileName(file.filePath);
                     tabManager.openNewTab(file.filePath, file.displayName, file.noteFile, language);
                     textPanel.loadTextFromResource(file.noteFile);

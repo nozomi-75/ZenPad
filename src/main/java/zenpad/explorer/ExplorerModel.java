@@ -1,4 +1,4 @@
-package zenpad.fileopener;
+package zenpad.explorer;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import zenpad.branch.Branch;
 import zenpad.branch.SampleBranches;
 
-public class FileOpenerModel {
+public class ExplorerModel {
 
     public DefaultMutableTreeNode getTreeRoot() {
         List<Branch> branches = SampleBranches.getBranches();

@@ -1,4 +1,4 @@
-package zenpad.fileopener;
+package zenpad.explorer;
 
 import java.awt.GridLayout;
 
@@ -9,11 +9,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
-public class FileOpenerView {
+public class ExplorerView {
     private JPanel panel;
     private JTree tree;
 
-    public FileOpenerView(DefaultMutableTreeNode treeRoot) {
+    public ExplorerView(DefaultMutableTreeNode treeRoot) {
         panel = new JPanel(new GridLayout(0, 1, 10, 10));
         panel.setBorder(new EmptyBorder(5, 5, 5, 2));
 
