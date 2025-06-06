@@ -20,7 +20,7 @@ public class PythonExec implements CodeExec {
             File script = new File(tempDir, fileName);
             Files.writeString(script.toPath(), code, StandardOpenOption.CREATE);
 
-            TerminalLauncher.launchCommand(tempDir, "python " + fileName);
+            TerminalLauncher.launchCommand(tempDir, "python3 " + fileName);
             return true;
 
         } catch (IOException e) {
