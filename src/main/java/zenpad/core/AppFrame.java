@@ -11,6 +11,7 @@ import javax.swing.JTabbedPane;
 import zenpad.fileopener.FileOpenerPanel;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
+import zenpad.toolbar.Toolbar;
 import zenpad.ui.TabManager;
 import zenpad.utils.ComponentFactory;
 import zenpad.utils.NoteSyncManager;

@@ -6,7 +6,7 @@ import java.io.InputStream;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 
-import zenpad.core.Toolbar;
+import zenpad.toolbar.Toolbar;
 
 public class RTextHelper {
     @SuppressWarnings("unused")

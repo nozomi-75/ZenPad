@@ -1,4 +1,4 @@
-package zenpad.controllers;
+package zenpad.toolbar;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -12,7 +12,6 @@ import zenpad.runners.CodeRunner;
 import zenpad.ui.AboutDialog;
 import zenpad.ui.TabManager;
 import zenpad.utils.LafManager;
-import zenpad.views.ToolbarView;
 
 public class ToolbarController implements ToolbarView.Listener {
     private final TabManager tabManager;

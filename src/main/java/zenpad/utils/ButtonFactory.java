@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
-import zenpad.core.Toolbar;
+import zenpad.toolbar.Toolbar;
 
 /**
  * ButtonFactory provides static factory methods for creating

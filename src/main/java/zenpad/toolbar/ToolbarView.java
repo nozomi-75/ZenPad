@@ -1,4 +1,4 @@
-package zenpad.views;
+package zenpad.toolbar;
 
 import java.util.Arrays;
 import java.util.List;
