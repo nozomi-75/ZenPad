@@ -13,8 +13,16 @@ public class TerminalLauncher {
         if (os.contains("win")) {
             pb = new ProcessBuilder("cmd", "/c", "start", "cmd", "/k", command);
         } else if (os.contains("mac")) {
-            pb = new ProcessBuilder("osascript", "-e",
-                "tell application \"Terminal\" to do script \"" + command.replace("\"", "\\\"") + "\"");
+            String macCommand = (
+                "cd '" + workingDir.getAbsolutePath() +
+                "' && " + command + "; exec bash"
+            );
+
+            pb = new ProcessBuilder(
+                "osascript", "-e",
+                "tell application \"Terminal\" to do script \"" +
+                macCommand.replace("\"", "\\\"") + "\""
+            );
         } else {
             String terminal = detectLinuxTerminal();
             pb = new ProcessBuilder(terminal, "-e", "bash -c '" + command + "; exec bash'");

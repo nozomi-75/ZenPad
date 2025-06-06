@@ -13,7 +13,7 @@ import zenpad.utils.LafManager;
  * @see AppFrame
  */
 
-public class MainApp {
+public class ZenPad {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LafManager.applyLightLaf();
