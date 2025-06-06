@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import zenpad.runners.exec.*;
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 import zenpad.utils.DialogUtils;
 
 public class CodeRunner {

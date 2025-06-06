@@ -5,7 +5,7 @@ import javax.swing.JToolBar;
 
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 
 /**
  * Toolbar is a facade that assembles the ToolbarView and ToolbarController,

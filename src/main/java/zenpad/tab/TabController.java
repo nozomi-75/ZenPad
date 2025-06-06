@@ -1,4 +1,4 @@
-package zenpad.controllers;
+package zenpad.tab;
 
 import java.util.ArrayList;
 import java.util.List;

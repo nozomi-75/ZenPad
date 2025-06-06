@@ -9,8 +9,8 @@ import javax.swing.JToolBar;
 
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
+import zenpad.tab.TabManager;
 import zenpad.ui.AboutDialog;
-import zenpad.ui.TabManager;
 import zenpad.utils.LafManager;
 
 public class ToolbarController implements ToolbarView.Listener {

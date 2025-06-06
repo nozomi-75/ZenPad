@@ -4,7 +4,7 @@ import javax.swing.JTabbedPane;
 
 import zenpad.editor.EditorTab;
 import zenpad.note.NotePanel;
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 
 /**
  * NoteSyncManager provides static utility methods for synchronizing note content

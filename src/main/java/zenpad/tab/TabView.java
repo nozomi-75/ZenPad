@@ -1,4 +1,4 @@
-package zenpad.views;
+package zenpad.tab;
 
 import javax.swing.JTabbedPane;
 

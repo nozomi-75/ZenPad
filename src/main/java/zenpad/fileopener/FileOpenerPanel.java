@@ -3,7 +3,7 @@ package zenpad.fileopener;
 import javax.swing.JPanel;
 
 import zenpad.note.NotePanel;
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 
 /**
  * Facade for the file opener MVC components.

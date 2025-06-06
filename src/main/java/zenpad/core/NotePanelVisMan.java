@@ -3,8 +3,8 @@ package zenpad.core;
 import javax.swing.JSplitPane;
 
 import zenpad.note.NotePanel;
+import zenpad.tab.TabManager;
 import zenpad.toolbar.Toolbar;
-import zenpad.ui.TabManager;
 
 /**
  * NotePanelVisMan provides a static utility method for managing the visibility and state

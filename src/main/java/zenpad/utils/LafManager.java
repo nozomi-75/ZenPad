@@ -13,7 +13,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import zenpad.core.AppFrame;
 import zenpad.editor.EditorTab;
 import zenpad.note.NotePanel;
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 
 /**
  * LafManager is responsible for managing the Look and Feel (Laf) of the application.

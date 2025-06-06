@@ -3,7 +3,7 @@ package zenpad.tabheader;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 
 public class TabHeaderController {
     @SuppressWarnings("unused")

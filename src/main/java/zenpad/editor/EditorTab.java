@@ -4,7 +4,7 @@ import javax.swing.JTabbedPane;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 
 import javax.swing.JPanel;
 

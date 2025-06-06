@@ -5,8 +5,8 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
 
-import zenpad.tabheader.TabHeader;
-import zenpad.ui.TabManager;;
+import zenpad.tab.TabManager;
+import zenpad.tabheader.TabHeader;;
 
 public class EditorController {
     private EditorModel model;

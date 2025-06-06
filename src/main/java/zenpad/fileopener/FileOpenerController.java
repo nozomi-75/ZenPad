@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
-import zenpad.ui.TabManager;
+import zenpad.tab.TabManager;
 import zenpad.utils.RTextHelper;
 
 public class FileOpenerController {
