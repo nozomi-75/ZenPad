@@ -63,7 +63,7 @@ if ($IsWindows) {
     $jpackageArgs += "--linux-shortcut"
     $jpackageArgs += "--linux-package-name", "zenpad"
 } elseif ($IsMacOS) {
-    $jpackageArgs += "--icon", "src/main/resources/icons/64x64.png"
+    $jpackageArgs += "--icon", "src/main/resources/icons/zenpad.icns"
     $jpackageArgs += "--mac-package-name", "ZenPad"
 }
 
