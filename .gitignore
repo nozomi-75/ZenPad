@@ -28,6 +28,7 @@
 *.rar
 *.tar
 *.zip
+*.deb
 
 # Logs and databases #
 ######################
