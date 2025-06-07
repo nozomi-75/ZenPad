@@ -1,12 +1,5 @@
 $ErrorActionPreference = "Stop"
 
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$ProjectRoot = Join-Path -Path $ScriptDir -ChildPath ".." | Resolve-Path
-Set-Location -Path $ProjectRoot
-
-Write-Host "Current Working Directory set to: $ProjectRoot"
-Write-Host "ZenPad project root should be located here."
-
 Write-Host "`nChecking for Maven installation..."
 try {
     $mavenVersionOutput = (mvn -version 2>&1 | Out-String).Trim()
@@ -63,10 +56,15 @@ $jpackageArgs = @(
 
 if ($IsWindows) {
     $jpackageArgs += "--icon", "src\main\resources\icons\64x64.ico"
+    $jpackageArgs += "--win-shortcut-prompt"
+    $jpackageArgs += "--win-menu"
 } elseif ($IsLinux) {
     $jpackageArgs += "--icon", "src/main/resources/icons/64x64.png"
     $jpackageArgs += "--linux-shortcut"
     $jpackageArgs += "--linux-package-name", "zenpad"
+} elseif ($IsMacOS) {
+    $jpackageArgs += "--icon", "src/main/resources/icons/64x64.png"
+    $jpackageArgs += "--mac-package-name", "ZenPad"
 }
 
 jpackage @jpackageArgs
@@ -80,7 +78,7 @@ if ($jpackageExitCode -ne 0) {
 Write-Host "`nSearching for the generated package file in current directory..."
 if ($IsWindows) {
     $packageFile = Get-ChildItem -Path . -Filter "ZenPad*.msi" -File -Recurse | Select-Object -First 1
-} elseif ($IsLinux) {
+} elseif ($IsLinux || $IsMacOS) {
     $packageFile = Get-ChildItem -Path . -Filter "ZenPad*.deb" -File -Recurse | Select-Object -First 1
     if (-not $packageFile) {
         $packageFile = Get-ChildItem -Path . -Filter "ZenPad*.rpm" -File -Recurse | Select-Object -First 1
