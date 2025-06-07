@@ -50,13 +50,16 @@ $jpackageArgs = @(
   "--dest", ".",
   "--vendor", "Zens",
   "--description", "A beginner-friendly tool for exploring and learning code.",
+  "--about-url", "https://github.com/nozomi-75/ZenPad/",
   "--copyright", "©2025 Zens.",
   "--license-file", "LICENSE"
 )
 
 if ($IsWindows) {
     $jpackageArgs += "--icon", "src\main\resources\icons\64x64.ico"
+    $jpackageArgs += "--win-per-user-install"
     $jpackageArgs += "--win-shortcut-prompt"
+    $jpackageArgs += "--win-dir-chooser"
     $jpackageArgs += "--win-menu"
 } elseif ($IsLinux) {
     $jpackageArgs += "--icon", "src/main/resources/icons/64x64.png"
