@@ -1,5 +1,13 @@
 $ErrorActionPreference = "Stop"
 
+Write-Host "`nChecking if running in the right location..."
+$srcDir = Get-ChildItem -Path . -Filter "src" | Select-Object -First 1
+$curDir = Get-Location
+if (-not $srcDir) {
+    Write-Error "You are in: $curDir. Run script from the project root."
+    exit 1
+}
+
 Write-Host "`nChecking for Maven installation..."
 try {
     $mavenVersionOutput = (mvn -version 2>&1 | Out-String).Trim()
@@ -92,7 +100,7 @@ if ($IsWindows) {
 }
 
 if ($packageFile) {
-    Write-Host "Package built successfully:"
+    Write-Host "`nPackage built successfully:"
     Write-Host "$($packageFile.FullName)"
 } else {
     Write-Error "jpackage reported success, but no 'ZenPad' package file found in the current directory."
