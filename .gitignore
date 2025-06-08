@@ -6,6 +6,15 @@
 /.vscode/
 /target/
 
+# Ignore jpackage output #
+##########################
+*.deb
+*.rpm
+*.appimage
+*.msi
+*.exe
+*.dmg
+
 # Compiled source #
 ###################
 *.com
@@ -28,10 +37,10 @@
 *.rar
 *.tar
 *.zip
-*.deb
 
 # Logs and databases #
 ######################
+*.db
 *.log
 *.sql
 *.sqlite
