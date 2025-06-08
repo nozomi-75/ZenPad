@@ -4,6 +4,7 @@ import javax.swing.JTabbedPane;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
+import zenpad.misc.manager.FontSizeManager;
 import zenpad.tab.TabManager;
 
 import javax.swing.JPanel;
@@ -25,19 +26,61 @@ public class CodePanel {
         model = new CodeModel(filePath, noteFile, language);
         view = new CodeView(language);
         controller = new CodeController(model, view, tabbedPane, node, tabManager);
+
+        FontSizeManager.registerPanel(this);
+    }
+
+    public void dispose() {
+        FontSizeManager.unregisterPanel(this);
+    }
+
+    public void changeFontSize(int delta) {
+        float newSize = FontSizeManager.getFontSize() + delta;
+        view.changeFontSize((int) (newSize - view.getCodeArea().getFont().getSize2D()));
     }
 
     // Exposed functionality
-    public JPanel getPanel() { return view.getPanel(); }
-    public String getCode() { return view.getCodeArea().getText(); }
-    public RSyntaxTextArea getCodeArea() { return view.getCodeArea(); }
-    public String getFileName() { return model.getFileName(); }
-    public String getNoteFile() { return model.getNoteFile(); }
-    public void changeFontSize(int delta) { view.changeFontSize(delta); }
-    public void resetFontSize() { view.resetFontSize(); }
-    public void setNoteContent(String content) { model.setNoteContent(content); }
-    public String getNoteContent() { return model.getNoteContent(); }
-    public JPanel getTabHeader() { return controller.getTabHeader().getHeaderPanel(); }
-    public void applyThemeIfNeeded(String themeName) { view.applyThemeIfNeeded(themeName); }
-    public String getLanguage() { return model.getLanguage(); }
+    public JPanel getPanel() {
+        return view.getPanel();
+    }
+
+    public String getCode() {
+        return view.getCodeArea().getText();
+    }
+
+    public RSyntaxTextArea getCodeArea() {
+        return view.getCodeArea();
+    }
+
+    public String getFileName() {
+        return model.getFileName();
+    }
+
+    public String getNoteFile() {
+        return model.getNoteFile();
+    }
+
+    public void resetFontSize() {
+        view.resetFontSize();
+    }
+
+    public void setNoteContent(String content) {
+        model.setNoteContent(content);
+    }
+
+    public String getNoteContent() {
+        return model.getNoteContent();
+    }
+
+    public JPanel getTabHeader() {
+        return controller.getTabHeader().getHeaderPanel();
+    }
+
+    public void applyThemeIfNeeded(String themeName) {
+        view.applyThemeIfNeeded(themeName);
+    }
+
+    public String getLanguage() {
+        return model.getLanguage();
+    }
 }

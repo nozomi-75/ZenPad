@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 
 import zenpad.code.CodePanel;
+import zenpad.misc.manager.FontSizeManager;
 
 /**
  * Serves as the primary coordinator for managing code editor tabs
@@ -36,8 +37,13 @@ public class TabManager {
     }
 
     public void closeTab(int index) {
+        CodePanel panelToClose = controller.getTabAt(index);
         controller.removeTab(index);
         view.removeTab(index);
+
+        if (panelToClose != null) {
+            panelToClose.dispose();
+        }
     }
 
     public List<CodePanel> getOpenTabs() {
@@ -59,10 +65,10 @@ public class TabManager {
     }
 
     public void changeAllFontSizes(int delta) {
-        controller.changeAllFontSizes(delta);
+        FontSizeManager.changeFontSize(delta);
     }
 
     public void resetAllFontSizes() {
-        controller.resetAllFontSizes();
+        FontSizeManager.resetFontSize();
     }
 }
