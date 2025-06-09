@@ -5,6 +5,7 @@
 ######################
 /.vscode/
 /target/
+*.ps1
 
 # Ignore jpackage output #
 ##########################

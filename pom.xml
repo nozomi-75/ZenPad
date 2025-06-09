@@ -41,7 +41,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>zenpad.launcher.MainApp</mainClass>
+                    <mainClass>zenpad.core.ZenPad</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -51,7 +51,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>zenpad.launcher.MainApp</mainClass>
+                            <mainClass>zenpad.core.ZenPad</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
