@@ -62,8 +62,8 @@ public class NoteViewer extends JDialog {
 
         // Add CSS for improved, modern styling for printing.
         String htmlContent = "<html><head><style>"
-            + "body { font-family: sans-serif; margin: 25px; color: #333; }"
-            + "code { font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace; }"
+            + "body { font-family: sans-serif; margin: 25px; background-color: #fff; color: #333; }"
+            + "code, pre { font-family: 'JetBrains Mono', 'Noto Mono', 'Hack', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace; }"
             + "pre { background-color: #f6f8fa; padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; border-radius: 6px; }"
             + "pre code { background-color: transparent; padding: 0; }"
             + "h1, h2, h3, h4, h5, h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; border-bottom: 1px solid #eaecef; padding-bottom: .3em; }"
