@@ -1,17 +1,20 @@
 package zenpad.misc.util;
 
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.print.PrinterException;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.print.PrinterException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class NoteViewer extends JDialog {
 
@@ -62,29 +65,32 @@ public class NoteViewer extends JDialog {
 
         // Add CSS for improved, modern styling for printing.
         String htmlContent = "<html><head><style>"
-            + "body { font-family: sans-serif; margin: 25px; background-color: #fff; color: #333; }"
+            + "body { font-family: sans-serif; background-color: #fff; color: #333; margin: 0; padding: 0; }"
+            + ".printable-area { padding: 1in; }"
             + "code, pre { font-family: 'JetBrains Mono', 'Noto Mono', 'Hack', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace; }"
             + "pre { background-color: #f6f8fa; padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; border-radius: 6px; }"
             + "pre code { background-color: transparent; padding: 0; }"
             + "h1, h2, h3, h4, h5, h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; border-bottom: 1px solid #eaecef; padding-bottom: .3em; }"
             + "h1 { font-size: 2em; } h2 { font-size: 1.5em; } h3 { font-size: 1.25em; }"
-            + "p, blockquote, ul, ol, dl, table { margin-top: 0; margin-bottom: 16px; }"
+            + "p, blockquote, ul, ol, dl, table { margin-top: 16px; margin-bottom: 16px; }"
             + "ul, ol { padding-left: 2em; }"
             + "</style></head><body>"
+            + "<div class='printable-area'>"
             + htmlBody
+            + "</div>"
             + "</body></html>";
 
         // Set the HTML content to the editor pane
         editorPane.setText(htmlContent);
         editorPane.setCaretPosition(0); // Scroll to top
     }
-
+    
     private void printNote() {
         try {
-            // This is the core printing functionality. It opens the system's print dialog.
-            // It can be a long-running task, so it's good practice to not block the EDT.
-            // However, the print() method itself is modal and handles threading.
+            // This simpler print method respects user settings from the dialog
+            // more naturally. The margin is now handled by CSS padding on a wrapper div.
             boolean didPrint = editorPane.print();
+
             if (didPrint) {
                 JOptionPane.showMessageDialog(this, "Printing has been sent to the printer.", "Printing", JOptionPane.INFORMATION_MESSAGE);
                 // Close the preview window after sending to printer
@@ -93,22 +99,5 @@ public class NoteViewer extends JDialog {
         } catch (PrinterException ex) {
             JOptionPane.showMessageDialog(this, "Error while trying to print: " + ex.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    /** For testing purposes */
-    public static void main(String[] args) {
-        // Run the application on the Event Dispatch Thread for thread safety
-        SwingUtilities.invokeLater(() -> {
-            try {
-                String testContent = new String(Files.readAllBytes(Paths.get("src/main/resources/notes/java/oop/Abstraction.md")));
-                // Create a dummy frame to act as the owner
-                JFrame testFrame = new JFrame();
-                testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                NoteViewer viewer = new NoteViewer(testFrame, "Abstraction.md", testContent);
-                viewer.setVisible(true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 }
