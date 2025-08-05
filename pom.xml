@@ -18,6 +18,13 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-all</artifactId>
+            <version>0.64.8</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.fifesoft</groupId>
             <artifactId>rsyntaxtextarea</artifactId>
             <version>3.6.0</version>
