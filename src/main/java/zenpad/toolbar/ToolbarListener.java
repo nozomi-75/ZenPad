@@ -14,4 +14,5 @@ public interface ToolbarListener {
     void onSaveNotes();
     void onToggleEditNotes(boolean editable);
     void onShowAbout();
+    void onPrint();
 }

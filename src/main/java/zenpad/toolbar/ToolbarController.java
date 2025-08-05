@@ -7,8 +7,10 @@ import java.awt.datatransfer.StringSelection;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
+import zenpad.code.CodePanel;
 import zenpad.misc.dialog.AboutDialog;
 import zenpad.misc.manager.LafManager;
+import zenpad.misc.util.NoteViewer;
 import zenpad.note.NotePanel;
 import zenpad.runners.CodeRunner;
 import zenpad.tab.TabManager;
@@ -81,6 +83,35 @@ public class ToolbarController implements ToolbarListener {
     @Override
     public void onShowAbout() {
         AboutDialog.show();
+    }
+
+    @Override
+    public void onPrint() {
+        int selectedIndex = tabManager.getSelectedIndex();
+        if (selectedIndex < 0) {
+            return; // No tab is selected, do nothing.
+        }
+
+        CodePanel currentTab = tabManager.getEditorTabAt(selectedIndex);
+        if (currentTab == null) {
+            return; // Should not happen if index is valid, but good practice to check.
+        }
+
+        String codeContent = currentTab.getCode();
+        String notesContent = notePanel.getText();
+        String noteTitle = currentTab.getFileName();
+        String language = currentTab.getLanguage() != null ? currentTab.getLanguage().toLowerCase() : "text";
+
+        // Combine the notes and code into a single Markdown string for printing.
+        String fullMarkdownContent = notesContent
+            + "\n\n---\n\n" // Add a horizontal rule for separation
+            + "## Associated Code\n\n"
+            + "```" + language + "\n"
+            + codeContent + "\n```";
+
+        // Create and show the NoteViewer dialog
+        NoteViewer printPreview = new NoteViewer(parentFrame, noteTitle, fullMarkdownContent);
+        printPreview.setVisible(true);
     }
     
     public ToolbarView getView() {

@@ -26,6 +26,7 @@ public class ToolbarView {
     private JButton minButton;
     private JButton resetButton;
     private JButton saveNotesButton;
+    private JButton printButton;
 
     private List<JButton> actionButtons;
     
@@ -46,7 +47,7 @@ public class ToolbarView {
     
     public void setToolbarButtonEnabled(boolean enabled) {
         if (saveNotesButton != null) {
-            actionButtons = Arrays.asList(copyButton, runButton, plusButton, minButton, resetButton, saveNotesButton);
+            actionButtons = Arrays.asList(copyButton, runButton, printButton, plusButton, minButton, resetButton, saveNotesButton);
             actionButtons.stream().forEach(button -> button.setEnabled(enabled));
         }
     }
@@ -64,7 +65,8 @@ public class ToolbarView {
         minButton = ButtonFactory.createButton("Font-", () -> listener.onFontSizeChange(-1));
         resetButton = ButtonFactory.createButton("Reset", () -> listener.onResetFontSize());
         saveNotesButton = ButtonFactory.createButton("Save notes", () -> listener.onSaveNotes());
-        Stream.of(copyButton, runButton, plusButton, minButton, resetButton, saveNotesButton).forEach(btn -> toolbar.add(btn));
+        printButton = ButtonFactory.createButton("Print", () -> listener.onPrint());
+        Stream.of(copyButton, runButton, printButton, plusButton, minButton, resetButton, saveNotesButton).forEach(btn -> toolbar.add(btn));
         
         ButtonFactory.createToggleButton("Edit notes", () -> {
             boolean editable = editNotesToggleButton.isSelected();

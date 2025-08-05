@@ -50,6 +50,10 @@ public class TabManager {
         return controller.getOpenTabs();
     }
 
+    public int getSelectedIndex() {
+        return view.getSelectedIndex();
+    }
+
     public String getSelectedCode() {
         int selectedIndex = view.getSelectedIndex();
         return controller.getSelectedCode(selectedIndex);
